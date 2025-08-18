@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>ShopDog</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list color="success">
+    <ion-item color="success">
+      <ion-avatar slot="start">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h1>Doña española</h1>
+        <p><span class="subtext">Busqueda de hogar</span></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Nombre: Luciana de los montes</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-icon name="hourglass-outline" slot="start" color="warning"></ion-icon>
+        <ion-label>Aún en busqueda
+          <p>28/05/25 13:30</p>
+        </ion-label>
+      </ion-item>
+      <ion-button color="success" fill="clear" size="full">Ver más...</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
