@@ -10,4 +10,13 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
   imports: [CommonModule, FormsModule, IonicModule]
 })
-export class LoginPage {}
+export class LoginPage {
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
+  togglePassword() {
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+  
+}

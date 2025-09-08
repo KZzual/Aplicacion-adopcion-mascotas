@@ -1,7 +1,88 @@
-ion-button {
-    text-transform: initial;
+.login-content {
+  --background: #f5f7fa;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 100%; /* Asegura que ocupe todo el ancho de la pantalla */
+  margin: 0; /* Elimina márgenes externos */
+  padding: 0; /* Elimina relleno interno */
 }
 
-ion-content{
-    --background: var(--ion-color-success);
+.login-container {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Títulos */
+h2 {
+  margin: 0 0 8px;
+  font-weight: bold;
+}
+
+.terms {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+ion-item {
+  --background: transparent;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  --highlight-color-focused: #3880ff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.eye-icon {
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* Opciones */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 25px;
+  font-size: 13px;
+}
+
+ion-checkbox {
+  --size: 18px;
+  --border-radius: 6px;
+  --background-checked: #3880ff;
+  --border-color-checked: #3880ff;
+}
+
+.options label {
+  margin-left: 6px;
+}
+
+.options a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #3880ff;
+}
+
+/* Botones */
+.btn-login {
+  --background: #3880ff;
+  --border-radius: 25px;
+  --box-shadow: 0 4px 12px rgba(56,128,255,0.4);
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.btn-register {
+  color: #3880ff;
+  font-size: 14px;
+  margin-top: 8px;
 }

@@ -1,18 +1,56 @@
-<ion-content>
-  <div class="flex-center">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title color="success">ShopDog Test 0</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-input label="Correo Electronico" label-placement="floating" fill="outline" placeholder="Ingrese su correo" type="email"></ion-input>
-        <br>
-        <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingrese su contraseña" type="password"></ion-input>
-        <br>
-        <ion-button fill="clear" size="full">¿Olvidaste tu contraseña/correo?</ion-button>
-        <ion-button shape="round" size="full">Login</ion-button>
-        <ion-button shape="round" size="full" fill="clear">Register</ion-button>
-      </ion-card-content>
-    </ion-card>
+<ion-content class="login-content">
+  <div class="flex-center">  <div class="login-container">
+
+    <h2>PetHub</h2>
+    <p class="terms">
+      Al registarse aquí, aceptas nuestros 
+      <a href="#">Terminos y politicas de privacidad</a>
+    </p>
+
+    <!-- Email -->
+    <ion-item lines="none">
+      <ion-input
+        label="Correo Electrónico"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Ingrese su correo"
+        type="email">
+      </ion-input>
+    </ion-item>
+
+    <!-- Password con icono -->
+    <ion-item lines="none">
+      <ion-input
+        [type]="passwordType"
+        label="Contraseña"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Ingrese su contraseña">
+      </ion-input>
+      <ion-icon
+        slot="end"
+        [name]="passwordIcon"
+        (click)="togglePassword()"
+        class="eye-icon">
+      </ion-icon>
+    </ion-item>
+
+    <!-- Recuérdame + Olvidaste -->
+    <div class="options">
+      <ion-checkbox></ion-checkbox>
+      <label>Recuérdame</label>
+      <a href="#">¿Olvidaste tu contraseña?</a>
+    </div>
+
+    <!-- Botones -->
+    <ion-button expand="block" shape="round" class="btn-login">
+      Ingresar
+    </ion-button>
+    <ion-button expand="block" fill="clear" shape="round" class="btn-register">
+      Registrarse
+    </ion-button>
+
   </div>
+</div>
+
 </ion-content>
