@@ -1,63 +1,63 @@
-<ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>¿Cual es su proposito dentro de la aplicación?</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-        <ion-radio-group>
-          <ion-item>
-            <ion-radio value="ADOPT" labelPlacement="start">Buscar y Adoptar</ion-radio><br />
-          </ion-item>
-          <ion-item>
-            <ion-radio value="POSTER" labelPlacement="start">Publicar y buscar hogar</ion-radio><br />
-          </ion-item>       
-        </ion-radio-group>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-      <ion-card-header>
-          <ion-card-title>
-            Información personal
-          </ion-card-title>
-        </ion-card-header>
-      <ion-card-content>
+<ion-content class="register-page">
+  <div class="register-container">
+    <h2>Crear cuenta</h2>
+
+   
+    <div class="section">
+      <h3>¿Cuál es su propósito dentro de la aplicación?</h3>
+      <ion-radio-group>
         <ion-item>
-          <ion-input label="Nombre" label-placement="floating" placeholder="Ingrese su nombre" type="text"></ion-input>
-        </ion-item><br>
-        <ion-item>
-          <ion-input label="Apellido" label-placement="floating" placeholder="Ingrese su apellido" type="text"></ion-input>
-        </ion-item><br>
-        <ion-item>
-          <ion-input label="Correo Electronico" label-placement="floating" placeholder="Ingrese su correo" type="email"></ion-input>
-        </ion-item><br>
-        <ion-item>
-          <ion-input label="Contraseña" label-placement="floating" placeholder="Ingrese su contraseña" type="password"></ion-input>
-        </ion-item><br>
-        <ion-item>
-          <ion-input label="Confirmar contraseña" label-placement="floating" placeholder="Confirme su contraseña" type="password"></ion-input>
-        </ion-item><br>
-        <ion-item>
-          <ion-input label="Número de telefóno" label-placement="floating" placeholder="+56 0 0000 0000" type="tel"></ion-input>
+          <ion-label>Buscar y Adoptar</ion-label>
+          <ion-radio slot="end" value="adoptar"></ion-radio>
         </ion-item>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          Dirección de domicilio
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
         <ion-item>
-          <ion-input label="Calle" label-placement="floating" placeholder="Dirección de calle" type="text"></ion-input>
-        </ion-item><br>
-        <ion-item>
-          <ion-input label="Número de calle" label-placement="floating" placeholder="0000" type="tel"></ion-input>
-        </ion-item><br>
-        <ion-item>
-          <ion-input label="Ciudad" label-placement="floating" placeholder="Santiago" type="text"></ion-input>
-        </ion-item><br>
-      </ion-card-content>
-    </ion-card>
-    <ion-button size="full">Registrarse</ion-button>
+          <ion-label>Publicar y buscar hogar</ion-label>
+          <ion-radio slot="end" value="publicar"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    
+    <div class="section">
+      <h3>Información personal</h3>
+
+      <ion-item class="input-item">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Nombre" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Apellido" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Correo electrónico" type="email"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Contraseña" type="password"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Confirmar contraseña" type="password"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-icon name="call-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Número de teléfono" type="tel"></ion-input>
+      </ion-item>
+    </div>
+
+    
+    <ion-button expand="block" class="signup-btn">Registrarse</ion-button>
+
+    <p class="footer-text">
+      ¿Ya tienes cuenta?
+      <a routerLink="/login">Inicia sesión</a>
+    </p>
+  </div>
 </ion-content>
