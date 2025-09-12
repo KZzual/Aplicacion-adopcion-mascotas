@@ -1,33 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="success">
-    <ion-buttons slot="start">
-      <ion-back-button text=""></ion-back-button>
-    </ion-buttons>
-    <ion-title>Post</ion-title>
-  </ion-toolbar>
-</ion-header><br>
+<ion-content class="post-page">
+  <div class="post-container">
 
-<ion-content>
-  <div class="image-container">
-    <img src="https://cdn.shopify.com/s/files/1/0086/0795/7054/files/Golden-Retriever.jpg?v=1645179525">
-  </div><br>
-  <ion-card>
-    <ion-card-content>
-      <p>Nombre : Cholito</p>
-      <p>Género : Macho</p>
-      <p>Peso : 30 kg</p>
-      <p>Edad : 1 año</p>
-      <p>Ubicación : Calle siempre viva</p>
-      <p>Número de residencia : 0567</p>
-    </ion-card-content>
-  </ion-card><br>
-  <ion-list>
-    <div>
-      <ion-item lines="inset">
-      <ion-label position="floating">Notas</ion-label>
-      <ion-textarea></ion-textarea>
-    </ion-item><br>
-    </div>
-  </ion-list>
-  <ion-button size="full" color="success">Subir post</ion-button>
+    <h2>Publicar Mascota</h2>
+
+    
+    <ion-card class="pet-card">
+      <img src="https://cdn.shopify.com/s/files/1/0086/0795/7054/files/Golden-Retriever.jpg?v=1645179525" alt="Mascota" />
+
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-icon name="paw-outline" slot="start"></ion-icon>
+            <ion-label><strong>Nombre:</strong> Cholito</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="male-outline" slot="start"></ion-icon>
+            <ion-label><strong>Género:</strong> Macho</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="fitness-outline" slot="start"></ion-icon>
+            <ion-label><strong>Peso:</strong> 30 kg</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="hourglass-outline" slot="start"></ion-icon>
+            <ion-label><strong>Edad:</strong> 1 año</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="location-outline" slot="start"></ion-icon>
+            <ion-label><strong>Ubicación:</strong> Calle siempre viva</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            <ion-label><strong>Residencia:</strong> 0567</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    
+    <ion-item class="notes-item">
+      <ion-textarea placeholder="Notas adicionales..."></ion-textarea>
+    </ion-item>
+
+    
+    <ion-button expand="block" class="post-btn">Subir Post</ion-button>
+
+  </div>
 </ion-content>

@@ -1,17 +1,59 @@
-ion-button{
-    margin: 15px;
+.post-page {
+  --background: #f5f7fa;
+
+  .post-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .pet-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      img {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #eee;
+      }
+
+      ion-card-content {
+        padding: 10px 0;
+
+        ion-item {
+          --background: transparent;
+          font-size: 15px;
+          color: #333;
+
+          ion-icon {
+            color: #3880ff;
+          }
+        }
+      }
+    }
+
+    .notes-item {
+      margin-top: 20px;
+      border-radius: 10px;
+      --background: #fff;
+      border: 1px solid #ddd;
+    }
+
+    .post-btn {
+      margin-top: 20px;
+      height: 45px;
+      border-radius: 25px;
+      font-weight: bold;
+      --background: #3880ff;
+    }
+  }
 }
 
-.image-container {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-container img {
-  height: 100%;
-  object-fit: cover; 
-}
