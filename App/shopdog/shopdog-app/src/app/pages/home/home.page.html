@@ -1,41 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="success">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>ShopDog</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
 
-<ion-content>
-  <ion-list color="success">
-    <ion-item color="success">
-      <ion-avatar slot="start">
-        <ion-icon name="person-circle-outline"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h1>Doña española</h1>
-        <p><span class="subtext">Busqueda de hogar</span></p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Nombre: Luciana de los montes</ion-card-subtitle>
-    </ion-card-header>
+  <div class="home-header">
+    <h1>PetHub</h1>
+    <p>Casas felices, para animales felices.</p>
+  </div>
+
+  <ion-searchbar placeholder="Encuentra a tu nuevo amigo..."></ion-searchbar>
+
+  <!-- Lista de mascotas -->
+  <ion-card class="pet-card" *ngFor="let pet of pets">
+    
+    <div class="pet-banner" [style.background]="pet.color">
+      {{ pet.name }}
+    </div>
+
+    <ion-button class="favorite-btn" fill="solid" size="small" (click)="toggleFavorite(pet.id)">
+      <ion-icon [name]="favorites.includes(pet.id) ? 'heart' : 'heart-outline'"></ion-icon>
+    </ion-button>
+
     <ion-card-content>
-      <ion-item lines="none">
-        <ion-icon name="hourglass-outline" slot="start" color="warning"></ion-icon>
-        <ion-label>Aún en busqueda
-          <p>28/05/25 13:30</p>
-        </ion-label>
-      </ion-item>
-      <ion-button color="success" fill="clear" size="full">Ver más...</ion-button>
+      <h2>{{ pet.name }}</h2>
+      <p>{{ pet.breed }}</p>
+      <p>{{ pet.age }} • {{ pet.gender }} • {{ pet.location }}</p>
+
+      <ion-chip color="success" *ngIf="pet.vaccinated">Vacunado</ion-chip>
+      <ion-chip color="success" *ngIf="pet.neutered">Esterilizado</ion-chip>
+      <ion-chip color="success" *ngIf="pet.houseTrained">Adiestrado</ion-chip>
+
+      <ion-button expand="block" class="details-btn" (click)="openDetails(pet)">
+        Ver Detalles
+      </ion-button>
     </ion-card-content>
   </ion-card>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
