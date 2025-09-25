@@ -14,7 +14,7 @@ export class HomePage {
   pets = [
     {
       id: 1,
-      name: 'Buddy',
+      name: 'Cholo',
       breed: 'Golden Retriever',
       age: '2 años',
       gender: 'Macho',
@@ -27,7 +27,7 @@ export class HomePage {
     },
     {
       id: 2,
-      name: 'Luna',
+      name: 'Lunita',
       breed: 'Siames',
       age: '1 año',
       gender: 'Hembra',
