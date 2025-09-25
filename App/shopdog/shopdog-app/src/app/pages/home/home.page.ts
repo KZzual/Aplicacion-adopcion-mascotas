@@ -14,7 +14,7 @@ export class HomePage {
   pets = [
     {
       id: 1,
-      name: 'Cholo',
+      name: 'Cholito',
       breed: 'Golden Retriever',
       age: '2 años',
       gender: 'Macho',
@@ -23,6 +23,7 @@ export class HomePage {
       vaccinated: true,
       neutered: true,
       houseTrained: true,
+      chipped: true,
       color: '#4a90e2'
     },
     {
@@ -36,6 +37,7 @@ export class HomePage {
       vaccinated: true,
       neutered: false,
       houseTrained: true,
+      chipped: false,
       color: '#e74c3c'
     }
   ];
