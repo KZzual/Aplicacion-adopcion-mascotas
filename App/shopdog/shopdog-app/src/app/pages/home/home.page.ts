@@ -14,48 +14,50 @@ export class HomePage {
   pets = [
     {
       id: 1,
-      name: 'Cholito',
+      name: 'Buddy',
       breed: 'Golden Retriever',
       age: '2 años',
       gender: 'Macho',
-      location: 'San Joaquín, Santiago de Chile',
+      location: 'New York, NY',
+      type: 'dog',
       vaccinated: true,
       neutered: true,
       houseTrained: true,
-      color: '#4A90E2'
+      color: '#4a90e2'
     },
     {
       id: 2,
-      name: 'Princesa',
-      breed: 'Siamese',
-      age: '1 años',
+      name: 'Luna',
+      breed: 'Siames',
+      age: '1 año',
       gender: 'Hembra',
-      location: 'San Joaquín, Santiago de Chile',
+      location: 'Boston, MA',
+      type: 'cat',
       vaccinated: true,
-      neutered: true,
+      neutered: false,
       houseTrained: true,
-      color: '#FF6B6B'
+      color: '#e74c3c'
     }
   ];
 
-  favorites: number[] = [];
-  selectedPet: any = null;
 
-  constructor() {}
+  // Filtros
+  selectedFilter: string = 'all';
+  searchText: string = '';
+
+  // Función para filtrar
+  filteredPets() {
+    return this.pets.filter(pet => {
+      const matchFilter = this.selectedFilter === 'all' || pet.type === this.selectedFilter;
+      const matchSearch =
+        pet.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        pet.breed.toLowerCase().includes(this.searchText.toLowerCase());
+      return matchFilter && matchSearch;
+    });
+  }
 
   openDetails(pet: any) {
-    this.selectedPet = pet;
-  }
-
-  closeDetails() {
-    this.selectedPet = null;
-  }
-
-  toggleFavorite(petId: number) {
-    if (this.favorites.includes(petId)) {
-      this.favorites = this.favorites.filter(id => id !== petId);
-    } else {
-      this.favorites.push(petId);
-    }
+    console.log('Detalles de la mascota:', pet);
+    // Aquí más adelante puedes hacer navegación a una página de detalle
   }
 }

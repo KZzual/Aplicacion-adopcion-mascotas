@@ -1,0 +1,57 @@
+.historial-page {
+  --background: #f5f7fa;
+}
+
+.historial-container {
+  max-width: 450px;
+  margin: auto;
+  padding: 20px;
+
+  h2 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #111;
+  }
+}
+
+.post-card {
+  border-radius: 18px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 18px;
+
+  ion-card-header {
+    background: #f9f9f9;
+    border-radius: 18px 18px 0 0;
+    padding: 12px 16px;
+
+    ion-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  ion-item {
+    --background: transparent;
+
+    ion-icon {
+      font-size: 22px;
+    }
+
+    ion-label {
+      h3 {
+        font-size: 15px;
+        font-weight: 500;
+        margin: 0;
+        color: #222;
+      }
+      p {
+        font-size: 13px;
+        color: #666;
+        margin: 2px 0 0 0;
+      }
+    }
+  }
+}

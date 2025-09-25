@@ -5,18 +5,23 @@
     <p>Casas felices, para animales felices.</p>
   </div>
 
-  <ion-searchbar placeholder="Encuentra a tu nuevo amigo..."></ion-searchbar>
+  <!-- Buscador -->
+  <ion-searchbar [(ngModel)]="searchText" placeholder="Encuentra a tu nuevo amigo..."></ion-searchbar>
 
-  <!-- Lista de mascotas -->
-  <ion-card class="pet-card" *ngFor="let pet of pets">
+  <!-- Filtro por tipo -->
+  <ion-segment [(ngModel)]="selectedFilter">
+    <ion-segment-button value="all">Todos</ion-segment-button>
+    <ion-segment-button value="dog">Perros</ion-segment-button>
+    <ion-segment-button value="cat">Gatos</ion-segment-button>
+  </ion-segment>
+
+  <!-- Lista de mascotas filtradas -->
+  <ion-card class="pet-card" *ngFor="let pet of filteredPets()">
     
     <div class="pet-banner" [style.background]="pet.color">
       {{ pet.name }}
     </div>
 
-    <ion-button class="favorite-btn" fill="solid" size="small" (click)="toggleFavorite(pet.id)">
-      <ion-icon [name]="favorites.includes(pet.id) ? 'heart' : 'heart-outline'"></ion-icon>
-    </ion-button>
 
     <ion-card-content>
       <h2>{{ pet.name }}</h2>

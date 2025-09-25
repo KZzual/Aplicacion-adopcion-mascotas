@@ -1,40 +1,41 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="success">
-    <ion-buttons slot="start">
-      <ion-back-button text=""></ion-back-button>
-    </ion-buttons>
-    <ion-title>Publicaciones</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="historial-page">
+  <div class="historial-container">
+    <h2>📖 Publicaciones</h2>
 
-<ion-content>
-  <ion-list>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>Luciana de los montes</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-icon name="hourglass-outline" slot="start" color="warning"></ion-icon>
-            <ion-label>Aún en busqueda
+    <ion-list lines="none">
+
+      
+      <ion-card class="post-card">
+        <ion-card-header>
+          <ion-card-title>Luciana de los montes</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-icon name="hourglass-outline" color="warning" slot="start"></ion-icon>
+            <ion-label>
+              <h3>Aún en búsqueda</h3>
               <p>28/05/25 13:30</p>
             </ion-label>
           </ion-item>
         </ion-card-content>
-    </ion-card><br>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>Cholito</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-icon name="thumbs-up-outline" color="success" slot="start"></ion-icon>
-          <ion-label>
-            En su nuevo hogar
-            <p>27/05/25 10:30</p>
-          </ion-label>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+      </ion-card>
+
+      
+      <ion-card class="post-card">
+        <ion-card-header>
+          <ion-card-title>Cholito</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-icon name="thumbs-up-outline" color="success" slot="start"></ion-icon>
+            <ion-label>
+              <h3>En su nuevo hogar</h3>
+              <p>27/05/25 10:30</p>
+            </ion-label>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-list>
+  </div>
 </ion-content>
