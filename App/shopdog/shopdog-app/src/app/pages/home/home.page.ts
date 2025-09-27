@@ -47,19 +47,36 @@ export class HomePage {
   selectedFilter: string = 'all';
   searchText: string = '';
 
-  // Función para filtrar
+
+  getAgeNumber(age: string): number {
+    const match = age.match(/\d+/);
+    return match ? parseInt(match[0], 10) : 0;
+  }
+
+  
   filteredPets() {
     return this.pets.filter(pet => {
-      const matchFilter = this.selectedFilter === 'all' || pet.type === this.selectedFilter;
+      const ageNum = this.getAgeNumber(pet.age);
+
+     
+      const matchFilter =
+        this.selectedFilter === 'all' ||
+        pet.type === this.selectedFilter ||
+        (this.selectedFilter === 'puppy' && ageNum <= 1) ||
+        (this.selectedFilter === 'adult' && ageNum > 1 && ageNum <= 7) ||
+        (this.selectedFilter === 'senior' && ageNum > 7);
+
+      
       const matchSearch =
         pet.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
         pet.breed.toLowerCase().includes(this.searchText.toLowerCase());
+
       return matchFilter && matchSearch;
     });
   }
 
   openDetails(pet: any) {
     console.log('Detalles de la mascota:', pet);
-    // Aquí más adelante puedes hacer navegación a una página de detalle
+    
   }
 }
