@@ -1,0 +1,369 @@
+/* Estilos del Header */
+.profile-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  .profile-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .header-avatar {
+      width: 40px;
+      height: 40px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .header-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ion-color-dark);
+    }
+  }
+}
+
+/* Contenido Principal */
+.profile-content {
+  padding: 0 16px 20px;
+  background: var(--ion-color-light-tint);
+  min-height: 100vh;
+}
+
+.profile-separator {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ion-color-medium) 20%,
+    var(--ion-color-medium) 80%,
+    transparent
+  );
+  margin: 16px 0;
+}
+
+/* Segmento de Filtros */
+.filter-segment {
+  --background: var(--ion-color-light);
+  --color: var(--ion-color-medium);
+  --color-checked: var(--ion-color-primary);
+  --border-radius: 12px;
+  margin: 16px 0 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  ion-segment-button {
+    --indicator-color: var(--ion-color-primary);
+    --color-checked: var(--ion-color-primary);
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 40px;
+  }
+}
+
+/* Cuerpo del Perfil */
+.profile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Tarjetas Generales */
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  overflow: hidden;
+
+  ion-card-header {
+    background: linear-gradient(135deg, var(--ion-color-primary-tint), var(--ion-color-primary));
+    color: white;
+    padding: 16px 20px;
+
+    ion-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+
+      .section-icon {
+        font-size: 24px;
+      }
+    }
+  }
+
+  ion-card-content {
+    padding: 20px;
+  }
+}
+
+/* Sección de Información */
+.info-card {
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--ion-color-light-shade);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .info-icon {
+      font-size: 24px;
+      color: var(--ion-color-primary);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .info-details {
+      flex: 1;
+
+      strong {
+        display: block;
+        color: var(--ion-color-dark);
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+
+      p {
+        color: var(--ion-color-medium-shade);
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0;
+      }
+    }
+  }
+}
+
+/* Sección de Publicaciones */
+.posts-card {
+  .posts-grid {
+    display: grid;
+    gap: 16px;
+
+    .post-item {
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      &.adopted {
+        opacity: 0.8;
+
+        .post-image {
+          filter: grayscale(20%);
+        }
+      }
+
+      .post-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .post-content {
+        padding: 16px;
+
+        .pet-name {
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--ion-color-dark);
+          margin: 0 0 8px 0;
+        }
+
+        .post-description {
+          color: var(--ion-color-medium-shade);
+          font-size: 14px;
+          line-height: 1.4;
+          margin: 0 0 16px 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .post-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 12px;
+
+          .post-stats {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ion-color-primary);
+            font-size: 14px;
+            font-weight: 500;
+
+            .paw-icon {
+              font-size: 18px;
+            }
+          }
+
+          .post-date {
+            font-size: 12px;
+            color: var(--ion-color-medium);
+          }
+        }
+
+        .status-chip {
+          font-size: 12px;
+          font-weight: 600;
+          height: 28px;
+          --border-radius: 14px;
+        }
+      }
+    }
+  }
+}
+
+/* Sección de Actividad */
+.activity-card {
+  .activity-list {
+    padding: 0;
+
+    .activity-item {
+      --padding-start: 0;
+      --padding-end: 0;
+      --inner-padding-end: 0;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--ion-color-light-shade);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .activity-icon {
+        font-size: 24px;
+        margin-right: 16px;
+
+        &.activity-like {
+          color: var(--ion-color-danger);
+        }
+
+        &.activity-comment {
+          color: var(--ion-color-primary);
+        }
+
+        &.activity-post {
+          color: var(--ion-color-success);
+        }
+      }
+
+      ion-label {
+        .activity-description {
+          font-size: 15px;
+          font-weight: 500;
+          color: var(--ion-color-dark);
+          margin: 0 0 4px 0;
+          line-height: 1.3;
+        }
+
+        .activity-date {
+          font-size: 12px;
+          color: var(--ion-color-medium);
+          margin: 0 0 2px 0;
+        }
+
+        .activity-target {
+          font-size: 13px;
+          color: var(--ion-color-primary);
+          margin: 0;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+/* Estados Vacíos */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ion-color-medium);
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .profile-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 20px;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-body ion-card {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Tema oscuro */
+@media (prefers-color-scheme: dark) {
+  .profile-separator {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--ion-color-medium-tint) 20%,
+      var(--ion-color-medium-tint) 80%,
+      transparent
+    );
+  }
+
+  ion-card {
+    --background: var(--ion-color-dark-shade);
+
+    ion-card-header {
+      background: linear-gradient(135deg, var(--ion-color-primary-shade), var(--ion-color-primary-tint));
+    }
+  }
+}
