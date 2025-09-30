@@ -1,0 +1,198 @@
+
+<!-- Header del Perfil -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button
+      slot="start"
+      fill="clear"
+      (click)="goBack()"
+      (keydown.enter)="goBack()"
+      aria-label="Regresar">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title class="profile-title">
+      <div class="profile-header-info">
+        <ion-avatar class="header-avatar">
+          <img [src]="userInfo.profileImage" [alt]="userInfo.name">
+        </ion-avatar>
+        <span class="header-name">{{ userInfo.name }}</span>
+      </div>
+    </ion-title>
+
+    <ion-button
+      slot="end"
+      fill="clear"
+      (click)="presentActionSheet()"
+      (keydown.enter)="presentActionSheet()"
+      aria-label="Opciones de usuario">
+      <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Header colapsable para scroll -->
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ userInfo.name }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="profile-content">
+    <!-- Separador visual -->
+    <hr class="profile-separator">
+
+    <!-- Barra de filtros -->
+    <ion-segment
+      [(ngModel)]="selectedFilter"
+      (ionChange)="onFilterChange($event)"
+      class="filter-segment">
+      <ion-segment-button value="todo">
+        <ion-label>Todo</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="informacion">
+        <ion-label>Información</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="publicaciones">
+        <ion-label>Publicaciones</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="actividad">
+        <ion-label>Actividad</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Contenido del perfil -->
+    <div class="profile-body">
+
+      <!-- Sección de Información Personal -->
+      <ion-card
+        class="info-card"
+        *ngIf="getFilteredContent().showInfo">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="person-outline" class="section-icon"></ion-icon>
+            Información Personal
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="info-item">
+            <ion-icon name="person" class="info-icon"></ion-icon>
+            <div class="info-details">
+              <strong>Nombre Completo</strong>
+              <p>{{ userInfo.fullName }}</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <ion-icon name="calendar" class="info-icon"></ion-icon>
+            <div class="info-details">
+              <strong>Fecha de Nacimiento</strong>
+              <p>{{ userInfo.birthDate }}</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <ion-icon name="location" class="info-icon"></ion-icon>
+            <div class="info-details">
+              <strong>Ubicación</strong>
+              <p>{{ userInfo.location }}</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <ion-icon name="document-text" class="info-icon"></ion-icon>
+            <div class="info-details">
+              <strong>Descripción</strong>
+              <p>{{ userInfo.description }}</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Sección de Publicaciones -->
+      <ion-card
+        class="posts-card"
+        *ngIf="getFilteredContent().showPosts">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="images-outline" class="section-icon"></ion-icon>
+            Publicaciones ({{ posts.length }})
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="posts-grid">
+            <ion-card
+              class="post-item"
+              *ngFor="let post of posts"
+              [ngClass]="{'adopted': post.status === 'adopted'}">
+              <img [src]="post.petImage" [alt]="post.petName" class="post-image">
+
+              <ion-card-content class="post-content">
+                <h3 class="pet-name">{{ post.petName }}</h3>
+                <p class="post-description">{{ post.description }}</p>
+
+                <div class="post-footer">
+                  <div class="post-stats">
+                    <ion-icon name="paw" class="paw-icon"></ion-icon>
+                    <span>{{ post.likes }}</span>
+                  </div>
+                  <span class="post-date">{{ post.date }}</span>
+                </div>
+
+                <ion-chip
+                  [color]="post.status === 'adopted' ? 'success' : 'primary'"
+                  class="status-chip">
+                  {{ post.status === 'adopted' ? '✓ Adoptado' : '🏠 Disponible' }}
+                </ion-chip>
+              </ion-card-content>
+            </ion-card>
+          </div>
+
+          <div *ngIf="posts.length === 0" class="empty-state">
+            <ion-icon name="images-outline" class="empty-icon"></ion-icon>
+            <p>No hay publicaciones aún</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Sección de Actividad -->
+      <ion-card
+        class="activity-card"
+        *ngIf="getFilteredContent().showActivity">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="pulse-outline" class="section-icon"></ion-icon>
+            Actividad Reciente ({{ activities.length }})
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list lines="none" class="activity-list">
+            <ion-item
+              *ngFor="let activity of activities"
+              class="activity-item">
+              <ion-icon
+                [name]="getActivityIcon(activity.type)"
+                slot="start"
+                class="activity-icon"
+                [ngClass]="'activity-' + activity.type"></ion-icon>
+
+              <ion-label>
+                <h3 class="activity-description">{{ activity.description }}</h3>
+                <p class="activity-date">{{ activity.date }}</p>
+                <p *ngIf="activity.targetPost" class="activity-target">
+                  en: {{ activity.targetPost }}
+                </p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+
+          <div *ngIf="activities.length === 0" class="empty-state">
+            <ion-icon name="pulse-outline" class="empty-icon"></ion-icon>
+            <p>No hay actividad reciente</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

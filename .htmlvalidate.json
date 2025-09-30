@@ -1,0 +1,23 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "attr-case": "off"
+  },
+  "elements": [
+    "html5",
+    {
+      "*": {
+        "attributes": {
+          "[(ngModel)]": {},
+          "*ngIf": {},
+          "*ngFor": {},
+          "(click)": {},
+          "(ionChange)": {},
+          "[ngClass]": {},
+          "[src]": {},
+          "[alt]": {}
+        }
+      }
+    }
+  ]
+}
