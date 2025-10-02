@@ -79,4 +79,10 @@ export class HomePage {
     console.log('Detalles de la mascota:', pet);
     
   }
+
+  onFabClick() {
+  console.log('FAB presionado');
+  // Aquí puedes navegar a otra página o abrir un modal
+}
+
 }
