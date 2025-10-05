@@ -1,11 +1,11 @@
-# 🐾 Guía de Desarrollo - PetHub v3.0.1
+# 🐾 Guía de Desarrollo - PetHub v0.3.1
 
 ## 📋 **Análisis del Proyecto: Aplicación de Adopción de Mascotas**
 
 ### 🏗️ **Información General**
 
-- **Nombre del Proyecto:** PetHub (anteriormente "shopdog-app")
-- **Versión:** 3.0.1
+- **Nombre del Proyecto:** PetHub
+- **Versión:** 0.3.1
 - **Propósito:** Conectar personas que buscan adoptar mascotas con aquellas que buscan hogar para sus animales
 - **Tipo:** Aplicación móvil híbrida multiplataforma
 - **Repositorio:** https://github.com/KZzual/Aplicacion-adopcion-mascotas
@@ -496,7 +496,7 @@ npm test -- --include="**/login.page.spec.ts"
 ### **Ionic (`ionic.config.json`)**
 ```json
 {
-  "name": "shopdog-app",
+  "name": "PetHub",
   "integrations": {
     "capacitor": {}
   },
@@ -508,7 +508,7 @@ npm test -- --include="**/login.page.spec.ts"
 ```typescript
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'shopdog-app',
+  appName: 'PetHub',
   webDir: 'www'
 };
 ```
@@ -797,7 +797,7 @@ chore: tareas de mantenimiento
 
 ## 📝 **Notas de Versión**
 
-### **v3.0.1 (Actual)**
+### **v0.3.1 (Actual)**
 - ✅ Estructura base del proyecto completada
 - ✅ Sistema de navegación implementado
 - ✅ Páginas principales desarrolladas
@@ -805,10 +805,10 @@ chore: tareas de mantenimiento
 - ✅ Testing framework configurado
 
 ### **Próximas Versiones:**
-- **v3.1.0:** Integración con backend
-- **v3.2.0:** Sistema de autenticación real
-- **v3.3.0:** Subida de imágenes
-- **v4.0.0:** Chat y notificaciones en tiempo real
+- **v0.4.0:** Integración con backend
+- **v0.5.0:** Sistema de autenticación real
+- **v0.6.0:** Subida de imágenes
+- **v1.0.0:** Chat y notificaciones en tiempo real
 
 ---
 

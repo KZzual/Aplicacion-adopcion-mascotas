@@ -1,4 +1,4 @@
-# 📁 Estructura Detallada del Proyecto PetHub v3.0.1
+# 📁 Estructura Detallada del Proyecto PetHub v0.3.1
 
 ## 🏗️ Aplicacion-adopcion-mascotas/
 
@@ -276,5 +276,5 @@ Home (Dashboard Principal)
 
 ---
 
-*Estructura generada automáticamente - PetHub v3.0.1*  
-*Fecha: 28 de septiembre de 2025*
+*Estructura generada automáticamente - PetHub v0.3.1*  
+*Fecha: 5 de octubre de 2025*
