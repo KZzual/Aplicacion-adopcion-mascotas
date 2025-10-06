@@ -1,56 +1,57 @@
 <ion-content class="login-content">
-  <div class="flex-center">  <div class="login-container">
+  <div class="flex-center">
+    <div class="login-container">
 
-    <h2>PetHub</h2>
-    <p class="terms">
-      Al registarse aquí, aceptas nuestros 
-      <a href="#">Terminos y politicas de privacidad</a>
-    </p>
+      <h2>PetHub</h2>
+      <p class="terms">
+        Al registarse aquí, aceptas nuestros 
+        <a href="#">Términos y políticas de privacidad</a>
+      </p>
 
-    
-    <ion-item lines="none">
-      <ion-input
-        label="Correo Electrónico"
-        label-placement="floating"
-        fill="outline"
-        placeholder="Ingrese su correo"
-        type="email">
-      </ion-input>
-    </ion-item>
+      <!-- Campo Email -->
+      <ion-item lines="none">
+        <ion-input
+          [(ngModel)]="email"
+          label="Correo Electrónico"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Ingrese su correo"
+          type="email">
+        </ion-input>
+      </ion-item>
 
-    
-    <ion-item lines="none">
-      <ion-input
-        [type]="passwordType"
-        label="Contraseña"
-        label-placement="floating"
-        fill="outline"
-        placeholder="Ingrese su contraseña">
-      </ion-input>
-      <ion-icon
-        slot="end"
-        [name]="passwordIcon"
-        (click)="togglePassword()"
-        class="eye-icon">
-      </ion-icon>
-    </ion-item>
+      <!-- Campo Contraseña -->
+      <ion-item lines="none">
+        <ion-input
+          [(ngModel)]="password"
+          [type]="passwordType"
+          label="Contraseña"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Ingrese su contraseña">
+        </ion-input>
+        <ion-icon
+          slot="end"
+          [name]="passwordIcon"
+          (click)="togglePassword()"
+          class="eye-icon">
+        </ion-icon>
+      </ion-item>
 
-    
-    <div class="options">
-      <ion-checkbox></ion-checkbox>
-      <label>Recuérdame</label>
-      <a href="#">¿Olvidaste tu contraseña?</a>
+      <div class="options">
+        <ion-checkbox></ion-checkbox>
+        <label>Recuérdame</label>
+        <a href="#">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <!-- Botones -->
+      <ion-button expand="block" shape="round" class="btn-login" (click)="onLogin()">
+        Ingresar
+      </ion-button>
+      <ion-button expand="block" fill="clear" shape="round" class="btn-register" (click)="onRegister()">
+        Registrarse
+      </ion-button>
+
     </div>
-
-    
-    <ion-button expand="block" shape="round" class="btn-login">
-      Ingresar
-    </ion-button>
-    <ion-button expand="block" fill="clear" shape="round" class="btn-register">
-      Registrarse
-    </ion-button>
-
   </div>
-</div>
-
 </ion-content>
