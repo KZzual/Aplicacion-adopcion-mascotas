@@ -1,6 +1,6 @@
 {
-  "name": "shopdog-app",
-  "version": "0.0.1",
+  "name": "PetHub",
+  "version": "0.3.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^19.2.15",
     "@angular/platform-browser-dynamic": "^19.2.15",
     "@angular/router": "^19.2.15",
+    "@capacitor/android": "7.4.3",
     "@capacitor/app": "^7.1.0",
     "@capacitor/core": "^7.4.3",
     "@capacitor/haptics": "^7.0.2",
