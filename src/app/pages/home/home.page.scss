@@ -1,3 +1,207 @@
+/* Header personalizado */
+.app-logo {
+  font-size: 24px;
+  color: white;
+}
+
+ion-toolbar {
+  --background: #8e44ad;
+  --color: white;
+}
+
+ion-title {
+  font-weight: 600;
+}
+
+/* Tabs */
+ion-tab-bar {
+  --background: #ffffff;
+  --border: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
+}
+
+ion-tab-button {
+  --color: #8e8e93;
+  --color-selected: #8e44ad;
+
+  &.tab-selected {
+    --color: #8e44ad;
+  }
+}
+
+ion-tab-button ion-icon {
+  font-size: 24px;
+}
+
+ion-tab-button ion-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Páginas */
+.page-header {
+  text-align: center;
+  padding: 20px 15px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    color: #2d3748; /* Color más oscuro para mejor contraste */
+  }
+
+  p {
+    font-size: 14px;
+    color: #4a5568; /* Color más legible */
+    margin: 0;
+  }
+}
+
+/* Estados vacíos */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 80px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Conversaciones */
+.conversation-card {
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.conversation-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.conversation-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.conversation-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748; /* Color más oscuro para mejor contraste */
+}
+
+.last-message {
+  margin: 0;
+  font-size: 14px;
+  color: #4a5568; /* Color más legible */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversation-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.time {
+  font-size: 12px;
+  color: #999;
+}
+
+ion-avatar {
+  width: 50px;
+  height: 50px;
+}
+
+ion-badge {
+  font-size: 12px;
+  min-width: 20px;
+  height: 20px;
+}
+
+/* Posts */
+.post-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  &.adopted {
+    opacity: 0.8;
+
+    .post-image {
+      filter: grayscale(20%);
+    }
+  }
+
+  ion-card-content {
+    padding: 15px;
+  }
+
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+  }
+
+  p {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.4;
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+
+    small {
+      font-size: 12px;
+      color: #718096;
+    }
+
+    .status-chip {
+      font-size: 12px;
+      font-weight: 600;
+      height: 28px;
+      --border-radius: 14px;
+    }
+  }
+}
+
 .home-header {
   text-align: center;
   padding: 10px 15px;
@@ -6,12 +210,12 @@
     font-size: 22px;
     font-weight: bold;
     margin: 0;
-    color: #111;
+    color: #2d3748;
   }
 
   p {
     font-size: 14px;
-    color: #666;
+    color: #4a5568;
     margin-top: 4px;
   }
 }
@@ -30,6 +234,51 @@ ion-segment {
   overflow: hidden;
   margin-bottom: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  .post-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e2e8f0;
+
+    .owner-avatar {
+      width: 40px;
+      height: 40px;
+      margin-right: 12px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .owner-info {
+      flex: 1;
+
+      h4 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #2d3748;
+      }
+
+      p {
+        margin: 2px 0 0 0;
+        font-size: 12px;
+        color: #718096;
+      }
+    }
+  }
+
+  .pet-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
 
   .pet-banner {
     display: flex;
@@ -52,7 +301,7 @@ ion-segment {
 
     p {
       font-size: 14px;
-      color: #444;
+      color: #4a5568;
     }
 
     ion-chip {
@@ -68,11 +317,4 @@ ion-segment {
     }
   }
 
-}
-
-/* Tabs abajo */
-ion-tab-bar {
-  --background: #fff;
-  --color: #888;
-  --color-selected: #4a90e2;
 }

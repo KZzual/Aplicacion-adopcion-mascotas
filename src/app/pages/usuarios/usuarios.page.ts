@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
-interface UserInfo {
+interface UsuarioInfo {
   name: string;
   fullName: string;
   profileImage: string;
@@ -15,7 +15,7 @@ interface UserInfo {
   phone: string;
 }
 
-interface Post {
+interface UsuarioPost {
   id: number;
   petName: string;
   petImage: string;
@@ -25,7 +25,7 @@ interface Post {
   status: 'available' | 'adopted';
 }
 
-interface Activity {
+interface UsuarioActivity {
   id: number;
   type: 'comment' | 'like' | 'post';
   description: string;
@@ -34,16 +34,16 @@ interface Activity {
 }
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-usuarios',
+  templateUrl: './usuarios.page.html',
+  styleUrls: ['./usuarios.page.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule]
 })
-export class ProfilePage implements OnInit {
+export class UsuariosPage implements OnInit {
   selectedFilter: string = 'todo';
 
-  userInfo: UserInfo = {
+  userInfo: UsuarioInfo = {
     name: 'María González',
     fullName: 'María Alejandra González Rodríguez',
     profileImage: 'https://ionicframework.com/docs/img/demos/avatar.svg',
@@ -54,7 +54,7 @@ export class ProfilePage implements OnInit {
     phone: '+56 9 1234 5678'
   };
 
-  posts: Post[] = [
+  posts: UsuarioPost[] = [
     {
       id: 1,
       petName: 'Luna',
@@ -75,7 +75,7 @@ export class ProfilePage implements OnInit {
     }
   ];
 
-  activities: Activity[] = [
+  activities: UsuarioActivity[] = [
     {
       id: 1,
       type: 'like',
@@ -106,8 +106,7 @@ export class ProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Inicialización del componente - cargar datos del perfil si es necesario
-    console.log('ProfilePage initialized');
+    console.log('UsuariosPage initialized');
   }
 
   goBack() {
@@ -120,127 +119,105 @@ export class ProfilePage implements OnInit {
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Opciones',
+      header: 'Opciones de Usuario',
       buttons: [
         {
-          text: 'Editar perfil',
-          icon: 'create-outline',
-          handler: () => {
-            this.editProfile();
-          }
+          text: 'Enviar Mensaje',
+          icon: 'chatbubble-outline',
+          handler: () => { this.sendMessage(); }
         },
         {
-          text: 'Configuración',
-          icon: 'ellipsis-horizontal',
-          handler: () => {
-            this.router.navigate(['/configuraciones']);
-          }
+          text: 'Info de Contacto',
+          icon: 'information-circle-outline',
+          handler: () => { this.showContactInfo(); }
         },
         {
-          text: 'Cerrar Sesión',
-          icon: 'log-out-outline',
+          text: 'Denunciar Usuario',
+          icon: 'flag-outline',
           role: 'destructive',
-          handler: () => {
-            this.logout();
-          }
+          handler: () => { this.reportUser(); }
         },
         {
-          text: 'Cancelar',
-          icon: 'close',
-          role: 'cancel'
-        }
+          text: 'Bloquear Usuario',
+          icon: 'ban-outline',
+          role: 'destructive',
+          handler: () => { this.blockUser(); }
+        },
+        { text: 'Cancelar', icon: 'close', role: 'cancel' }
       ]
     });
     await actionSheet.present();
   }
 
-  async openSettings() {
-    // Ya no se usa, la opción de configuración ahora navega a la página de configuraciones
-  }
-
-  async editProfile() {
+  async sendMessage() {
     const alert = await this.alertController.create({
-      header: 'Editar Perfil',
-      inputs: [
-        {
-          name: 'name',
-          type: 'text',
-          placeholder: 'Nombre',
-          value: this.userInfo.name
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          placeholder: 'Descripción',
-          value: this.userInfo.description
-        }
-      ],
+      header: 'Enviar Mensaje',
+      inputs: [{ name: 'message', type: 'textarea', placeholder: 'Escribe tu mensaje...' }],
       buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Guardar',
-          handler: (data) => {
-            if (data.name && data.description) {
-              this.userInfo.name = data.name;
-              this.userInfo.description = data.description;
-              this.showToast('Perfil actualizado correctamente');
-            }
-          }
-        }
+        { text: 'Cancelar', role: 'cancel' },
+        { text: 'Enviar', handler: (data) => { if (data.message) { console.log('Mensaje enviado:', data.message); this.showToast('Mensaje enviado correctamente'); } } }
       ]
     });
     await alert.present();
   }
 
-  async showPrivacySettings() {
+  async showContactInfo() {
     const alert = await this.alertController.create({
-      header: 'Configuración de Privacidad',
-      message: 'Gestiona quién puede ver tu perfil y publicaciones',
+      header: 'Información de Contacto',
+      message: `
+        <strong>Email:</strong> ${this.userInfo.email}<br>
+        <strong>Teléfono:</strong> ${this.userInfo.phone}<br>
+        <strong>Ubicación:</strong> ${this.userInfo.location}
+      `,
       buttons: ['OK']
     });
     await alert.present();
   }
 
-  onFilterChange(event: any) {
-    this.selectedFilter = event.detail.value;
+  async reportUser() {
+    const alert = await this.alertController.create({
+      header: 'Denunciar Usuario',
+      inputs: [{ name: 'reason', type: 'text', placeholder: 'Motivo de la denuncia' }],
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        { text: 'Enviar', handler: (data) => { if (data.reason) { console.log('Usuario denunciado por:', data.reason); this.showToast('Denuncia enviada'); } } }
+      ]
+    });
+    await alert.present();
   }
+
+  async blockUser() {
+    const alert = await this.alertController.create({
+      header: 'Bloquear Usuario',
+      message: '¿Estás seguro que quieres bloquear a este usuario?',
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        { text: 'Bloquear', role: 'destructive', handler: () => this.showToast('Usuario bloqueado') }
+      ]
+    });
+    await alert.present();
+  }
+
+  async showToast(message: string) {
+    const toast = await this.toastController.create({ message, duration: 2000, position: 'bottom' });
+    await toast.present();
+  }
+
+  onFilterChange(_event: any) {}
 
   getFilteredContent() {
-    switch (this.selectedFilter) {
-      case 'informacion':
-        return { showInfo: true, showPosts: false, showActivity: false };
-      case 'publicaciones':
-        return { showInfo: false, showPosts: true, showActivity: false };
-      case 'actividad':
-        return { showInfo: false, showPosts: false, showActivity: true };
-      default: // caso por defecto - mostrar el contenido completo
-        return { showInfo: true, showPosts: true, showActivity: true };
-    }
+    return {
+      showInfo: this.selectedFilter === 'todo' || this.selectedFilter === 'informacion',
+      showPosts: this.selectedFilter === 'todo' || this.selectedFilter === 'publicaciones',
+      showActivity: this.selectedFilter === 'todo' || this.selectedFilter === 'actividad'
+    };
   }
 
-  getActivityIcon(type: string): string {
+  getActivityIcon(type: UsuarioActivity['type']) {
     switch (type) {
-      case 'like':
-        return 'paw-outline';
-      case 'comment':
-        return 'chatbubble-outline';
-      case 'post':
-        return 'add-circle-outline';
-      default:
-        return 'ellipse-outline';
+      case 'like': return 'heart';
+      case 'comment': return 'chatbubble-ellipses';
+      case 'post': return 'create';
     }
-  }
-
-  private async showToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000,
-      position: 'bottom',
-      color: 'success'
-    });
-    await toast.present();
   }
 }

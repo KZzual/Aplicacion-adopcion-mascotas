@@ -18,12 +18,20 @@ export class LoginPage {
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
 
+  // Estado para controlar si mostrar bienvenida o formulario de login
+  showWelcome: boolean = true;
+  authMode: 'login' | 'register' = 'login';
+
   constructor(
     private menuCtrl: MenuController,
     private authService: AuthService,
     private toastCtrl: ToastController,
-     private router: Router
-  ) {}
+    private router: Router
+  ) {
+    // Verificar si es la primera vez
+    const hasVisited = localStorage.getItem('hasVisited');
+    this.showWelcome = !hasVisited;
+  }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false, 'main-menu'); // 🔒 bloquear menú
@@ -31,6 +39,12 @@ export class LoginPage {
 
   ionViewWillLeave() {
     this.menuCtrl.enable(true, 'main-menu'); // 🔓 reactivar menú
+  }
+
+  // Método para continuar desde la pantalla de bienvenida
+  continueToAuth() {
+    localStorage.setItem('hasVisited', 'true');
+    this.showWelcome = false;
   }
 
   togglePassword() {
@@ -42,9 +56,8 @@ export class LoginPage {
     try {
       const user = await this.authService.login(this.email, this.password);
       this.showToast('✅ Inicio de sesión correcto');
-      this.router.navigate(['/home']);   // ✅ aquí rediriges al Ho
+      this.router.navigate(['/home']);   // ✅ aquí rediriges al Home
       console.log('Usuario:', user);
-      // Aquí podrías redirigir al home con router.navigate(['/home']);
     } catch (error: any) {
       this.showToast('❌ Error al iniciar sesión: ' + error.message);
       console.error(error);
@@ -55,6 +68,7 @@ export class LoginPage {
     try {
       const user = await this.authService.register(this.email, this.password);
       this.showToast('✅ Registro exitoso');
+      this.router.navigate(['/home']);
       console.log('Usuario registrado:', user);
     } catch (error: any) {
       this.showToast('❌ Error en registro: ' + error.message);

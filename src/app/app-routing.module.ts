@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'loader',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -31,11 +31,19 @@ const routes: Routes = [
   {
     path: 'historial-posts',
     loadChildren: () => import('./pages/historial-posts/historial-posts.module').then( m => m.HistorialPostsPageModule)
-  },  {
+  },
+  {
+    path: 'usuarios',
+    loadComponent: () => import('./pages/usuarios/usuarios.page').then(m => m.UsuariosPage)
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'configuraciones',
+    loadComponent: () => import('./pages/configuraciones/configuraciones.page').then(m => m.ConfiguracionesPage)
   }
-
 ];
 
 @NgModule({

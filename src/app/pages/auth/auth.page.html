@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/welcome"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Autenticación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-content">
+  <div class="auth-container">
+
+    <!-- Segmento para alternar entre Login y Registro -->
+    <ion-segment [(ngModel)]="authMode" class="auth-segment">
+      <ion-segment-button value="login">
+        <ion-label>Iniciar Sesión</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="register">
+        <ion-label>Registrarse</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Formulario de Login -->
+    <div *ngIf="authMode === 'login'" class="auth-form">
+      <div class="form-header">
+        <h2>Bienvenido de vuelta</h2>
+        <p>Ingresa tus credenciales para acceder</p>
+      </div>
+
+      <ion-item lines="none" class="form-item">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          [(ngModel)]="loginData.email"
+          type="email"
+          placeholder="tu@email.com">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="form-item">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input
+          [(ngModel)]="loginData.password"
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="••••••••">
+        </ion-input>
+        <ion-button
+          slot="end"
+          fill="clear"
+          (click)="togglePassword()">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        shape="round"
+        class="auth-button"
+        (click)="onLogin()">
+        Iniciar Sesión
+      </ion-button>
+    </div>
+
+    <!-- Formulario de Registro -->
+    <div *ngIf="authMode === 'register'" class="auth-form">
+      <div class="form-header">
+        <h2>Crear cuenta</h2>
+        <p>Únete a nuestra comunidad de adopción</p>
+      </div>
+
+      <ion-item lines="none" class="form-item">
+        <ion-label position="floating">Nombre completo</ion-label>
+        <ion-input
+          [(ngModel)]="registerData.fullName"
+          type="text"
+          placeholder="Tu nombre">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="form-item">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          [(ngModel)]="registerData.email"
+          type="email"
+          placeholder="tu@email.com">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="form-item">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input
+          [(ngModel)]="registerData.password"
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="••••••••">
+        </ion-input>
+        <ion-button
+          slot="end"
+          fill="clear"
+          (click)="togglePassword()">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        shape="round"
+        class="auth-button"
+        (click)="onRegister()">
+        Crear Cuenta
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

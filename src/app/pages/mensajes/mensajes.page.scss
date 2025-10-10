@@ -1,0 +1,95 @@
+.mensajes-content {
+  --background: #f8f9fa;
+}
+
+.mensajes-container {
+  padding: 16px;
+}
+
+.conversations-list {
+  margin-bottom: 20px;
+}
+
+.conversation-card {
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.conversation-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.conversation-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.conversation-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.last-message {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversation-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.time {
+  font-size: 12px;
+  color: #999;
+}
+
+ion-avatar {
+  width: 50px;
+  height: 50px;
+}
+
+ion-badge {
+  font-size: 12px;
+  min-width: 20px;
+  height: 20px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 80px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.empty-state h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-icon name="paw" class="app-logo"></ion-icon>
+    </ion-buttons>
+    <ion-title>{{ getPageTitle() }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="goToProfile()">
+        <ion-icon name="person-circle" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom" color="light">
+    <ion-tab-button tab="home" (click)="setCurrentTab('home')">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="historial-posts" (click)="setCurrentTab('historial-posts')">
+      <ion-icon name="time"></ion-icon>
+      <ion-label>Historial</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="post-view" (click)="setCurrentTab('post-view')">
+      <ion-icon name="add-circle"></ion-icon>
+      <ion-label>Publicar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="mensajes" (click)="setCurrentTab('mensajes')">
+      <ion-icon name="chatbubbles"></ion-icon>
+      <ion-label>Mensajes</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

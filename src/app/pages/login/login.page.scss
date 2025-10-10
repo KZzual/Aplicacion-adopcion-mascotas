@@ -1,6 +1,5 @@
 .login-content {
   --background: none; /* quita el fondo por defecto de Ionic */
-  background: url('/assets/img/testimage.jpg') no-repeat center center / cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,6 +7,113 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  position: relative;
+}
+
+/* Estilos para la pantalla de bienvenida */
+.welcome-screen {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.welcome-container {
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.logo-container {
+  margin-bottom: 40px;
+}
+
+.logo-circle {
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.logo-icon {
+  font-size: 60px;
+  color: white;
+}
+
+.welcome-text {
+  margin-bottom: 60px;
+}
+
+.app-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.app-description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0 20px;
+}
+
+.welcome-actions {
+  margin-bottom: 40px;
+}
+
+.start-button {
+  --background: #8e44ad;
+  --background-hover: #9b59b6;
+  --background-activated: #7d3c98;
+  --color: white;
+  --border-radius: 25px;
+  height: 50px;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 20px;
+}
+
+.page-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+
+  &.active {
+    background: white;
+  }
+}
+
+/* Estilos para la pantalla de autenticación */
+.flex-center {
+  background: url('/assets/img/testimage.jpg') no-repeat center center / cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 
   /* Overlay opcional para mejorar contraste */
   position: relative;
@@ -33,7 +139,38 @@
   }
 }
 
-/* Títulos */
+/* Segmento de autenticación */
+.auth-segment {
+  margin-bottom: 30px;
+  --background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  ion-segment-button {
+    --color: #666666;
+    --color-checked: #8e44ad;
+    --background-checked: rgba(142, 68, 173, 0.1);
+    --indicator-color: #8e44ad;
+    font-weight: 500;
+  }
+}
+
+.form-header {
+  margin-bottom: 25px;
+
+  h2 {
+    margin: 0 0 8px;
+    font-weight: bold;
+    color: #2d3748; /* Color más oscuro para mejor contraste */
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #4a5568; /* Color más legible */
+    margin: 0;
+  }
+}/* Títulos */
 h2 {
   margin: 0 0 8px;
   font-weight: bold;
@@ -45,58 +182,101 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* Inputs */
+/* Inputs mejorados */
 ion-item {
-  --background: transparent;
+  --background: #ffffff;
   margin-bottom: 18px;
   border-radius: 12px;
-  --highlight-color-focused: #3880ff;
+  --highlight-color-focused: #8e44ad;
+  --border-color: #e2e8f0;
+  --border-width: 1px;
+  --border-style: solid;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+
+  ion-input, ion-textarea {
+    --color: #2d3748;
+    --placeholder-color: #a0aec0;
+    font-size: 16px;
+  }
+
+  ion-label {
+    --color: #4a5568;
+    font-weight: 500;
+  }
 }
 
 .eye-icon {
   font-size: 20px;
-  color: #666;
+  color: #718096;
   cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #8e44ad;
+  }
 }
 
-/* Opciones */
+/* Opciones mejoradas */
 .options {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 15px 0 25px;
   font-size: 13px;
+
+  label {
+    margin-left: 6px;
+    color: #4a5568;
+    font-weight: 500;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 13px;
+    color: #8e44ad;
+    font-weight: 500;
+
+    &:hover {
+      color: #9b59b6;
+    }
+  }
 }
 
 ion-checkbox {
   --size: 18px;
   --border-radius: 6px;
-  --background-checked: #3880ff;
-  --border-color-checked: #3880ff;
+  --background-checked: #8e44ad;
+  --border-color-checked: #8e44ad;
+  --border-color: #cbd5e0;
 }
 
-.options label {
-  margin-left: 6px;
-}
-
-.options a {
-  text-decoration: none;
-  font-size: 13px;
-  color: #3880ff;
-}
-
-/* Botones */
+/* Botones mejorados */
 .btn-login {
-  --background: #3880ff;
+  --background: #8e44ad;
+  --background-hover: #9b59b6;
+  --background-activated: #7d3c98;
   --border-radius: 25px;
-  --box-shadow: 0 4px 12px rgba(56,128,255,0.4);
-  font-weight: 500;
+  --box-shadow: 0 4px 12px rgba(142, 68, 173, 0.4);
+  --color: #ffffff;
+  font-weight: 600;
   margin-top: 10px;
+  height: 48px;
+  font-size: 16px;
 }
 
 .btn-register {
-  color: #3880ff;
-  font-size: 14px;
+  --background: transparent;
+  --color: #8e44ad;
+  --border-color: #8e44ad;
+  --border-width: 2px;
+  --border-style: solid;
+  --border-radius: 25px;
+  font-weight: 600;
   margin-top: 8px;
+  height: 48px;
+  font-size: 16px;
+
+  &:hover {
+    --background: rgba(142, 68, 173, 0.1);
+  }
 }

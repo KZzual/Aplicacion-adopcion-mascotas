@@ -1,0 +1,33 @@
+.app-logo {
+  font-size: 24px;
+  color: white;
+}
+
+ion-tab-bar {
+  --background: #ffffff;
+  --border: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
+}
+
+ion-tab-button {
+  --color: #8e8e93;
+  --color-selected: #8e44ad;
+}
+
+ion-tab-button ion-icon {
+  font-size: 24px;
+}
+
+ion-tab-button ion-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+ion-toolbar {
+  --background: #8e44ad;
+  --color: white;
+}
+
+ion-title {
+  font-weight: 600;
+}

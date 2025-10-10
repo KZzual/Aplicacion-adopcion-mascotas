@@ -1,5 +1,19 @@
-<ion-content class="ion-padding">
+<!-- Header personalizado -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-icon name="paw" class="app-logo"></ion-icon>
+    </ion-buttons>
+    <ion-title>{{ getCurrentPageTitle() }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="goToProfile()">
+        <ion-icon name="person-circle" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content class="ion-padding" *ngIf="currentTab === 'home'">
   <div class="home-header">
     <h1>PetHub</h1>
     <p>Casas felices, para animales felices.</p>
@@ -20,12 +34,21 @@
     <ion-segment-button value="adult">Adultos</ion-segment-button>
   </ion-segment>
 
-
   <!-- Lista de mascotas filtrada -->
   <ion-card class="pet-card" *ngFor="let pet of filteredPets()">
-    <div class="pet-banner" [style.background]="pet.color">
-      {{ pet.name }}
+    <!-- Información del usuario que publica -->
+    <div class="post-header">
+      <ion-avatar class="owner-avatar">
+        <img [src]="pet.owner.avatar" [alt]="pet.owner.name">
+      </ion-avatar>
+      <div class="owner-info">
+        <h4>{{ pet.owner.name }}</h4>
+        <p>publicó hace 2 días</p>
+      </div>
     </div>
+
+    <!-- Imagen de la mascota -->
+    <img [src]="pet.image" [alt]="pet.name" class="pet-image">
 
     <ion-card-content>
       <h2>{{ pet.name }}</h2>
@@ -42,11 +65,119 @@
       </ion-button>
     </ion-card-content>
   </ion-card>
-  
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button color="primary" (click)="onFabClick()">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="onFabClick()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
+
+<!-- Contenido para Historial de Posts -->
+<ion-content class="ion-padding" *ngIf="currentTab === 'historial-posts'">
+  <div class="page-header">
+    <h2>Historial de Posts</h2>
+    <p>Tus publicaciones anteriores</p>
+  </div>
+
+  <ion-card *ngFor="let post of userPosts" class="post-card" [ngClass]="{'adopted': post.status === 'adopted'}">
+    <img src="assets/placeholder.png" [src]="post.petImage || 'assets/placeholder.png'" alt="Mascota" [alt]="post.petName || 'Mascota'" class="post-image">
+    <ion-card-content>
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.description }}</p>
+      <div class="post-footer">
+        <small>Publicado: {{ post.date }}</small>
+        <ion-chip [color]="post.status === 'adopted' ? 'success' : 'primary'" class="status-chip">
+          {{ post.status === 'adopted' ? '✓ Adoptado' : '🏠 Disponible' }}
+        </ion-chip>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="empty-state" *ngIf="userPosts.length === 0">
+    <ion-icon name="document-text-outline" class="empty-icon"></ion-icon>
+    <h3>No tienes posts aún</h3>
+    <p>Cuando publiques una mascota para adopción, aparecerá aquí.</p>
+  </div>
+</ion-content>
+
+<!-- Contenido para Publicar -->
+<ion-content class="ion-padding" *ngIf="currentTab === 'post-view'">
+  <div class="page-header">
+    <h2>Publicar Mascota</h2>
+    <p>Ayuda a una mascota a encontrar hogar</p>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-input label="Nombre de la mascota" labelPlacement="floating" [(ngModel)]="newPost.name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea label="Descripción" labelPlacement="floating" [(ngModel)]="newPost.description"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" (click)="publishPost()">Publicar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!-- Contenido para Mensajes -->
+<ion-content class="ion-padding" *ngIf="currentTab === 'mensajes'">
+  <div class="page-header">
+    <h2>Mensajes</h2>
+    <p>Conversaciones sobre adopciones</p>
+  </div>
+
+  <ion-card class="conversation-card" *ngFor="let conversation of conversations" (click)="openConversation(conversation)">
+    <ion-card-content>
+      <div class="conversation-header">
+        <ion-avatar>
+          <img [src]="conversation.avatar || 'assets/default-avatar.png'" [alt]="conversation.name">
+        </ion-avatar>
+        <div class="conversation-info">
+          <h3>{{ conversation.name }}</h3>
+          <p class="last-message">{{ conversation.lastMessage }}</p>
+        </div>
+        <div class="conversation-meta">
+          <span class="time">{{ conversation.time }}</span>
+          <ion-badge color="primary" *ngIf="conversation.unreadCount > 0">
+            {{ conversation.unreadCount }}
+          </ion-badge>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="empty-state" *ngIf="conversations.length === 0">
+    <ion-icon name="chatbubbles-outline" class="empty-icon"></ion-icon>
+    <h3>No hay conversaciones</h3>
+    <p>Cuando alguien te escriba sobre una adopción, aparecerá aquí.</p>
+  </div>
+</ion-content>
+
+<!-- Tabs inferiores -->
+<ion-tabs>
+  <ion-tab-bar slot="bottom" color="light">
+    <ion-tab-button (click)="setCurrentTab('home')" [class.tab-selected]="currentTab === 'home'">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="setCurrentTab('historial-posts')" [class.tab-selected]="currentTab === 'historial-posts'">
+      <ion-icon name="time"></ion-icon>
+      <ion-label>Historial</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="setCurrentTab('post-view')" [class.tab-selected]="currentTab === 'post-view'">
+      <ion-icon name="add-circle"></ion-icon>
+      <ion-label>Publicar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="setCurrentTab('mensajes')" [class.tab-selected]="currentTab === 'mensajes'">
+      <ion-icon name="chatbubbles"></ion-icon>
+      <ion-label>Mensajes</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

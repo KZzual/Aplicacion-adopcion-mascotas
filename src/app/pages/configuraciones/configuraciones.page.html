@@ -1,0 +1,172 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+  <ion-button (click)="goBack()" (keydown.enter)="goBack()" aria-label="Atrás">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Configuraciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-divider color="primary">Perfil de usuario</ion-item-divider>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Foto de perfil">
+      </ion-avatar>
+      <ion-label>
+        <h2>María González</h2>
+        <p>maria.gonzalez&#64;email.com</p>
+        <p>+56 9 1234 5678</p>
+        <p>Estado: Amante de los animales</p>
+      </ion-label>
+      <ion-button fill="outline" slot="end">Editar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Contraseña</ion-label>
+      <ion-button fill="outline" slot="end">Cambiar</ion-button>
+    </ion-item>
+
+    <ion-item-divider color="primary">Preferencias de notificaciones</ion-item-divider>
+    <ion-item>
+      <ion-label>Notificaciones push</ion-label>
+      <ion-toggle checked></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Frecuencia de notificaciones</ion-label>
+      <ion-select value="diarias">
+        <ion-select-option value="diarias">Diarias</ion-select-option>
+        <ion-select-option value="semanales">Semanales</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sonidos y vibraciones</ion-label>
+      <ion-toggle checked></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Notificaciones de correo</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider color="primary">Idioma y región <ion-note color="medium">(Próximamente)</ion-note></ion-item-divider>
+    <ion-item disabled>
+      <ion-label>Idioma</ion-label>
+      <ion-select value="es" disabled>
+        <ion-select-option value="es">Español</ion-select-option>
+        <ion-select-option value="en">Inglés</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item disabled>
+      <ion-label>Región</ion-label>
+      <ion-select value="cl" disabled>
+        <ion-select-option value="cl">Chile</ion-select-option>
+        <ion-select-option value="mx">México</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item-divider color="primary">Privacidad y seguridad</ion-item-divider>
+    <ion-item>
+      <ion-label>Autenticación de dos factores</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Permisos de ubicación</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Historial de actividad</ion-label>
+      <ion-button fill="outline" slot="end">Ver/Borrar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gestión de datos personales</ion-label>
+      <ion-button fill="outline" slot="end">Ver</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Controles de privacidad</ion-label>
+      <ion-button fill="outline" slot="end">Configurar</ion-button>
+    </ion-item>
+
+    <ion-item-divider color="primary">Ajustes de apariencia <ion-note color="medium">(Próximamente)</ion-note></ion-item-divider>
+    <ion-item disabled>
+      <ion-label>Tema</ion-label>
+      <ion-select value="claro" disabled>
+        <ion-select-option value="claro">Claro</ion-select-option>
+        <ion-select-option value="oscuro">Oscuro</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item-divider color="primary">Conexión y redes <ion-note color="medium">(Próximamente)</ion-note></ion-item-divider>
+    <ion-item disabled>
+      <ion-label>Redes sociales</ion-label>
+      <ion-button fill="outline" slot="end" disabled>Conectar</ion-button>
+    </ion-item>
+
+    <ion-item-divider color="primary">Uso de datos <ion-note color="medium">(Próximamente)</ion-note></ion-item-divider>
+    <ion-item>
+      <ion-label>Modo de ahorro de datos</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Descarga de contenido solo en Wi-Fi</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sincronización en segundo plano</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider color="primary">Ajustes de cuenta <ion-note color="medium">(Próximamente)</ion-note></ion-item-divider>
+    <ion-item>
+      <ion-label>Desactivar o eliminar cuenta</ion-label>
+      <ion-button fill="outline" slot="end" color="danger">Eliminar</ion-button>
+    </ion-item>
+
+    <ion-item-divider color="primary">Actualizaciones y versión de la app</ion-item-divider>
+    <ion-item>
+      <ion-label>Versión de la aplicación</ion-label>
+      <ion-note slot="end">v3.0.1</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Registro de cambios</ion-label>
+      <ion-button fill="outline" slot="end">Ver</ion-button>
+    </ion-item>
+
+    <ion-item-divider color="primary">Ayuda y soporte</ion-item-divider>
+    <ion-item>
+      <ion-label>Preguntas frecuentes (FAQ)</ion-label>
+      <ion-button fill="outline" slot="end">Ver</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Contactar soporte técnico</ion-label>
+      <ion-button fill="outline" slot="end">Contactar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Términos y condiciones</ion-label>
+      <ion-button fill="outline" slot="end">Ver</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Política de privacidad</ion-label>
+      <ion-button fill="outline" slot="end">Ver</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sugerir función o reportar error</ion-label>
+      <ion-button fill="outline" slot="end">Enviar</ion-button>
+    </ion-item>
+
+    <ion-item-divider color="primary">Funciones avanzadas <ion-note color="medium">(Próximamente)</ion-note></ion-item-divider>
+    <ion-item disabled>
+      <ion-label>Modo desarrollador</ion-label>
+      <ion-toggle disabled></ion-toggle>
+    </ion-item>
+    <ion-item disabled>
+      <ion-label>Integración con API externas</ion-label>
+      <ion-button fill="outline" slot="end" disabled>Configurar</ion-button>
+    </ion-item>
+    <ion-item disabled>
+      <ion-label>Gestión de backups</ion-label>
+      <ion-button fill="outline" slot="end" disabled>Gestionar</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
