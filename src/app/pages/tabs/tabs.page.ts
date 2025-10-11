@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonHeader, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-tabs',
