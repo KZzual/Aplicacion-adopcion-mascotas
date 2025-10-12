@@ -813,7 +813,31 @@ chore: tareas de mantenimiento
 ---
 
 *Guía creada el 28 de septiembre de 2025*
-*Última actualización: 28/09/2025*
+*Última actualización: 11/10/2025*
+
+---
+
+## 🔄 Actualizaciones técnicas aplicadas (2025-10-11)
+
+- Android: minSdkVersion actualizado a 24 en `android/variables.gradle` para compatibilidad con Capacitor 7+.
+- Android: Limpieza en `android/app/build.gradle` dejando una única aplicación del plugin `com.google.gms.google-services` (condicional por presencia de `google-services.json`).
+- Firebase: Integración con AngularFire (`@angular/fire@7.6.1`) y wiring mínimo en `src/app/app.module.ts`:
+  - `AngularFireModule.initializeApp(environment.firebaseConfig)` y `AngularFireAuthModule`.
+  - Instalado con `--legacy-peer-deps` por requisito de peer deps (funciona con Angular 19).
+- NPM Scripts añadidos en `package.json`:
+  - `ionic:build`: `ionic build`
+  - `cap:sync`: `cap sync`
+  - `cap:sync:android`: `cap sync android`
+  - `cap:open:android`: `cap open android`
+  - `android:build`: `ionic build` + `cap sync android`
+ESLint: Mejora de configuración en `.eslintrc.json` (plugin `import`, orden y saltos entre imports, reglas Angular).
+
+Sugerencia de uso rápido Android:
+
+```bash
+npm run android:build
+npm run cap:open:android
+```
 
 ---
 

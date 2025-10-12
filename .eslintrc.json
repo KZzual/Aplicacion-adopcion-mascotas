@@ -8,6 +8,7 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
+      "plugins": ["import", "@angular-eslint"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
@@ -16,26 +17,19 @@
         "@angular-eslint/prefer-standalone": "off",
         "@angular-eslint/component-class-suffix": [
           "error",
-          {
-            "suffixes": ["Page", "Component"]
-          }
+          { "suffixes": ["Page", "Component"] }
         ],
         "@angular-eslint/component-selector": [
           "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
+          { "type": "element", "prefix": "app", "style": "kebab-case" }
         ],
         "@angular-eslint/directive-selector": [
           "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ]
+          { "type": "attribute", "prefix": "app", "style": "camelCase" }
+        ],
+        "import/order": "off",
+        "import/newline-after-import": "off",
+        "@angular-eslint/no-empty-lifecycle-method": "off"
       }
     },
     {
