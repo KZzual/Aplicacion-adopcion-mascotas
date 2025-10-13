@@ -3,7 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
 
-  "ignoreDeprecations": "6.0",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
