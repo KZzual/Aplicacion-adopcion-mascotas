@@ -48,7 +48,7 @@
     </div>
 
     <!-- Imagen de la mascota -->
-    <img [src]="pet.image" [alt]="pet.name" class="pet-image">
+    <img [src]="pet.image || 'assets/img/logoapp1.1.png'" [alt]="pet.name" class="pet-image">
 
     <ion-card-content>
       <h2>{{ pet.name }}</h2>
@@ -157,27 +157,4 @@
   </div>
 </ion-content>
 
-<!-- Tabs inferiores -->
-<ion-tabs>
-  <ion-tab-bar slot="bottom" color="light">
-    <ion-tab-button (click)="setCurrentTab('home')" [class.tab-selected]="currentTab === 'home'">
-      <ion-icon name="home"></ion-icon>
-      <ion-label>Home</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button (click)="setCurrentTab('historial-posts')" [class.tab-selected]="currentTab === 'historial-posts'">
-      <ion-icon name="time"></ion-icon>
-      <ion-label>Historial</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button (click)="setCurrentTab('post-view')" [class.tab-selected]="currentTab === 'post-view'">
-      <ion-icon name="add-circle"></ion-icon>
-      <ion-label>Publicar</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button (click)="setCurrentTab('mensajes')" [class.tab-selected]="currentTab === 'mensajes'">
-      <ion-icon name="chatbubbles"></ion-icon>
-      <ion-label>Mensajes</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<!-- Tabs inferiores removidos: ahora se manejan en TabsPage -->

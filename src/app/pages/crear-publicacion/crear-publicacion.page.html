@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Publicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-input label="Nombre" labelPlacement="floating" formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+      El nombre es obligatorio
+    </ion-note>
+
+    <ion-item>
+      <ion-textarea label="Descripción" labelPlacement="floating" formControlName="descripcion"></ion-textarea>
+    </ion-item>
+    <ion-note color="danger" *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid">
+      La descripción es obligatoria (mín. 10 caracteres)
+    </ion-note>
+
+    <ion-item>
+      <ion-select label="Especie" formControlName="especie">
+        <ion-select-option value="perro">Perro</ion-select-option>
+        <ion-select-option value="gato">Gato</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Edad" labelPlacement="floating" formControlName="edad"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-segment formControlName="genero">
+        <ion-segment-button value="macho">Macho</ion-segment-button>
+        <ion-segment-button value="hembra">Hembra</ion-segment-button>
+      </ion-segment>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Ubicación" labelPlacement="floating" formControlName="ubicacion"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="form.invalid">Publicar</ion-button>
+  </form>
+</ion-content>

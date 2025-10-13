@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IonContent } from "@ionic/angular/standalone";
+import { CommonModule } from '@angular/common';
+import { IonContent, IonBadge, IonIcon, IonCard, IonCardContent, IonAvatar } from "@ionic/angular/standalone";
 
 interface Conversation {
   id: number;
@@ -14,6 +15,8 @@ interface Conversation {
   selector: 'app-mensajes',
   templateUrl: './mensajes.page.html',
   styleUrls: ['./mensajes.page.scss'],
+  standalone: true,
+  imports: [CommonModule, IonContent, IonCard, IonCardContent, IonAvatar, IonBadge, IonIcon]
 })
 export class MensajesPage implements OnInit {
 

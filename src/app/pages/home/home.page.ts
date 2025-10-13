@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
   IonContent, IonSearchbar, IonSegment, IonSegmentButton,
   IonCard, IonCardContent, IonAvatar, IonChip, IonFab, IonFabButton,
-  IonItem, IonInput, IonTextarea, IonBadge, IonTabs, IonTabBar,
-  IonTabButton, IonLabel
+  IonItem, IonInput, IonTextarea, IonBadge
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -18,8 +18,7 @@ import {
     CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonButtons,
     IonButton, IonIcon, IonContent, IonSearchbar, IonSegment, IonSegmentButton,
     IonCard, IonCardContent, IonAvatar, IonChip, IonFab, IonFabButton,
-    IonItem, IonInput, IonTextarea, IonBadge, IonTabs, IonTabBar,
-    IonTabButton, IonLabel
+    IonItem, IonInput, IonTextarea, IonBadge, RouterModule
   ]
 })
 export class HomePage {
@@ -134,7 +133,23 @@ export class HomePage {
     }
   ];
 
-  constructor() {}
+  constructor(private readonly router: Router) {
+    // Sincronizar pestaña con URL al cargar y en cambios de navegación
+    this.syncTabWithUrl(this.router.url);
+    this.router.events.subscribe(ev => {
+      if (ev instanceof NavigationEnd) {
+        this.syncTabWithUrl(ev.urlAfterRedirects);
+      }
+    });
+  }
+
+  private syncTabWithUrl(url: string) {
+    if (!url) return;
+    if (url.includes('/home/historial')) this.currentTab = 'historial-posts';
+    else if (url.includes('/home/publicar')) this.currentTab = 'post-view';
+    else if (url.includes('/home/mensajes')) this.currentTab = 'mensajes';
+    else this.currentTab = 'home';
+  }
 
   // Método para obtener el título de la página actual
   getCurrentPageTitle(): string {
@@ -196,6 +211,19 @@ export class HomePage {
   // Método para cambiar de tab
   setCurrentTab(tab: string): void {
     this.currentTab = tab;
+    switch (tab) {
+      case 'historial-posts':
+        this.router.navigateByUrl('/home/historial');
+        break;
+      case 'post-view':
+        this.router.navigateByUrl('/home/publicar');
+        break;
+      case 'mensajes':
+        this.router.navigateByUrl('/home/mensajes');
+        break;
+      default:
+        this.router.navigateByUrl('/home/inicio');
+    }
   }
 
   // Método para publicar un nuevo post
@@ -238,7 +266,7 @@ export class HomePage {
   // Método para el botón flotante
   onFabClick(): void {
     console.log('Botón flotante presionado');
-    // Cambiar a la tab de publicar
-    this.setCurrentTab('post-view');
+    // Navegar a crear-publicacion dentro de tabs
+    this.router.navigateByUrl('/tabs/crear-publicacion');
   }
 }

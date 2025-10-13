@@ -13,23 +13,29 @@
 </ion-header>
 
 <ion-tabs>
+  <ion-router-outlet></ion-router-outlet>
   <ion-tab-bar slot="bottom" color="light">
-    <ion-tab-button tab="home" (click)="setCurrentTab('home')">
+    <ion-tab-button [routerLink]="['/tabs/home']" routerLinkActive="tab-selected">
       <ion-icon name="home"></ion-icon>
       <ion-label>Home</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="historial-posts" (click)="setCurrentTab('historial-posts')">
+    <ion-tab-button [routerLink]="['/tabs/historial-posts']" routerLinkActive="tab-selected">
       <ion-icon name="time"></ion-icon>
       <ion-label>Historial</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="post-view" (click)="setCurrentTab('post-view')">
+    <ion-tab-button [routerLink]="['/tabs/crear-publicacion']" routerLinkActive="tab-selected">
       <ion-icon name="add-circle"></ion-icon>
       <ion-label>Publicar</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="mensajes" (click)="setCurrentTab('mensajes')">
+    <ion-tab-button [routerLink]="['/tabs/notificaciones']" routerLinkActive="tab-selected">
+      <ion-icon name="notifications"></ion-icon>
+      <ion-label>Notificaciones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button [routerLink]="['/tabs/mensajes']" routerLinkActive="tab-selected">
       <ion-icon name="chatbubbles"></ion-icon>
       <ion-label>Mensajes</ion-label>
     </ion-tab-button>
