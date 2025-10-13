@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
 
-    "baseUrl": "./",
+  "ignoreDeprecations": "6.0",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -15,7 +15,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+  "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "es2022",
     "module": "es2020",
