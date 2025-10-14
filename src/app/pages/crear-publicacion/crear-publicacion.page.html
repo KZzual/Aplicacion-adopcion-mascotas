@@ -48,3 +48,25 @@
     <ion-button expand="block" type="submit" [disabled]="form.invalid">Publicar</ion-button>
   </form>
 </ion-content>
+
+<!-- Contenido para Publicar
+<ion-content class="ion-padding" *ngIf="currentTab === 'post-view'">
+  <div class="page-header">
+    <h2>Publicar Mascota</h2>
+    <p>Ayuda a una mascota a encontrar hogar</p>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-input label="Nombre de la mascota" labelPlacement="floating" [(ngModel)]="newPost.name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea label="Descripción" labelPlacement="floating" [(ngModel)]="newPost.description"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" (click)="publishPost()">Publicar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content> -->

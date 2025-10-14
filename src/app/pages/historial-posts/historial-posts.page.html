@@ -4,7 +4,7 @@
 
     <ion-list lines="none">
 
-      
+
       <ion-card class="post-card">
         <ion-card-header>
           <ion-card-title>Luciana de los montes</ion-card-title>
@@ -20,7 +20,7 @@
         </ion-card-content>
       </ion-card>
 
-      
+
       <ion-card class="post-card">
         <ion-card-header>
           <ion-card-title>Cholito</ion-card-title>
@@ -39,3 +39,31 @@
     </ion-list>
   </div>
 </ion-content>
+
+<!-- Contenido para Historial de Posts
+<ion-content class="ion-padding" *ngIf="currentTab === 'historial-posts'">
+  <div class="page-header">
+    <h2>Historial de Posts</h2>
+    <p>Tus publicaciones anteriores</p>
+  </div>
+
+  <ion-card *ngFor="let post of userPosts" class="post-card" [ngClass]="{'adopted': post.status === 'adopted'}">
+    <img src="assets/placeholder.png" [src]="post.petImage || 'assets/placeholder.png'" alt="Mascota" [alt]="post.petName || 'Mascota'" class="post-image">
+    <ion-card-content>
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.description }}</p>
+      <div class="post-footer">
+        <small>Publicado: {{ post.date }}</small>
+        <ion-chip [color]="post.status === 'adopted' ? 'success' : 'primary'" class="status-chip">
+          {{ post.status === 'adopted' ? '✓ Adoptado' : '🏠 Disponible' }}
+        </ion-chip>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="empty-state" *ngIf="userPosts.length === 0">
+    <ion-icon name="document-text-outline" class="empty-icon"></ion-icon>
+    <h3>No tienes posts aún</h3>
+    <p>Cuando publiques una mascota para adopción, aparecerá aquí.</p>
+  </div>
+</ion-content>-->

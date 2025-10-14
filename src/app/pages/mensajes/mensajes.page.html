@@ -7,7 +7,7 @@
         <ion-card-content>
           <div class="conversation-header">
             <ion-avatar>
-              <img [src]="conversation.avatar || 'assets/default-avatar.png'" [alt]="conversation.name">
+              <img [src]="conversation.avatar || 'assets/img/avatar3.png'" [alt]="conversation.name">
             </ion-avatar>
             <div class="conversation-info">
               <h3>{{ conversation.name }}</h3>
@@ -33,3 +33,37 @@
 
   </div>
 </ion-content>
+
+<!-- Contenido para Mensajes
+<ion-content class="ion-padding" *ngIf="currentTab === 'mensajes'">
+  <div class="page-header">
+    <h2>Mensajes</h2>
+    <p>Conversaciones sobre adopciones</p>
+  </div>
+
+  <ion-card class="conversation-card" *ngFor="let conversation of conversations" (click)="openConversation(conversation)">
+    <ion-card-content>
+      <div class="conversation-header">
+        <ion-avatar>
+          <img [src]="conversation.avatar || 'assets/default-avatar.png'" [alt]="conversation.name">
+        </ion-avatar>
+        <div class="conversation-info">
+          <h3>{{ conversation.name }}</h3>
+          <p class="last-message">{{ conversation.lastMessage }}</p>
+        </div>
+        <div class="conversation-meta">
+          <span class="time">{{ conversation.time }}</span>
+          <ion-badge color="primary" *ngIf="conversation.unreadCount > 0">
+            {{ conversation.unreadCount }}
+          </ion-badge>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="empty-state" *ngIf="conversations.length === 0">
+    <ion-icon name="chatbubbles-outline" class="empty-icon"></ion-icon>
+    <h3>No hay conversaciones</h3>
+    <p>Cuando alguien te escriba sobre una adopción, aparecerá aquí.</p>
+  </div>
+</ion-content> -->

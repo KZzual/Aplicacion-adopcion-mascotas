@@ -109,13 +109,7 @@ export class HomePage {
     }
   ];
 
-  // Nuevo post para formulario de publicación
-  newPost = {
-    name: '',
-    description: ''
-  };
-
-  // Lista de conversaciones para mensajes
+  // Lista de conversaciones para mensajes (simulada)
   conversations = [
     {
       id: 1,
@@ -135,7 +129,7 @@ export class HomePage {
     }
   ];
 
-  constructor(private readonly router: Router) {
+  constructor(private readonly router: Router) {//LAS RUTAS SE MANEJAN CON PAGINA TABS PRINCIPALMENTE
     // Sincronizar pestaña con URL al cargar y en cambios de navegación
     this.syncTabWithUrl(this.router.url);
     this.router.events.subscribe(ev => {
@@ -145,7 +139,7 @@ export class HomePage {
     });
   }
 
-  private syncTabWithUrl(url: string) {
+  private syncTabWithUrl(url: string) {//LAS RUTAS SE MANEJAN CON PAGINA TABS PRINCIPALMENTE
     if (!url) return;
     if (url.includes('/home/historial')) this.currentTab = 'historial-posts';
     else if (url.includes('/home/publicar')) this.currentTab = 'post-view';
@@ -153,30 +147,9 @@ export class HomePage {
     else this.currentTab = 'home';
   }
 
-  // Método para obtener el título de la página actual
-  getCurrentPageTitle(): string {
-    switch (this.currentTab) {
-      case 'home':
-        return 'PetHub - Adopciones';
-      case 'historial-posts':
-        return 'Mis Publicaciones';
-      case 'post-view':
-        return 'Publicar Mascota';
-      case 'mensajes':
-        return 'Mensajes';
-      default:
-        return 'PetHub';
-    }
-  }
-
-  // Método para navegar al perfil
-  goToProfile(): void {
-    // Aquí iría la lógica de navegación al perfil
-    console.log('Navegando al perfil...');
-  }
-
-  // Método para filtrar mascotas según búsqueda y filtro seleccionado
-  filteredPets(): any[] {
+  // Método viejo
+  // para filtrar mascotas según búsqueda y filtro seleccionado
+/*  filteredPets(): any[] {
     let filtered = this.pets;
 
     // Filtrar por texto de búsqueda
@@ -208,52 +181,10 @@ export class HomePage {
     }
 
     return filtered;
-  }
+  } */
 
-  // Método para cambiar de tab
-  setCurrentTab(tab: string): void {
-    this.currentTab = tab;
-    switch (tab) {
-      case 'historial-posts':
-        this.router.navigateByUrl('/home/historial');
-        break;
-      case 'post-view':
-        this.router.navigateByUrl('/home/publicar');
-        break;
-      case 'mensajes':
-        this.router.navigateByUrl('/home/mensajes');
-        break;
-      default:
-        this.router.navigateByUrl('/home/inicio');
-    }
-  }
 
-  // Método para publicar un nuevo post
-  publishPost(): void {
-    if (this.newPost.name && this.newPost.description) {
-      const newUserPost = {
-        title: `${this.newPost.name} - En adopción`,
-        petImage: 'assets/placeholder.png',
-        petName: this.newPost.name,
-        status: 'available',
-        description: this.newPost.description,
-        date: new Date().toISOString().slice(0, 10)
-      };
-
-      this.userPosts.unshift(newUserPost);
-
-      // Limpiar el formulario
-      this.newPost = {
-        name: '',
-        description: ''
-      };
-
-      // Cambiar a la tab de historial para ver el post publicado
-      this.setCurrentTab('historial-posts');
-    }
-  }
-
-  // Método para abrir conversación
+  // Método para abrir conversación (se debera abrir pantalla de comentarios de publicaciones)
   openConversation(conversation: any): void {
     console.log('Abriendo conversación con:', conversation.name);
     // Aquí iría la lógica para abrir la conversación
@@ -265,14 +196,8 @@ export class HomePage {
     // Aquí iría la lógica para abrir los detalles
   }
 
-  // Método para el botón flotante
-  onFabClick(): void {
-    console.log('Botón flotante presionado');
-    // Navegar a crear-publicacion dentro de tabs
-    this.router.navigateByUrl('/tabs/crear-publicacion');
-  }
 
-  get filteredPets2() {
+  get filteredPets() {
     return this.pets.filter(pet => {
       const matchesText = pet.name.toLowerCase().includes(this.searchText.toLowerCase());
       const matchesFilter = this.selectedFilter === 'all' ||
