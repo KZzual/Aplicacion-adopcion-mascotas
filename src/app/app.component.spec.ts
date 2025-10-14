@@ -34,14 +34,10 @@ describe('AppComponent', () => {
     expect(menuItems[1].textContent).toContain('Outbox');
   });
 
-  it('should have urls', () => {
+  it('should initialize with empty menu', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const app = fixture.nativeElement;
-    const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(6);
-    expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/folder/inbox');
-    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/folder/outbox');
+    const app = fixture.componentInstance;
+    expect(app.appPages.length).toEqual(0);
   });
 
 });

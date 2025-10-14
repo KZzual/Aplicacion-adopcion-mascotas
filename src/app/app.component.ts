@@ -8,18 +8,11 @@ import { Router, NavigationEnd } from '@angular/router';
   standalone: false,
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-  ];
+  public appPages: Array<{ title: string; url: string; icon: string }> = [];
 
   isLoginPage = false;
 
-  constructor(private router: Router) {
+  constructor(private readonly router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Cambia 'login' por la ruta real de tu login
