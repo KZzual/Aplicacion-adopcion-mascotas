@@ -6,15 +6,14 @@ import {
   IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
   IonContent, IonSearchbar, IonSegment, IonSegmentButton,
   IonCard, IonCardContent, IonAvatar, IonChip, IonFab, IonFabButton,
-  IonItem, IonInput, IonTextarea, IonBadge
-} from '@ionic/angular/standalone';
+  IonItem, IonInput, IonTextarea, IonBadge, IonPopover } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonPopover,
     CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonButtons,
     IonButton, IonIcon, IonContent, IonSearchbar, IonSegment, IonSegmentButton,
     IonCard, IonCardContent, IonAvatar, IonChip, IonFab, IonFabButton,
@@ -25,6 +24,9 @@ export class HomePage {
   currentTab: string = 'home';
   searchText: string = '';
   selectedFilter: string = 'all';
+
+  isFilterOpen = false;
+  popoverEvent: any;
 
   // Lista de mascotas para la sección home
   pets = [
@@ -269,4 +271,20 @@ export class HomePage {
     // Navegar a crear-publicacion dentro de tabs
     this.router.navigateByUrl('/tabs/crear-publicacion');
   }
+
+  get filteredPets2() {
+    return this.pets.filter(pet => {
+      const matchesText = pet.name.toLowerCase().includes(this.searchText.toLowerCase());
+      const matchesFilter = this.selectedFilter === 'all' ||
+        pet.type === this.selectedFilter ||
+        pet.age === this.selectedFilter;
+      return matchesText && matchesFilter;
+    });
+  }
+
+  openFilters(ev: any) {
+    this.popoverEvent = ev;
+    this.isFilterOpen = true;
+  }
+
 }

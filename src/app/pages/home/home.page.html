@@ -19,20 +19,54 @@
     <p>Casas felices, para animales felices.</p>
   </div>
 
-  <!-- Barra de búsqueda -->
+  <!-- Barra de búsqueda
   <ion-searchbar
     [(ngModel)]="searchText"
-    placeholder="Encuentra a tu nuevo amigo...">
+    placeholder="Encuentra a tu nuevo amigo..."
+    show-clear-button="focus">
   </ion-searchbar>
 
-  <!-- Segmento de filtros -->
+   Segmento de filtros
   <ion-segment [(ngModel)]="selectedFilter">
     <ion-segment-button value="all">Todos</ion-segment-button>
     <ion-segment-button value="dog">Perros</ion-segment-button>
     <ion-segment-button value="cat">Gatos</ion-segment-button>
     <ion-segment-button value="puppy">Cachorros</ion-segment-button>
     <ion-segment-button value="adult">Adultos</ion-segment-button>
-  </ion-segment>
+  </ion-segment>  -->
+
+  <!-- Contenedor de búsqueda + botón de filtros -->
+  <div class="search-filter-container">
+    <ion-searchbar
+      [(ngModel)]="searchText"
+      placeholder="Encuentra a tu nuevo amigo..."
+      show-clear-button="focus">
+    </ion-searchbar>
+
+    <ion-button fill="outline" id="filter-btn" (click)="openFilters($event)">
+      <ion-icon name="filter-outline" slot="start"></ion-icon>
+      Filtros
+    </ion-button>
+  </div>
+
+  <!-- Popover de filtros -->
+  <ion-popover
+    [isOpen]="isFilterOpen"
+    (didDismiss)="isFilterOpen = false"
+    [event]="popoverEvent">
+    <ng-template>
+      <ion-content class="ion-padding">
+        <ion-segment [(ngModel)]="selectedFilter">
+          <ion-segment-button value="all">Todos</ion-segment-button>
+          <ion-segment-button value="dog">Perros</ion-segment-button>
+          <ion-segment-button value="cat">Gatos</ion-segment-button>
+          <ion-segment-button value="puppy">Cachorros</ion-segment-button>
+          <ion-segment-button value="adult">Adultos</ion-segment-button>
+        </ion-segment>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+
 
   <!-- Lista de mascotas filtrada -->
   <ion-card class="pet-card" *ngFor="let pet of filteredPets()">
