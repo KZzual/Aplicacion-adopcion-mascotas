@@ -3,14 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'loader',
-    loadChildren: () =>
-      import('./pages/loader/loader.module').then(m => m.LoaderPageModule)
-  },
-  {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    loadComponent: () => import('./pages/loader/loader.page').then(m => m.LoaderPage)
   },
   {
     path: 'login',

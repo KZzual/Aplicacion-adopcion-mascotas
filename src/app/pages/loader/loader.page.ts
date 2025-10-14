@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-loader',
   standalone: true,
-  imports: [IonicModule], // <--- ¡IMPORTANTE!
+  imports: [IonicModule],
   templateUrl: './loader.page.html',
   styleUrls: ['./loader.page.scss'],
 })
-export class LoaderPage implements OnInit {
-  constructor(private router:Router) {}
+export class LoaderPage {
+  constructor(private readonly router: Router) {}
 
-  ngOnInit() {
-    this.router.navigate(['login']);
+  ionViewDidEnter() {
+    setTimeout(() => {
+      this.router.navigate(['welcome']);
+    }, 1200); // muestra el splash 1.2s
   }
 }
 

@@ -1,4 +1,11 @@
 <ion-app>
+  <ion-loading
+    [isOpen]="loading$ | async"
+    message="Cargando..."
+    spinner="circular"
+    duration="0"
+    backdropDismiss="false"
+  ></ion-loading>
   <ion-split-pane contentId="main-content">
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>

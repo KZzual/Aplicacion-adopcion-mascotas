@@ -1,17 +1,3 @@
-<!-- Header personalizado -->
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-icon name="paw" class="app-logo"></ion-icon>
-    </ion-buttons>
-    <ion-title>{{ getCurrentPageTitle() }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="clear" (click)="goToProfile()"> <!-- Navegar al perfil de nuestro usuario -->
-        <ion-icon name="person-circle" size="large"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content class="ion-padding" *ngIf="currentTab === 'home'">
   <div class="home-header">
