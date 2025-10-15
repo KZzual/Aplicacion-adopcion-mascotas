@@ -68,3 +68,13 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase and Environment files (contains sensitive credentials)/descomentar al pasar a
+
+#/src/environments/environment.ts
+#/src/environments/environment.prod.ts
+#/android/google-services.json
+#/ios/GoogleService-Info.plist
+
+# Keep example files for reference
+!src/environments/environment.example.ts
