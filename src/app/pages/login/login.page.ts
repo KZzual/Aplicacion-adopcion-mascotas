@@ -15,6 +15,9 @@ import { Router } from '@angular/router';
 export class LoginPage {
   email: string = '';
   password: string = '';
+  confirmPassword: string = '';
+  fullName: string = '';
+  phone: string = '';
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
 
@@ -23,10 +26,10 @@ export class LoginPage {
   authMode: 'login' | 'register' = 'login';
 
   constructor(
-    private menuCtrl: MenuController,
-    private authService: AuthService,
-    private toastCtrl: ToastController,
-    private router: Router
+    private readonly menuCtrl: MenuController,
+    private readonly authService: AuthService,
+    private readonly toastCtrl: ToastController,
+    private readonly router: Router
   ) {
     // Verificar si es la primera vez
     const hasVisited = localStorage.getItem('hasVisited');
@@ -65,8 +68,20 @@ export class LoginPage {
   }
 
   async onRegister() {
+    // Validaciones mínimas de registro extendido
+    if (!this.fullName || !this.phone || !this.email || !this.password || !this.confirmPassword) {
+      this.showToast('⚠️ Completa todos los campos');
+      return;
+    }
+
+    if (this.password !== this.confirmPassword) {
+      this.showToast('⚠️ Las contraseñas no coinciden');
+      return;
+    }
+
     try {
       const user = await this.authService.register(this.email, this.password);
+      // Nota: Aquí podríamos persistir fullName y phone en Firestore vinculados al uid
       this.showToast('✅ Registro exitoso');
       this.router.navigate(['/home']);
       console.log('Usuario registrado:', user);

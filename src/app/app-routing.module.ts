@@ -8,16 +8,8 @@ const routes: Routes = [
     loadComponent: () => import('./pages/loader/loader.page').then(m => m.LoaderPage)
   },
   {
-    path: 'welcome',
-    loadComponent: () => import('./pages/welcome/welcome.page').then(m => m.WelcomePage)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'home',

@@ -25,7 +25,9 @@
           shape="round"
           size="large"
           class="start-button"
-          (click)="continueToAuth()">
+          (click)="continueToAuth()"
+          (keydown.enter)="continueToAuth()"
+          (keyup.space)="continueToAuth()">
           Comenzar
         </ion-button>
       </div>
@@ -86,18 +88,22 @@
             slot="end"
             [name]="passwordIcon"
             (click)="togglePassword()"
+            (keydown.enter)="togglePassword()"
+            (keyup.space)="togglePassword()"
+            tabindex="0"
+            aria-label="Mostrar u ocultar contraseña"
             class="eye-icon">
           </ion-icon>
         </ion-item>
 
-        <div class="options">
-          <ion-checkbox></ion-checkbox>
-          <label>Recuérdame</label>
-          <a href="#">¿Olvidaste tu contraseña?</a>
-        </div>
+        <ion-item lines="none" class="options">
+          <ion-checkbox slot="start" aria-labelledby="rememberMeLabel"></ion-checkbox>
+          <ion-label id="rememberMeLabel">Recuérdame</ion-label>
+          <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+        </ion-item>
 
         <!-- Botón de Login -->
-        <ion-button expand="block" shape="round" class="btn-login" (click)="onLogin()">
+        <ion-button expand="block" shape="round" class="btn-login" (click)="onLogin()" (keydown.enter)="onLogin()" (keyup.space)="onLogin()">
           Iniciar Sesión
         </ion-button>
       </div>
@@ -108,6 +114,30 @@
           <h2>Crear cuenta</h2>
           <p>Únete a nuestra comunidad de adopción</p>
         </div>
+
+        <!-- Campo Nombre Completo -->
+        <ion-item lines="none">
+          <ion-input
+            [(ngModel)]="fullName"
+            label="Nombre Completo"
+            label-placement="floating"
+            fill="outline"
+            placeholder="Ingresa tu nombre completo"
+            type="text">
+          </ion-input>
+        </ion-item>
+
+        <!-- Campo Teléfono Móvil -->
+        <ion-item lines="none">
+          <ion-input
+            [(ngModel)]="phone"
+            label="Número de teléfono móvil"
+            label-placement="floating"
+            fill="outline"
+            placeholder="Ej: +56 9 1234 5678"
+            type="tel">
+          </ion-input>
+        </ion-item>
 
         <!-- Campo Email -->
         <ion-item lines="none">
@@ -135,12 +165,38 @@
             slot="end"
             [name]="passwordIcon"
             (click)="togglePassword()"
+            (keydown.enter)="togglePassword()"
+            (keyup.space)="togglePassword()"
+            tabindex="0"
+            aria-label="Mostrar u ocultar contraseña"
+            class="eye-icon">
+          </ion-icon>
+        </ion-item>
+
+        <!-- Campo Confirmar Contraseña -->
+        <ion-item lines="none">
+          <ion-input
+            [(ngModel)]="confirmPassword"
+            [type]="passwordType"
+            label="Confirmar contraseña"
+            label-placement="floating"
+            fill="outline"
+            placeholder="Repite tu contraseña">
+          </ion-input>
+          <ion-icon
+            slot="end"
+            [name]="passwordIcon"
+            (click)="togglePassword()"
+            (keydown.enter)="togglePassword()"
+            (keyup.space)="togglePassword()"
+            tabindex="0"
+            aria-label="Mostrar u ocultar contraseña"
             class="eye-icon">
           </ion-icon>
         </ion-item>
 
         <!-- Botón de Registro -->
-        <ion-button expand="block" shape="round" class="btn-register" (click)="onRegister()">
+        <ion-button expand="block" shape="round" class="btn-register" (click)="onRegister()" (keydown.enter)="onRegister()" (keyup.space)="onRegister()">
           Crear Cuenta
         </ion-button>
       </div>

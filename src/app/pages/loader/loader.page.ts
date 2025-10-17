@@ -14,7 +14,7 @@ export class LoaderPage {
 
   ionViewDidEnter() {
     setTimeout(() => {
-      this.router.navigate(['welcome']);
+      this.router.navigate(['login']);
     }, 1200); // muestra el splash 1.2s
   }
 }
