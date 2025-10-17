@@ -99,7 +99,7 @@
         <ion-item lines="none" class="options">
           <ion-checkbox slot="start" aria-labelledby="rememberMeLabel"></ion-checkbox>
           <ion-label id="rememberMeLabel">Recuérdame</ion-label>
-          <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+          <a href="#" class="forgot-link" (click)="onForgotPassword(); $event.preventDefault()">¿Olvidaste tu contraseña?</a>
         </ion-item>
 
         <!-- Botón de Login -->
