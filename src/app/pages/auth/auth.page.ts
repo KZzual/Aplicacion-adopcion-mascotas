@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonHeader, IonContent, IonToolbar, IonSegmentButton } from "@ionic/angular/standalone";
+import { IonHeader, IonContent, IonToolbar, IonSegmentButton, IonSegment, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-auth',

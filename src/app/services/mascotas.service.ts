@@ -1,31 +1,38 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
+import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MascotasService {
   constructor(
-    private firestore: AngularFirestore,
-    private storage: AngularFireStorage
+    private readonly firestore: Firestore,
+    private readonly storage: Storage
   ) {}
 
-  crearMascota(data: any, imagenFile?: File): Promise<any> {
+  async crearMascota(data: any, imagenFile?: File): Promise<any> {
     if (imagenFile) {
       const filePath = `mascotas/${Date.now()}_${imagenFile.name}`;
-      const ref = this.storage.ref(filePath);
-      return this.storage.upload(filePath, imagenFile)
-        .then(() => ref.getDownloadURL().toPromise())
-        .then(url => {
-          return this.firestore.collection('mascotas').add({ ...data, imagen: url });
-        });
+      const storageRef = ref(this.storage, filePath);
+      
+      // Upload file
+      await uploadBytes(storageRef, imagenFile);
+      
+      // Get download URL
+      const url = await getDownloadURL(storageRef);
+      
+      // Add document to Firestore
+      const mascotasCollection = collection(this.firestore, 'mascotas');
+      return addDoc(mascotasCollection, { ...data, imagen: url });
     } else {
       // Usar imagen por defecto
-      return this.firestore.collection('mascotas').add({ ...data, imagen: data.imagen || 'assets/img/testimage.jpg' });
+      const mascotasCollection = collection(this.firestore, 'mascotas');
+      return addDoc(mascotasCollection, { ...data, imagen: data.imagen || 'assets/img/testimage.jpg' });
     }
   }
 
   obtenerMascotas(): Observable<any[]> {
-    return this.firestore.collection('mascotas').valueChanges({ idField: 'id' });
+    const mascotasCollection = collection(this.firestore, 'mascotas');
+    return collectionData(mascotasCollection, { idField: 'id' });
   }
 }

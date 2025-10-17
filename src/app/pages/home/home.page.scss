@@ -1,320 +1,535 @@
-/* Header personalizado */
-.app-logo {
-  font-size: 24px;
-  color: white;
+// ============================================
+// HOME PAGE STYLES - PetHub
+// Versión: 3.0 - Ionic 8 + Angular 19
+// ============================================
+
+// Variables locales
+$primary-color: #8e44ad;
+$secondary-color: #3498db;
+$success-color: #27ae60;
+$text-dark: #2d3748;
+$text-medium: #4a5568;
+$text-light: #718096;
+$border-color: #e2e8f0;
+$bg-light: #f7fafc;
+
+// ============================================
+// CONTENEDOR PRINCIPAL
+// ============================================
+.home-content {
+  --background: #{$bg-light};
+  --padding-top: 0;
+  --padding-bottom: 20px;
 }
 
-ion-toolbar {
-  --background: #8e44ad;
-  --color: white;
-}
-
-ion-title {
-  font-weight: 600;
-}
-
-/* Tabs */
-ion-tab-bar {
-  --background: #ffffff;
-  --border: 1px solid #e0e0e0;
-  border-top: 1px solid #e0e0e0;
-}
-
-ion-tab-button {
-  --color: #8e8e93;
-  --color-selected: #8e44ad;
-
-  &.tab-selected {
-    --color: #8e44ad;
-  }
-}
-
-ion-tab-button ion-icon {
-  font-size: 24px;
-}
-
-ion-tab-button ion-label {
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* Páginas */
-.page-header {
-  text-align: center;
-  padding: 20px 15px;
-
-  h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-    color: #2d3748; /* Color más oscuro para mejor contraste */
-  }
-
-  p {
-    font-size: 14px;
-    color: #4a5568; /* Color más legible */
-    margin: 0;
-  }
-}
-
-/* Estados vacíos */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.empty-icon {
-  font-size: 80px;
-  color: #ccc;
-  margin-bottom: 20px;
-}
-
-.empty-state h3 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.empty-state p {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* Conversaciones */
-.conversation-card {
-  margin-bottom: 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-  }
-}
-
-.conversation-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.conversation-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.conversation-info h3 {
-  margin: 0 0 4px 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #2d3748; /* Color más oscuro para mejor contraste */
-}
-
-.last-message {
-  margin: 0;
-  font-size: 14px;
-  color: #4a5568; /* Color más legible */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.conversation-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-}
-
-.time {
-  font-size: 12px;
-  color: #999;
-}
-
-ion-avatar {
-  width: 50px;
-  height: 50px;
-}
-
-ion-badge {
-  font-size: 12px;
-  min-width: 20px;
-  height: 20px;
-}
-
-/* Posts */
-.post-card {
-  margin-bottom: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-  .post-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-  }
-
-  &.adopted {
-    opacity: 0.8;
-
-    .post-image {
-      filter: grayscale(20%);
-    }
-  }
-
-  ion-card-content {
-    padding: 15px;
-  }
-
-  h3 {
-    margin: 0 0 8px 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #2d3748;
-  }
-
-  p {
-    margin: 0 0 12px 0;
-    font-size: 14px;
-    color: #4a5568;
-    line-height: 1.4;
-  }
-
-  .post-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
-
-    small {
-      font-size: 12px;
-      color: #718096;
-    }
-
-    .status-chip {
-      font-size: 12px;
-      font-weight: 600;
-      height: 28px;
-      --border-radius: 14px;
-    }
-  }
-}
-
+// ============================================
+// HEADER
+// ============================================
 .home-header {
+  background: linear-gradient(135deg, $primary-color 0%, #9b59b6 100%);
+  padding: 24px 20px;
   text-align: center;
-  padding: 10px 15px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   h1 {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 0;
-    color: #2d3748;
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
   }
 
   p {
+    margin: 0;
     font-size: 14px;
-    color: #4a5568;
-    margin-top: 4px;
+    opacity: 0.95;
+    font-weight: 400;
   }
 }
 
-ion-searchbar {
-  margin-bottom: 10px;
-}
+// ============================================
+// SEARCH CONTAINER
+// ============================================
+.search-container {
+  padding: 16px 20px;
+  background: white;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
-ion-segment {
-  margin: 10px 0 20px;
-  --indicator-color: #3880ff;
-}
+  ion-searchbar {
+    flex: 1;
+    --background: #{$bg-light};
+    --border-radius: 12px;
+    --box-shadow: none;
+    --icon-color: #{$text-medium};
+    --placeholder-color: #{$text-light};
+    --color: #{$text-dark};
+    padding: 0;
+    margin: 0;
+  }
 
-.pet-card {
-  border-radius: 15px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  .filter-button {
+    --background: #{$primary-color};
+    --background-hover: #7d3c98;
+    --border-radius: 12px;
+    height: 44px;
+    min-width: 44px;
+    margin: 0;
+    flex-shrink: 0;
 
-  .post-header {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    background: #f8f9fa;
-    border-bottom: 1px solid #e2e8f0;
-
-    .owner-avatar {
-      width: 40px;
-      height: 40px;
-      margin-right: 12px;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-      }
-    }
-
-    .owner-info {
-      flex: 1;
-
-      h4 {
-        margin: 0;
-        font-size: 14px;
-        font-weight: 600;
-        color: #2d3748;
-      }
-
-      p {
-        margin: 2px 0 0 0;
-        font-size: 12px;
-        color: #718096;
-      }
+    ion-icon {
+      font-size: 24px;
     }
   }
+}
 
-  .pet-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-  }
+// ============================================
+// FILTER POPOVER
+// ============================================
+.filter-popover {
+  --width: 320px;
+  --max-height: 70vh;
 
-  .pet-banner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 120px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #fff;
-  }
-
-  ion-card-content {
-    padding: 10px 15px;
+  .filter-header {
+    padding: 20px;
+    background: linear-gradient(135deg, $primary-color 0%, #9b59b6 100%);
+    color: white;
 
     h2 {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0 0 5px 0;
+      margin: 0 0 4px 0;
+      font-size: 20px;
+      font-weight: 600;
     }
 
     p {
-      font-size: 14px;
-      color: #4a5568;
-    }
-
-    ion-chip {
-      margin-right: 5px;
-      font-size: 12px;
-    }
-
-    .details-btn {
-      margin-top: 10px;
-      border-radius: 12px;
-      font-weight: bold;
-      background: linear-gradient(90deg, #3880ff, #9b59b6);
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.9;
     }
   }
 
+  .filter-list {
+    padding: 0;
+
+    ion-item {
+      --padding-start: 20px;
+      --padding-end: 20px;
+      --inner-padding-end: 0;
+      margin-bottom: 8px;
+
+      ion-label {
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: $text-dark;
+        font-size: 14px;
+      }
+
+      ion-select,
+      ion-input {
+        --padding-start: 12px;
+        --padding-end: 12px;
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        background: $bg-light;
+        font-size: 14px;
+      }
+
+      ion-range {
+        --bar-background: $border-color;
+        --bar-background-active: $primary-color;
+        --knob-background: $primary-color;
+        --pin-background: $primary-color;
+        padding-top: 8px;
+      }
+    }
+  }
+
+  .characteristics-section {
+    padding: 0 20px 12px 20px;
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-dark;
+      margin: 16px 0 12px 0;
+    }
+
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      margin-bottom: 4px;
+
+      ion-label {
+        font-size: 14px;
+        color: $text-medium;
+        margin: 0;
+      }
+
+      ion-checkbox {
+        --size: 20px;
+        --checkbox-background-checked: $success-color;
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .filter-actions {
+    padding: 16px 20px;
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid $border-color;
+    background: white;
+
+    ion-button {
+      flex: 1;
+      margin: 0;
+      height: 44px;
+      font-weight: 600;
+      font-size: 14px;
+
+      &.reset-btn {
+        --background: white;
+        --color: #{$text-medium};
+        --border-color: #{$border-color};
+        --border-width: 1px;
+        --border-style: solid;
+      }
+
+      &.apply-btn {
+        --background: #{$primary-color};
+        --background-hover: #7d3c98;
+      }
+    }
+  }
+}
+
+// ============================================
+// RESULTS COUNT
+// ============================================
+.results-count {
+  padding: 12px 20px 8px 20px;
+  font-size: 14px;
+  color: $text-medium;
+  font-weight: 500;
+}
+
+// ============================================
+// PETS GRID
+// ============================================
+.pets-grid {
+  padding: 0 12px 20px 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 20px 20px 20px;
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ============================================
+// PET CARD
+// ============================================
+.pet-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+
+  // Header con info del dueño
+  .pet-card-header {
+    padding: 12px 16px;
+    background: $bg-light;
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    .owner-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+
+      .owner-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, $primary-color 0%, #9b59b6 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+
+      .owner-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+        flex: 1;
+
+        .owner-name {
+          font-size: 13px;
+          font-weight: 600;
+          color: $text-dark;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .publish-time {
+          font-size: 11px;
+          color: $text-light;
+          margin: 0;
+        }
+      }
+    }
+
+    .distance-chip {
+      background: rgba($secondary-color, 0.1);
+      color: $secondary-color;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      white-space: nowrap;
+
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+  }
+
+  // Imagen de la mascota
+  .pet-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; // Aspect ratio 4:3
+    overflow: hidden;
+    background: $bg-light;
+
+    .pet-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // Contenido de la card
+  .pet-content {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .pet-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: $text-dark;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    // Info rápida con iconos
+    .quick-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background: $bg-light;
+        border-radius: 8px;
+        font-size: 13px;
+        color: $text-medium;
+
+        ion-icon {
+          font-size: 18px;
+          color: $primary-color;
+          flex-shrink: 0;
+        }
+
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: 500;
+        }
+      }
+    }
+
+    // Características
+    .characteristics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      .feature-chip {
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: 11px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        border: 1px solid transparent;
+
+        ion-icon {
+          font-size: 14px;
+        }
+
+        &.vaccinated {
+          background: rgba($success-color, 0.1);
+          color: $success-color;
+          border-color: rgba($success-color, 0.2);
+        }
+
+        &.neutered {
+          background: rgba($secondary-color, 0.1);
+          color: $secondary-color;
+          border-color: rgba($secondary-color, 0.2);
+        }
+
+        &.house-trained {
+          background: rgba(#f39c12, 0.1);
+          color: #f39c12;
+          border-color: rgba(#f39c12, 0.2);
+        }
+
+        &.chipped {
+          background: rgba(#9b59b6, 0.1);
+          color: #9b59b6;
+          border-color: rgba(#9b59b6, 0.2);
+        }
+      }
+    }
+
+    // Botón ver detalles
+    .details-button {
+      --background: #{$primary-color};
+      --background-hover: #7d3c98;
+      --border-radius: 12px;
+      height: 44px;
+      margin: 8px 0 0 0;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: none;
+      letter-spacing: 0.3px;
+    }
+  }
+}
+
+// ============================================
+// EMPTY STATE
+// ============================================
+.empty-state {
+  padding: 60px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  .empty-icon {
+    font-size: 80px;
+    opacity: 0.3;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $text-dark;
+    margin: 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-light;
+    margin: 0 0 16px 0;
+    max-width: 300px;
+  }
+
+  ion-button {
+    --background: #{$primary-color};
+    --background-hover: #7d3c98;
+    --border-radius: 12px;
+    height: 44px;
+    font-weight: 600;
+    text-transform: none;
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pet-card {
+  animation: fadeIn 0.4s ease-out;
+}
+
+// ============================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================
+@media (max-width: 360px) {
+  .home-header h1 {
+    font-size: 24px;
+  }
+
+  .pet-card .pet-content .pet-name {
+    font-size: 18px;
+  }
+
+  .search-container {
+    padding: 12px 16px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .pets-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

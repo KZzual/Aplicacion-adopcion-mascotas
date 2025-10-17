@@ -18,3 +18,126 @@ Node (esperado para Angular 19): Node 18.19+ o 20.x (no fijado en package.json; 
 3-Revisar sugerencia para Angular:
 
 Si vas a usar Firebase de forma intensiva con Angular, considerar @angular/fire compatible con Angular 19 para integración idiomática (observables, inyección, etc.). No es obligatorio; el SDK Web funciona, pero AngularFire simplifica.
+
+
+Información sobre Diagramas de clases de la base de datos actual propuesta:
+
+Clase: Mascota
+
+  Atributos:
+
+    string id
+
+    string nombre
+
+    string raza
+
+    string edad
+
+    string genero
+
+    string ubicacion
+
+    string tipo_animal
+
+    boolean vacunado
+
+    boolean esterilizado
+
+    boolean entrenado
+
+    boolean chip
+
+    string url_imagen
+
+    string id_usuario (quien registra la mascota)
+
+    string estado
+
+    Date fecha_registro
+
+  Métodos:
+
+    registrarMascota()
+
+    editarMascota()
+
+Clase: Usuario
+
+  Atributos:
+
+    string uid
+
+    string nombre
+
+    string apellido
+
+    string correo
+
+    string password
+
+    string telefono
+
+    string rol
+
+  Métodos:
+
+    registrarUsuario()
+
+    iniciarSesion()
+
+    actualizarPerfil()
+
+Clase: Adopcion
+
+  Atributos:
+
+    string id
+
+    string id_usuario (quien solicita la adopción)
+
+    string id_mascota
+
+    Date fecha
+
+    string estado
+
+  Métodos:
+
+    solicitarAdopcion()
+
+    aprobarAdopcion()
+
+Clase: ValidadorImagen
+
+  Métodos:
+
+    verificarEXIF(imagen)
+
+    analizarVisionAP(imagen)
+
+    validarImagen(imagen)
+
+Clase: FirestoreService
+
+  Métodos:
+
+    getUsuario(uid)
+
+    saveUsuario(usuario)
+
+    saveMascota(mascota)
+
+    getMascotas()
+
+    updateEstadoMascota(id, estado)
+
+Clase: AuthService
+
+  Métodos:
+
+    login(correo, password)
+
+    register(nombre, apellido, correo, password)
+
+    logout()

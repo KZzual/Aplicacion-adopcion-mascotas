@@ -1,75 +1,252 @@
-
-<ion-content class="ion-padding" *ngIf="currentTab === 'home'">
+<ion-content class="home-content">
   <div class="home-header">
-    <h1>PetHub</h1>
-    <p>Casas felices, para animales felices.</p>
+    <h1>🐾 PetHub</h1>
+    <p>Encuentra a tu compañero perfecto</p>
   </div>
 
-  <!-- Contenedor de búsqueda + botón de filtros -->
-  <div class="search-filter-container">
+  <div class="search-container">
     <ion-searchbar
       [(ngModel)]="searchText"
-      placeholder="Encuentra a tu nuevo amigo..."
-      show-clear-button="focus">
+      placeholder="Buscar por nombre, raza o ubicación..."
+      mode="ios"
+      showClearButton="always"
+      animated="true"
+      class="search-bar">
     </ion-searchbar>
 
-    <ion-button fill="outline" id="filter-btn" (click)="openFilters($event)">
-      <ion-icon name="filter-outline" slot="start"></ion-icon>
-      Filtros
+    <ion-button
+      fill="outline"
+      class="filter-button"
+      (click)="openFilters($event)"
+      aria-label="Abrir filtros">
+      <ion-icon name="filter-outline" slot="icon-only"></ion-icon>
     </ion-button>
   </div>
 
-  <!-- Popover de filtros --> <!-- poner filtros como ubicacion, tipo, edad, etc -->
   <ion-popover
     [isOpen]="isFilterOpen"
-    (didDismiss)="isFilterOpen = false"
-    [event]="popoverEvent">
+    (didDismiss)="closeFilters()"
+    [event]="popoverEvent"
+    alignment="end"
+    size="auto">
     <ng-template>
-      <ion-content class="ion-padding">
-        <ion-segment [(ngModel)]="selectedFilter">
-          <ion-segment-button value="all">Todos</ion-segment-button>
-          <ion-segment-button value="dog">Perros</ion-segment-button>
-          <ion-segment-button value="cat">Gatos</ion-segment-button>
-          <ion-segment-button value="puppy">Cachorros</ion-segment-button>
-          <ion-segment-button value="adult">Adultos</ion-segment-button>
-        </ion-segment>
-      </ion-content>
+      <div class="filter-popover">
+        <div class="filter-header">
+          <h3>Filtros</h3>
+          <ion-button
+            fill="clear"
+            (click)="closeFilters()"
+            aria-label="Cerrar filtros">
+            <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ion-list class="filter-list">
+          <ion-item>
+            <ion-label position="stacked">Especie</ion-label>
+            <ion-select
+              [(ngModel)]="filters.species"
+              placeholder="Seleccionar"
+              interface="popover">
+              <ion-select-option value="all">Todos</ion-select-option>
+              <ion-select-option value="dog">Perros</ion-select-option>
+              <ion-select-option value="cat">Gatos</ion-select-option>
+              <ion-select-option value="other">Otros</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Grupo de Edad</ion-label>
+            <ion-select
+              [(ngModel)]="filters.ageGroup"
+              placeholder="Seleccionar"
+              interface="popover">
+              <ion-select-option value="all">Todos</ion-select-option>
+              <ion-select-option value="puppy">Cachorros</ion-select-option>
+              <ion-select-option value="adult">Adultos</ion-select-option>
+              <ion-select-option value="senior">Seniors</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Género</ion-label>
+            <ion-select
+              [(ngModel)]="filters.gender"
+              placeholder="Seleccionar"
+              interface="popover">
+              <ion-select-option value="all">Todos</ion-select-option>
+              <ion-select-option value="Macho">Macho</ion-select-option>
+              <ion-select-option value="Hembra">Hembra</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              Radio de búsqueda: {{ filters.maxDistance }} km
+            </ion-label>
+            <ion-range
+              [(ngModel)]="filters.maxDistance"
+              min="5"
+              max="100"
+              step="5"
+              pin="true"
+              color="primary">
+            </ion-range>
+          </ion-item>
+
+          <div class="characteristics-section">
+            <ion-text>
+              <h4>Características</h4>
+            </ion-text>
+
+            <ion-item lines="none">
+              <ion-label>Vacunado</ion-label>
+              <ion-checkbox
+                slot="start"
+                [(ngModel)]="filters.vaccinated">
+              </ion-checkbox>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label>Esterilizado</ion-label>
+              <ion-checkbox
+                slot="start"
+                [(ngModel)]="filters.neutered">
+              </ion-checkbox>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label>Adiestrado</ion-label>
+              <ion-checkbox
+                slot="start"
+                [(ngModel)]="filters.houseTrained">
+              </ion-checkbox>
+            </ion-item>
+          </div>
+        </ion-list>
+
+        <div class="filter-actions">
+          <ion-button
+            expand="block"
+            fill="clear"
+            (click)="resetFilters()">
+            Limpiar filtros
+          </ion-button>
+          <ion-button
+            expand="block"
+            (click)="applyFilters()">
+            Aplicar ({{ filteredPets.length }})
+          </ion-button>
+        </div>
+      </div>
     </ng-template>
   </ion-popover>
 
+  <div class="results-count" *ngIf="filteredPets.length > 0">
+    <ion-text color="medium">
+      {{ filteredPets.length }} {{ filteredPets.length === 1 ? 'mascota encontrada' : 'mascotas encontradas' }}
+    </ion-text>
+  </div>
 
-  <!-- Lista de mascotas filtrada -->
-  <ion-card class="pet-card" *ngFor="let pet of filteredPets()">
-    <!-- Información del usuario que publica -->
-    <div class="post-header">
-      <ion-avatar class="owner-avatar">
-        <img [src]="pet.owner.avatar" [alt]="pet.owner.name">
-      </ion-avatar>
-      <div class="owner-info">
-        <h4>{{ pet.owner.name }}</h4>
-        <p>publicó hace 2 días</p>
+  <div class="pets-grid">
+    <ion-card class="pet-card" *ngFor="let pet of filteredPets">
+      <div class="pet-card-header">
+        <div class="owner-info">
+          <ion-avatar class="owner-avatar">
+            <img
+              [src]="pet.owner.avatar"
+              [alt]="'Avatar de ' + pet.owner.name"
+              onerror="this.src='assets/img/logoapp1.1.png'">
+          </ion-avatar>
+          <div class="owner-details">
+            <h4>{{ pet.owner.name }}</h4>
+            <p class="publish-time">{{ getTimeAgo(pet.publishedDate) }}</p>
+          </div>
+        </div>
+        <ion-chip *ngIf="pet.distance" class="distance-chip" color="medium">
+          <ion-icon name="location-outline"></ion-icon>
+          <ion-label>{{ pet.distance }} km</ion-label>
+        </ion-chip>
       </div>
-    </div>
 
-    <!-- Imagen de la mascota -->
-    <img [src]="pet.image || 'assets/img/logoapp1.1.png'" [alt]="pet.name" class="pet-image">
+      <div class="pet-image-container">
+        <img
+          [src]="pet.image"
+          [alt]="'Foto de ' + pet.name"
+          class="pet-image"
+          onerror="this.src='assets/img/logoapp1.1.png'">
+      </div>
 
-    <ion-card-content>
-      <h2>{{ pet.name }}</h2>
-      <p>{{ pet.breed }}</p>
-      <p>{{ pet.age }} • {{ pet.gender }} • {{ pet.location }}</p>
+      <ion-card-content class="pet-content">
+        <h2 class="pet-name">{{ pet.name }}</h2>
 
-      <ion-chip color="success" *ngIf="pet.vaccinated">Vacunado</ion-chip>
-      <ion-chip color="success" *ngIf="pet.neutered">Esterilizado</ion-chip>
-      <ion-chip color="success" *ngIf="pet.houseTrained">Adiestrado</ion-chip>
-      <ion-chip color="success" *ngIf="pet.chipped">Con microchip</ion-chip>
+        <div class="quick-info">
+          <div class="info-item">
+            <ion-icon name="paw-outline"></ion-icon>
+            <span>{{ pet.species }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span>{{ pet.breed }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ pet.age }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="male-female-outline"></ion-icon>
+            <span>{{ pet.gender }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="location-outline"></ion-icon>
+            <span>{{ pet.location }}</span>
+          </div>
+        </div>
 
-      <ion-button expand="block" class="details-btn" (click)="openDetails(pet)">
-        Ver Detalles
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+        <div class="characteristics">
+          <ion-chip *ngIf="pet.vaccinated" color="success" class="feature-chip">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <ion-label>Vacunado</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="pet.neutered" color="success" class="feature-chip">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <ion-label>Esterilizado</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="pet.houseTrained" color="success" class="feature-chip">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <ion-label>Adiestrado</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="pet.chipped" color="primary" class="feature-chip">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <ion-label>Microchip</ion-label>
+          </ion-chip>
+        </div>
 
+        <ion-button
+          expand="block"
+          class="details-button"
+          (click)="openDetails(pet)">
+          Ver Detalles
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="empty-state" *ngIf="filteredPets.length === 0">
+    <ion-icon name="paw-outline" class="empty-icon"></ion-icon>
+    <h3>No se encontraron mascotas</h3>
+    <p *ngIf="searchText || filters.species !== 'all' || filters.ageGroup !== 'all' || filters.gender !== 'all'">
+      Intenta ajustar tus filtros de búsqueda
+    </p>
+    <p *ngIf="!searchText && filters.species === 'all' && filters.ageGroup === 'all' && filters.gender === 'all'">
+      Aún no hay mascotas publicadas en tu área
+    </p>
+    <ion-button
+      *ngIf="searchText || filters.species !== 'all' || filters.ageGroup !== 'all' || filters.gender !== 'all'"
+      fill="outline"
+      (click)="resetFilters(); searchText = ''">
+      Limpiar búsqueda
+    </ion-button>
+  </div>
 </ion-content>
-
-<!-- Tabs inferiores removidos: ahora se manejan en TabsPage -->

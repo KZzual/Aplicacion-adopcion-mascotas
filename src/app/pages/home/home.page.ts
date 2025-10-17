@@ -1,215 +1,281 @@
-import { Component } from '@angular/core';
-import { Router, NavigationEnd, RouterModule } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
-  IonContent, IonSearchbar, IonSegment, IonSegmentButton,
-  IonCard, IonCardContent, IonAvatar, IonChip, IonFab, IonFabButton,
-  IonItem, IonInput, IonTextarea, IonBadge, IonPopover } from '@ionic/angular/standalone';
+  IonContent, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent,
+  IonAvatar, IonChip, IonPopover, IonList, IonItem, IonLabel,
+  IonSelect, IonSelectOption, IonRange, IonCheckbox, IonText
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { filterOutline, searchOutline, closeOutline, checkmarkOutline, locationOutline, pawOutline, heartOutline, calendarOutline, maleFemaleOutline, checkmarkCircle, arrowForwardOutline } from 'ionicons/icons';
+
+// Interfaz para mascota
+interface Pet {
+  id: number;
+  name: string;
+  species: string;
+  breed: string;
+  age: string;
+  ageInMonths: number;
+  gender: 'Macho' | 'Hembra';
+  location: string;
+  distance?: number;
+  image: string;
+  images?: string[];
+  vaccinated: boolean;
+  neutered: boolean;
+  houseTrained: boolean;
+  chipped: boolean;
+  type: 'dog' | 'cat' | 'other';
+  ageGroup: 'puppy' | 'adult' | 'senior';
+  description?: string;
+  publishedDate: Date;
+  owner: {
+    id: string;
+    name: string;
+    avatar: string;
+  };
+}
+
+// Interfaz para filtros
+interface Filters {
+  species: string;
+  ageGroup: string;
+  gender: string;
+  location: string;
+  maxDistance: number;
+  vaccinated: boolean;
+  neutered: boolean;
+  houseTrained: boolean;
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonPopover,
-    CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonButtons,
-    IonButton, IonIcon, IonContent, IonSearchbar, IonSegment, IonSegmentButton,
-    IonCard, IonCardContent, IonAvatar, IonChip, IonFab, IonFabButton,
-    IonItem, IonInput, IonTextarea, IonBadge, RouterModule
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonContent,
+    IonSearchbar,
+    IonButton,
+    IonIcon,
+    IonCard,
+    IonCardContent,
+    IonAvatar,
+    IonChip,
+    IonPopover,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonSelect,
+    IonSelectOption,
+    IonRange,
+    IonCheckbox,
+    IonText
   ]
 })
-export class HomePage {
-  currentTab: string = 'home';
-  searchText: string = '';
-  selectedFilter: string = 'all';
+export class HomePage implements OnDestroy {
+  private readonly destroy$ = new Subject<void>();
 
+  searchText = '';
   isFilterOpen = false;
-  popoverEvent: any;
+  popoverEvent: Event | undefined;
 
-  // Lista de mascotas para la sección home
-  pets = [
+  filters: Filters = {
+    species: 'all',
+    ageGroup: 'all',
+    gender: 'all',
+    location: '',
+    maxDistance: 50,
+    vaccinated: false,
+    neutered: false,
+    houseTrained: false
+  };
+
+  pets: Pet[] = [
     {
       id: 1,
       name: 'Max',
+      species: 'Perro',
       breed: 'Labrador',
       age: '6 meses',
+      ageInMonths: 6,
       gender: 'Macho',
-      location: 'Madrid',
+      location: 'Madrid, España',
+      distance: 5,
       image: 'assets/img/dog1.jpg',
+      images: ['assets/img/dog1.jpg'],
       vaccinated: true,
       neutered: false,
       houseTrained: true,
       chipped: true,
       type: 'dog',
       ageGroup: 'puppy',
+      description: 'Cachorro juguetón y cariñoso, ideal para familias.',
+      publishedDate: new Date(2025, 9, 12),
       owner: {
-        name: 'Juan',
-        avatar: 'assets/img/avatar1.png',
+        id: 'user1',
+        name: 'Juan Pérez',
+        avatar: 'assets/img/avatar1.png'
       }
     },
     {
       id: 2,
       name: 'Luna',
-      breed: 'Siamesa',
+      species: 'Gato',
+      breed: 'Siamés',
       age: '1 año',
+      ageInMonths: 12,
       gender: 'Hembra',
-      location: 'Barcelona',
+      location: 'Barcelona, España',
+      distance: 15,
       image: 'assets/img/cat1.jpg',
+      images: ['assets/img/cat1.jpg'],
       vaccinated: true,
       neutered: true,
       houseTrained: true,
       chipped: true,
       type: 'cat',
       ageGroup: 'adult',
+      description: 'Gata tranquila y elegante, perfecta para apartamentos.',
+      publishedDate: new Date(2025, 9, 11),
       owner: {
-        name: 'Ana',
-        avatar: 'assets/img/avatar2.png',
+        id: 'user2',
+        name: 'Ana García',
+        avatar: 'assets/img/avatar2.png'
       }
     },
     {
       id: 3,
       name: 'Rocky',
+      species: 'Perro',
       breed: 'Pastor Alemán',
       age: '3 años',
+      ageInMonths: 36,
       gender: 'Macho',
-      location: 'Valencia',
+      location: 'Valencia, España',
+      distance: 25,
       image: 'assets/img/dog2.jpg',
+      images: ['assets/img/dog2.jpg'],
       vaccinated: true,
       neutered: true,
       houseTrained: true,
       chipped: true,
       type: 'dog',
       ageGroup: 'adult',
+      description: 'Perro leal y protector, entrenado y obediente.',
+      publishedDate: new Date(2025, 9, 10),
       owner: {
-        name: 'Carlos',
-        avatar: 'assets/img/avatar3.png',
+        id: 'user3',
+        name: 'Carlos Ruiz',
+        avatar: 'assets/img/avatar3.png'
+      }
+    },
+    {
+      id: 4,
+      name: 'Mimi',
+      species: 'Gato',
+      breed: 'Persa',
+      age: '2 años',
+      ageInMonths: 24,
+      gender: 'Hembra',
+      location: 'Sevilla, España',
+      distance: 35,
+      image: 'assets/img/logoapp1.1.png',
+      vaccinated: true,
+      neutered: true,
+      houseTrained: true,
+      chipped: false,
+      type: 'cat',
+      ageGroup: 'adult',
+      description: 'Gata preciosa y mimosa, necesita cuidados especiales.',
+      publishedDate: new Date(2025, 9, 9),
+      owner: {
+        id: 'user4',
+        name: 'María López',
+        avatar: 'assets/img/avatar1.png'
       }
     }
   ];
 
-  // Lista de posts del usuario para historial
-  userPosts = [
-    {
-      title: 'Max - Labrador en adopción',
-      petImage: 'assets/img/dog1.jpg',
-      petName: 'Max',
-      status: 'available',
-      description: 'Cachorro juguetón busca hogar amoroso.',
-      date: '2025-10-10'
-    },
-    {
-      title: 'Luna - Gata adoptada',
-      petImage: 'assets/img/cat1.jpg',
-      petName: 'Luna',
-      status: 'adopted',
-      description: 'Gatita tranquila y cariñosa.',
-      date: '2025-10-09'
-    }
-  ];
-
-  // Lista de conversaciones para mensajes (simulada)
-  conversations = [
-    {
-      id: 1,
-      name: 'Carlos',
-      avatar: 'assets/img/avatar3.png',
-      lastMessage: '¿Aún está disponible Max?',
-      time: '10:00',
-      unreadCount: 2
-    },
-    {
-      id: 2,
-      name: 'Lucía',
-      avatar: 'assets/img/avatar4.png',
-      lastMessage: 'Gracias por la información.',
-      time: '09:30',
-      unreadCount: 0
-    }
-  ];
-
-  constructor(private readonly router: Router) {//LAS RUTAS SE MANEJAN CON PAGINA TABS PRINCIPALMENTE
-    // Sincronizar pestaña con URL al cargar y en cambios de navegación
-    this.syncTabWithUrl(this.router.url);
-    this.router.events.subscribe(ev => {
+  constructor(private readonly router: Router) {
+    addIcons({filterOutline,closeOutline,locationOutline,pawOutline,heartOutline,calendarOutline,maleFemaleOutline,checkmarkCircle,arrowForwardOutline,searchOutline,checkmarkOutline});
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe(ev => {
       if (ev instanceof NavigationEnd) {
-        this.syncTabWithUrl(ev.urlAfterRedirects);
+        // Lógica adicional si es necesaria
       }
     });
   }
 
-  private syncTabWithUrl(url: string) {//LAS RUTAS SE MANEJAN CON PAGINA TABS PRINCIPALMENTE
-    if (!url) return;
-    if (url.includes('/home/historial')) this.currentTab = 'historial-posts';
-    else if (url.includes('/home/publicar')) this.currentTab = 'post-view';
-    else if (url.includes('/home/mensajes')) this.currentTab = 'mensajes';
-    else this.currentTab = 'home';
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  // Método viejo
-  // para filtrar mascotas según búsqueda y filtro seleccionado
-/*  filteredPets(): any[] {
-    let filtered = this.pets;
+  getTimeAgo(publishedDate: Date): string {
+    const now = new Date();
+    const diffInMs = now.getTime() - publishedDate.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    if (diffInDays === 0) return 'Hoy';
+    if (diffInDays === 1) return 'Ayer';
+    if (diffInDays < 7) return `Hace ${diffInDays} días`;
+    if (diffInDays < 30) return `Hace ${Math.floor(diffInDays / 7)} semanas`;
+    return `Hace ${Math.floor(diffInDays / 30)} meses`;
+  }
 
-    // Filtrar por texto de búsqueda
-    if (this.searchText && this.searchText.trim() !== '') {
+  get filteredPets(): Pet[] {
+    return this.pets.filter(pet => {
       const searchLower = this.searchText.toLowerCase();
-      filtered = filtered.filter(pet =>
+      const matchesSearch = !this.searchText ||
         pet.name.toLowerCase().includes(searchLower) ||
         pet.breed.toLowerCase().includes(searchLower) ||
-        pet.location.toLowerCase().includes(searchLower)
-      );
-    }
+        pet.location.toLowerCase().includes(searchLower) ||
+        pet.species.toLowerCase().includes(searchLower);
 
-    // Filtrar por tipo seleccionado
-    if (this.selectedFilter && this.selectedFilter !== 'all') {
-      filtered = filtered.filter(pet => {
-        switch (this.selectedFilter) {
-          case 'dog':
-            return pet.type === 'dog';
-          case 'cat':
-            return pet.type === 'cat';
-          case 'puppy':
-            return pet.ageGroup === 'puppy';
-          case 'adult':
-            return pet.ageGroup === 'adult';
-          default:
-            return true;
-        }
-      });
-    }
+      const matchesSpecies = this.filters.species === 'all' || pet.type === this.filters.species;
+      const matchesAgeGroup = this.filters.ageGroup === 'all' || pet.ageGroup === this.filters.ageGroup;
+      const matchesGender = this.filters.gender === 'all' || pet.gender === this.filters.gender;
+      const matchesDistance = !pet.distance || pet.distance <= this.filters.maxDistance;
+      const matchesVaccinated = !this.filters.vaccinated || pet.vaccinated;
+      const matchesNeutered = !this.filters.neutered || pet.neutered;
+      const matchesHouseTrained = !this.filters.houseTrained || pet.houseTrained;
 
-    return filtered;
-  } */
-
-
-  // Método para abrir conversación (se debera abrir pantalla de comentarios de publicaciones)
-  openConversation(conversation: any): void {
-    console.log('Abriendo conversación con:', conversation.name);
-    // Aquí iría la lógica para abrir la conversación
-  }
-
-  // Método para abrir detalles de mascota
-  openDetails(pet: any): void {
-    console.log('Abriendo detalles de:', pet.name);
-    // Aquí iría la lógica para abrir los detalles
-  }
-
-
-  get filteredPets() {
-    return this.pets.filter(pet => {
-      const matchesText = pet.name.toLowerCase().includes(this.searchText.toLowerCase());
-      const matchesFilter = this.selectedFilter === 'all' ||
-        pet.type === this.selectedFilter ||
-        pet.age === this.selectedFilter;
-      return matchesText && matchesFilter;
+      return matchesSearch && matchesSpecies && matchesAgeGroup && matchesGender && matchesDistance && matchesVaccinated && matchesNeutered && matchesHouseTrained;
     });
   }
 
-  openFilters(ev: any) {
-    this.popoverEvent = ev;
+  openFilters(event: Event): void {
+    this.popoverEvent = event;
     this.isFilterOpen = true;
   }
 
+  closeFilters(): void {
+    this.isFilterOpen = false;
+  }
+
+  resetFilters(): void {
+    this.filters = {
+      species: 'all',
+      ageGroup: 'all',
+      gender: 'all',
+      location: '',
+      maxDistance: 50,
+      vaccinated: false,
+      neutered: false,
+      houseTrained: false
+    };
+  }
+
+  applyFilters(): void {
+    this.isFilterOpen = false;
+  }
+
+  openDetails(pet: Pet): void {
+    console.log('Ver detalles de:', pet.name);
+  }
 }

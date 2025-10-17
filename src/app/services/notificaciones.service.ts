@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
-import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+import { Messaging, getToken, onMessage } from '@angular/fire/messaging';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class NotificacionesService {
   mensajes$ = new BehaviorSubject<string[]>([]);
 
-  constructor(private readonly messaging: AngularFireMessaging) {
-    this.messaging.messages.subscribe((msg: any) => {
-      const body = msg?.notification?.body || JSON.stringify(msg);
+  constructor(private readonly messaging: Messaging) {
+    // Listen for messages
+    onMessage(this.messaging, (payload) => {
+      const body = payload?.notification?.body || JSON.stringify(payload);
       this.mensajes$.next([body, ...this.mensajes$.value]);
     });
   }
 
-  solicitarPermiso(): Promise<void> {
-    return this.messaging.requestPermission
-      .pipe()
-      .toPromise()
-      .then(() => this.messaging.getToken.toPromise())
-      .then(token => {
-        // Aquí podrías guardar el token en Firestore para el usuario
-        console.log('FCM Token:', token);
+  async solicitarPermiso(): Promise<void> {
+    try {
+      const token = await getToken(this.messaging, {
+        vapidKey: 'YOUR_VAPID_KEY' // Reemplazar con tu VAPID key real
       });
+      // Aquí podrías guardar el token en Firestore para el usuario
+      console.log('FCM Token:', token);
+    } catch (error) {
+      console.error('Error al obtener token FCM:', error);
+    }
   }
 
   limpiarMensajes() {
