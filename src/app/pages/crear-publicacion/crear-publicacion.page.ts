@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { HeaderToolbarComponent } from '../../components/header-toolbar/header-toolbar.component';
 
 @Component({
   selector: 'app-crear-publicacion',
   templateUrl: './crear-publicacion.page.html',
   styleUrls: ['./crear-publicacion.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, HeaderToolbarComponent]
 })
 export class CrearPublicacionPage {
   form = this.fb.group({

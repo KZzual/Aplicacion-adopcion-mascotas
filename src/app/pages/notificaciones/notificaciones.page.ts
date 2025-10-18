@@ -2,15 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { NotificacionesService } from '../../services/notificaciones.service';
+import { HeaderToolbarComponent } from '../../components/header-toolbar/header-toolbar.component';
 
 @Component({
   selector: 'app-notificaciones',
   template: `
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Notificaciones</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-header-toolbar [title]="'Notificaciones'"></app-header-toolbar>
   <ion-content class="ion-padding">
     <ion-list>
       <ion-item *ngFor="let n of notifications">{{ n }}</ion-item>
@@ -18,7 +15,7 @@ import { NotificacionesService } from '../../services/notificaciones.service';
   </ion-content>
   `,
   standalone: true,
-  imports: [CommonModule, IonicModule]
+  imports: [CommonModule, IonicModule, HeaderToolbarComponent]
 })
 export class NotificacionesPage implements OnInit {
   notifications: string[] = [];

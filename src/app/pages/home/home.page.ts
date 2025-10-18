@@ -11,6 +11,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { filterOutline, searchOutline, closeOutline, checkmarkOutline, locationOutline, pawOutline, heartOutline, calendarOutline, maleFemaleOutline, checkmarkCircle, arrowForwardOutline } from 'ionicons/icons';
+import { HeaderToolbarComponent } from '../../components/header-toolbar/header-toolbar.component';
 
 // Interfaz para mascota
 interface Pet {
@@ -76,7 +77,8 @@ interface Filters {
     IonSelectOption,
     IonRange,
     IonCheckbox,
-    IonText
+    IonText,
+    HeaderToolbarComponent
   ]
 })
 export class HomePage implements OnDestroy {

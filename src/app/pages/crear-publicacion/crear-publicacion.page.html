@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Crear Publicación</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header-toolbar [title]="'Crear Publicación'"></app-header-toolbar>
 
 <ion-content class="ion-padding">
   <form [formGroup]="form" (ngSubmit)="submit()">
