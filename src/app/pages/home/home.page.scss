@@ -245,6 +245,7 @@ $bg-light: #f7fafc;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  animation: fadeIn 0.4s ease-out;
 
   &:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
@@ -507,9 +508,6 @@ $bg-light: #f7fafc;
   }
 }
 
-.pet-card {
-  animation: fadeIn 0.4s ease-out;
-}
 
 // ============================================
 // RESPONSIVE ADJUSTMENTS

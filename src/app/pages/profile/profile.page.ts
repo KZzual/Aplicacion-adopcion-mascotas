@@ -131,7 +131,7 @@ export class ProfilePage implements OnInit {
         },
         {
           text: 'Configuración',
-          icon: 'ellipsis-horizontal',
+          icon: 'settings',
           handler: () => {
             this.router.navigate(['/configuraciones']);
           }
