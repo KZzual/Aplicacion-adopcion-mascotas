@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 export interface UserProfileData {
   fullName: string;
@@ -11,7 +12,7 @@ export interface UserProfileData {
 
 @Injectable({ providedIn: 'root' })
 export class UserProfileService {
-  private readonly db = getFirestore();
+  constructor(private readonly db: Firestore) {}
 
   async saveProfile(uid: string, data: UserProfileData) {
     const ref = doc(this.db, 'users', uid);

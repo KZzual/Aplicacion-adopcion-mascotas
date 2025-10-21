@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoadingService } from './services/loading.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { PushNotificationsService } from './services/push-notifications.service';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +16,19 @@ export class AppComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly pushService: PushNotificationsService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // Cambia 'login' por la ruta real de tu login
-        this.isLoginPage = event.urlAfterRedirects.includes('./pages/login/login.page.ts');
+        // Detecta si la ruta actual es la página de login
+        // Detecta si la URL actual corresponde a la ruta de login
+        this.isLoginPage = event.urlAfterRedirects.startsWith('/login');
       }
     });
+
+    // Inicializa notificaciones push en nativo (Android/iOS). En Web se ignora.
+    this.pushService.init().catch(err => console.warn('Push init error:', err));
   }
 }
 

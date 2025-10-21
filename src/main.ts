@@ -1,16 +1,8 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-
 import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
 
-// Inicializa Firebase SDK nativo (evita conflictos de AngularFire con Angular 19)
-const app = initializeApp(environment.firebaseConfig);
-// Opcional: inicializa servicios que uses
-getAuth(app);
-getFirestore(app);
+// Nota: Firebase se inicializa en AppModule mediante provideFirebaseApp.
+// Evitamos inicializar Firebase aquí para prevenir conflictos de instancias duplicadas.
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

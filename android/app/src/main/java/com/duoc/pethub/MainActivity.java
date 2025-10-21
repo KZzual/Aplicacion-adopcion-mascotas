@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.duoc.pethub;
 
 import com.getcapacitor.BridgeActivity;
 

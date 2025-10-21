@@ -11,7 +11,8 @@ export const environment = {
     storageBucket: "pethub-47125.appspot.com",
     messagingSenderId: "191915819129",
     appId: "1:191915819129:android:7ebc5ab2086d2b386f54a8"
-  }
+  },
+  vapidKey: 'BBQVNW9ntb0ntr0dtvJZ-ZLuqQKWcrp7cO7e6z_kKi9Sm2-NzJ5rldcOveHvYt_EAU-_FCS6FH3ZpCtySS1ZQgo' // VAPID public key (WebPush)
 };
 
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Messaging, getToken, onMessage } from '@angular/fire/messaging';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class NotificacionesService {
@@ -16,8 +17,11 @@ export class NotificacionesService {
 
   async solicitarPermiso(): Promise<void> {
     try {
+      if (!environment.vapidKey) {
+        console.warn('VAPID key no configurada. Define environment.vapidKey para WebPush.');
+      }
       const token = await getToken(this.messaging, {
-        vapidKey: 'YOUR_VAPID_KEY' // Reemplazar con tu VAPID key real
+        vapidKey: environment.vapidKey || undefined
       });
       // Aquí podrías guardar el token en Firestore para el usuario
       console.log('FCM Token:', token);

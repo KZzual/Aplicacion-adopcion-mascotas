@@ -7,5 +7,6 @@ export const environment = {
     storageBucket: "pethub-9975a.appspot.com",
     messagingSenderId: "714950945847",
     appId: "1:714950945847:android:015cd5bc20e14f7863b2"
-  }
+  },
+  vapidKey: 'BBQVNW9ntb0ntr0dtvJZ-ZLuqQKWcrp7cO7e6z_kKi9Sm2-NzJ5rldcOveHvYt_EAU-_FCS6FH3ZpCtySS1ZQgo'
 };

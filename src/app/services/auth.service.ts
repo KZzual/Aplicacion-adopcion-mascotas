@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
+import { Auth } from '@angular/fire/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly auth = getAuth();
+  constructor(private readonly auth: Auth) {}
 
   login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);

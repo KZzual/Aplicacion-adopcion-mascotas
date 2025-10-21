@@ -6,7 +6,7 @@ import { TabsPage } from './tabs.page';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
 @NgModule({
-  declarations: [TabsPage],
-  imports: [CommonModule, IonicModule, RouterModule, TabsPageRoutingModule]
+  declarations: [],
+  imports: [CommonModule, IonicModule, RouterModule, TabsPageRoutingModule, TabsPage]
 })
 export class TabsPageModule {}
