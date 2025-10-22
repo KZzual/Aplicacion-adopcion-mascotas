@@ -220,4 +220,14 @@ export class UsuariosPage implements OnInit {
       case 'post': return 'create';
     }
   }
+
+  /**
+   * Maneja el evento de error al cargar una imagen.
+   * Si la imagen original falla, la reemplaza por una imagen local por defecto.
+   * @param event Evento de error del elemento img
+   */
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/img/logoapp1.1.png';
+  }
 }

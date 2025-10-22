@@ -14,7 +14,7 @@
     <ion-title class="profile-title">
       <div class="profile-header-info">
         <ion-avatar class="header-avatar">
-          <img [src]="userInfo.profileImage" [alt]="userInfo.name">
+          <img [src]="userInfo.profileImage" [alt]="userInfo.name" (error)="onImageError($event)">
         </ion-avatar>
         <span class="header-name">{{ userInfo.name }}</span>
       </div>
@@ -126,7 +126,7 @@
               class="post-item"
               *ngFor="let post of posts"
               [ngClass]="{'adopted': post.status === 'adopted'}">
-              <img [src]="post.petImage" [alt]="post.petName" class="post-image">
+              <img [src]="post.petImage" [alt]="post.petName" class="post-image" (error)="onImageError($event)">
 
               <ion-card-content class="post-content">
                 <h3 class="pet-name">{{ post.petName }}</h3>

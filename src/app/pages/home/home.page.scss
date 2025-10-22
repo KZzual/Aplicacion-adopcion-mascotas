@@ -93,13 +93,16 @@ $bg-light: #f7fafc;
   --max-height: 70vh;
 
   .filter-header {
-    padding: 20px;
+    padding: 16px 20px; // Ajustado
+    display: flex; // Añadido
+    align-items: center; // Añadido
+    justify-content: space-between; // Añadido
     background: linear-gradient(135deg, $primary-color 0%, #9b59b6 100%);
     color: white;
 
-    h2 {
-      margin: 0 0 4px 0;
-      font-size: 20px;
+    h3 { // Ajustado (era h2)
+      margin: 0;
+      font-size: 18px;
       font-weight: 600;
     }
 
@@ -149,7 +152,7 @@ $bg-light: #f7fafc;
   .characteristics-section {
     padding: 0 20px 12px 20px;
 
-    h3 {
+    h4 { // Ajustado (era h3)
       font-size: 14px;
       font-weight: 600;
       color: $text-dark;
@@ -189,7 +192,7 @@ $bg-light: #f7fafc;
       font-weight: 600;
       font-size: 14px;
 
-      &.reset-btn {
+      &.reset-btn { // Este estilo no se usa pero lo dejo
         --background: white;
         --color: #{$text-medium};
         --border-color: #{$border-color};
@@ -197,13 +200,37 @@ $bg-light: #f7fafc;
         --border-style: solid;
       }
 
-      &.apply-btn {
+      &.apply-btn { // Este estilo no se usa pero lo dejo
         --background: #{$primary-color};
         --background-hover: #7d3c98;
       }
     }
   }
 }
+
+// ============================================
+// (NUEVO) LOADING SPINNER
+// ============================================
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  gap: 16px;
+
+  ion-spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-medium;
+    margin: 0;
+  }
+}
+
 
 // ============================================
 // RESULTS COUNT
@@ -216,26 +243,20 @@ $bg-light: #f7fafc;
 }
 
 // ============================================
-// PETS GRID
+// (NUEVO) VIRTUAL SCROLL VIEWPORT
 // ============================================
-.pets-grid {
-  padding: 0 12px 20px 12px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0 20px 20px 20px;
-  }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.pet-list-viewport {
+  // Opcional: Si ves que no ocupa toda la altura.
+  // height: 100%;
 }
 
 // ============================================
-// PET CARD
+// (ELIMINADO) .pets-grid
+// ============================================
+
+
+// ============================================
+// PET CARD (Ajustado con margen)
 // ============================================
 .pet-card {
   background: white;
@@ -245,6 +266,10 @@ $bg-light: #f7fafc;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+
+  // AÑADIDO: Margen para reemplazar el 'gap' del grid
+  margin: 8px 12px 16px 12px;
+  animation: fadeIn 0.4s ease-out;
 
   &:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
@@ -288,7 +313,7 @@ $bg-light: #f7fafc;
         min-width: 0;
         flex: 1;
 
-        .owner-name {
+        h4 { // Corregido (tu HTML usa <h4>, no .owner-name)
           font-size: 13px;
           font-weight: 600;
           color: $text-dark;
@@ -507,9 +532,6 @@ $bg-light: #f7fafc;
   }
 }
 
-.pet-card {
-  animation: fadeIn 0.4s ease-out;
-}
 
 // ============================================
 // RESPONSIVE ADJUSTMENTS

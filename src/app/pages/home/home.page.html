@@ -1,4 +1,12 @@
-<ion-content class="home-content">
+<ion-content [fullscreen]="true" class="home-content">
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <div class="home-header">
     <h1>🐾 PetHub</h1>
     <p>Encuentra a tu compañero perfecto</p>
@@ -11,8 +19,10 @@
       mode="ios"
       showClearButton="always"
       animated="true"
-      class="search-bar">
-    </ion-searchbar>
+      class="search-bar"
+      (search)="runDataReload()"
+      (ionClear)="runDataReload()">
+      </ion-searchbar>
 
     <ion-button
       fill="outline"
@@ -31,6 +41,7 @@
     size="auto">
     <ng-template>
       <div class="filter-popover">
+
         <div class="filter-header">
           <h3>Filtros</h3>
           <ion-button
@@ -98,7 +109,6 @@
             <ion-text>
               <h4>Características</h4>
             </ion-text>
-
             <ion-item lines="none">
               <ion-label>Vacunado</ion-label>
               <ion-checkbox
@@ -106,7 +116,6 @@
                 [(ngModel)]="filters.vaccinated">
               </ion-checkbox>
             </ion-item>
-
             <ion-item lines="none">
               <ion-label>Esterilizado</ion-label>
               <ion-checkbox
@@ -114,7 +123,6 @@
                 [(ngModel)]="filters.neutered">
               </ion-checkbox>
             </ion-item>
-
             <ion-item lines="none">
               <ion-label>Adiestrado</ion-label>
               <ion-checkbox
@@ -135,28 +143,38 @@
           <ion-button
             expand="block"
             (click)="applyFilters()">
-            Aplicar ({{ filteredPets.length }})
+            Aplicar
           </ion-button>
         </div>
       </div>
     </ng-template>
   </ion-popover>
 
-  <div class="results-count" *ngIf="filteredPets.length > 0">
+  <div class="loading-container" *ngIf="isLoading">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Buscando mascotas...</p>
+  </div>
+
+  <div class="results-count" *ngIf="petsToDisplay.length > 0 && !isLoading">
     <ion-text color="medium">
-      {{ filteredPets.length }} {{ filteredPets.length === 1 ? 'mascota encontrada' : 'mascotas encontradas' }}
+      {{ petsToDisplay.length }} {{ petsToDisplay.length === 1 ? 'mascota cargada' : 'mascotas cargadas' }}
     </ion-text>
   </div>
 
-  <div class="pets-grid">
-    <ion-card class="pet-card" *ngFor="let pet of filteredPets">
+  <cdk-virtual-scroll-viewport
+    [itemSize]="650"
+    class="pet-list-viewport"
+    *ngIf="!isLoading && petsToDisplay.length > 0">
+
+    <ion-card class="pet-card" *cdkVirtualFor="let pet of petsToDisplay; trackBy: trackByPetId">
+
       <div class="pet-card-header">
         <div class="owner-info">
           <ion-avatar class="owner-avatar">
             <img
               [src]="pet.owner.avatar"
               [alt]="'Avatar de ' + pet.owner.name"
-              onerror="this.src='assets/img/logoapp1.1.png'">
+              (error)="onImageError($event)">
           </ion-avatar>
           <div class="owner-details">
             <h4>{{ pet.owner.name }}</h4>
@@ -174,7 +192,7 @@
           [src]="pet.image"
           [alt]="'Foto de ' + pet.name"
           class="pet-image"
-          onerror="this.src='assets/img/logoapp1.1.png'">
+          (error)="onImageError($event)">
       </div>
 
       <ion-card-content class="pet-content">
@@ -231,9 +249,10 @@
         </ion-button>
       </ion-card-content>
     </ion-card>
-  </div>
+  </cdk-virtual-scroll-viewport>
 
-  <div class="empty-state" *ngIf="filteredPets.length === 0">
+
+  <div class="empty-state" *ngIf="petsToDisplay.length === 0 && !isLoading">
     <ion-icon name="paw-outline" class="empty-icon"></ion-icon>
     <h3>No se encontraron mascotas</h3>
     <p *ngIf="searchText || filters.species !== 'all' || filters.ageGroup !== 'all' || filters.gender !== 'all'">
@@ -245,8 +264,16 @@
     <ion-button
       *ngIf="searchText || filters.species !== 'all' || filters.ageGroup !== 'all' || filters.gender !== 'all'"
       fill="outline"
-      (click)="resetFilters(); searchText = ''">
+      (click)="resetFiltersAndSearch()">
       Limpiar búsqueda
     </ion-button>
   </div>
+
+  <ion-infinite-scroll (ionInfinite)="loadMoreData($event)" #infiniteScroll>
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando más mascotas...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

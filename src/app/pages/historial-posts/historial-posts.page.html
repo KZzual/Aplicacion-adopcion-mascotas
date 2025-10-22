@@ -48,7 +48,7 @@
   </div>
 
   <ion-card *ngFor="let post of userPosts" class="post-card" [ngClass]="{'adopted': post.status === 'adopted'}">
-    <img src="assets/placeholder.png" [src]="post.petImage || 'assets/placeholder.png'" alt="Mascota" [alt]="post.petName || 'Mascota'" class="post-image">
+    <img src="assets/placeholder.png" [src]="post.petImage || 'assets/placeholder.png'" alt="Mascota" [alt]="post.petName || 'Mascota'" class="post-image" (error)="onImageError($event)">
     <ion-card-content>
       <h3>{{ post.title }}</h3>
       <p>{{ post.description }}</p>

@@ -7,7 +7,7 @@
         <ion-card-content>
           <div class="conversation-header">
             <ion-avatar>
-              <img [src]="conversation.avatar || 'assets/img/avatar3.png'" [alt]="conversation.name">
+              <img [src]="conversation.avatar || 'assets/img/avatar3.png'" [alt]="conversation.name" (error)="onImageError($event)">
             </ion-avatar>
             <div class="conversation-info">
               <h3>{{ conversation.name }}</h3>
@@ -45,7 +45,7 @@
     <ion-card-content>
       <div class="conversation-header">
         <ion-avatar>
-          <img [src]="conversation.avatar || 'assets/default-avatar.png'" [alt]="conversation.name">
+          <img [src]="conversation.avatar || 'assets/default-avatar.png'" [alt]="conversation.name" (error)="onImageError($event)">
         </ion-avatar>
         <div class="conversation-info">
           <h3>{{ conversation.name }}</h3>
