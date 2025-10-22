@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiBaseUrl: 'http://localhost:4444',
   firebaseConfig: {
+    apiKey: "AIzaSyDGYHntJlvrxJ18EVTzdzzwReG95Dn8hDM",
     authDomain: "pethub-47125.firebaseapp.com",
     projectId: "pethub-47125",
     storageBucket: "pethub-47125.appspot.com",

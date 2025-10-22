@@ -1,19 +1,25 @@
 .historial-page {
-  --background: #f5f7fa;
+  --background: #b1f74269;
+  padding: 16px;
+
+  ion-header {
+    ion-toolbar {
+      --background: #f5c66173;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      ion-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+      }
+    }
+  }
 }
 
-.historial-container {
-  max-width: 450px;
-  margin: auto;
-  padding: 20px;
+ion-list {
+  margin-top: 12px;
+  padding: 0;
 
-  h2 {
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #111;
-  }
 }
 
 .post-card {
@@ -45,11 +51,11 @@
         font-size: 15px;
         font-weight: 500;
         margin: 0;
-        color: #222;
+        color: #86a2ee;
       }
       p {
         font-size: 13px;
-        color: #666;
+        color: #ec8585;
         margin: 2px 0 0 0;
       }
     }
