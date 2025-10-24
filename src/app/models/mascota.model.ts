@@ -13,7 +13,7 @@ export interface Mascota {
   raza: string;
   fechaNacimiento: Date; // Usar Date es mejor que string para la edad
   genero: 'Macho' | 'Hembra'; // Un tipo literal es más estricto que string
-  ubicacion: string;
+  ubicacion: UbicacionMascota; // Ubicación enriquecida
   tipoAnimal: string;
   vacunado: boolean;
   esterilizado: boolean;
@@ -23,4 +23,26 @@ export interface Mascota {
   idUsuarioRegistra: string; // ID del usuario que la subió
   estado: EstadoMascota;
   fechaRegistro: Date;
+}
+
+// Tipos para soporte de mapas/ubicación
+export enum TipoUbicacion {
+  FIJA = 'fija',
+  APROXIMADA = 'aproximada'
+}
+
+export interface Coordenadas {
+  latitud: number;
+  longitud: number;
+}
+
+export interface UbicacionMascota {
+  direccionTexto: string; // Texto legible
+  comuna?: string;
+  region?: string;
+  tipoUbicacion: TipoUbicacion;
+  coordenadas?: Coordenadas; // Puede omitirse si solo hay texto
+  radioBusquedaKm?: number; // Solo para aproximada
+  esUbicacionVerificada?: boolean; // true si viene de GPS
+  fechaUbicacion?: Date; // última vez vista
 }

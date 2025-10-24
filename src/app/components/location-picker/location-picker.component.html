@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Seleccionar ubicación</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()" (keyup.enter)="cerrar()" onKeyUp>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tipoUbicacion" (ionChange)="onTipoUbicacionChange()">
+      <ion-segment-button [value]="TipoUbicacion.FIJA">
+        <ion-label>📍 Fija</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [value]="TipoUbicacion.APROXIMADA">
+        <ion-label>📌 Aproximada</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="location-outline" slot="start"></ion-icon>
+        <ion-input
+          label="Dirección"
+          labelPlacement="floating"
+          [(ngModel)]="direccionTexto"
+          placeholder="Ej: Av. Providencia 1234, Santiago">
+        </ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="tipoUbicacion === TipoUbicacion.APROXIMADA">
+    <ion-card-header>
+      <ion-card-subtitle>Radio de búsqueda</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="scan-circle-outline" slot="start"></ion-icon>
+        <ion-range [(ngModel)]="radioBusqueda" [min]="0.5" [max]="10" [step]="0.5" [pin]="true" (ionChange)="onRadioChange()">
+          <ion-label slot="start">0.5 km</ion-label>
+          <ion-label slot="end">10 km</ion-label>
+        </ion-range>
+      </ion-item>
+      <ion-text color="primary" class="ion-text-center">Radio: {{ radioBusqueda }} km</ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Ubicar en el mapa</ion-card-subtitle>
+      <ion-button size="small" fill="outline" (click)="centrarEnMiUbicacion()" (keyup.enter)="centrarEnMiUbicacion()" onKeyUp>
+        <ion-icon name="navigate" slot="start"></ion-icon>
+        Mi ubicación
+      </ion-button>
+    </ion-card-header>
+    <ion-card-content>
+      <div id="leaflet-map"></div>
+      <ion-text color="medium" class="ion-text-center ion-padding-top">
+        Toca el mapa para seleccionar la ubicación
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="confirmar()" (keyup.enter)="confirmar()" [disabled]="!direccionTexto" onKeyUp>
+      Confirmar ubicación
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

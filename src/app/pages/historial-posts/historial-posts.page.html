@@ -1,75 +1,59 @@
 <ion-header>
-</ion-header>
+  <ion-toolbar>
+    <ion-title>Historial de Posts</ion-title>
+  </ion-toolbar>
+  </ion-header>
 
 <ion-content class="historial-page">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Historial de Posts</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="estadoFiltro">
+      <ion-segment-button value="todos"><ion-label>Todos</ion-label></ion-segment-button>
+      <ion-segment-button value="disponible"><ion-label>Disponibles</ion-label></ion-segment-button>
+      <ion-segment-button value="adoptado"><ion-label>Adoptados</ion-label></ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="diasFiltro">
+      <ion-segment-button value="todos"><ion-label>Todas las fechas</ion-label></ion-segment-button>
+      <ion-segment-button value="7"><ion-label>Últimos 7 días</ion-label></ion-segment-button>
+      <ion-segment-button value="30"><ion-label>Últimos 30 días</ion-label></ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
   <ion-list lines="none">
+    <ion-card class="post-card" *ngFor="let item of publicacionesFiltradas">
+      <img src="assets/img/logoapp1.1.png" [src]="item.imagen || 'assets/img/logoapp1.1.png'" alt="Mascota" class="post-image" (error)="onImageError($event)">
+      <ion-card-header>
+        <ion-card-title>{{ item.nombre || 'Mascota' }}</ion-card-title>
+        <ion-chip size="small" color="primary" *ngIf="item?.ubicacion?.tipoUbicacion === 'fija'">📍 Fija</ion-chip>
+        <ion-chip size="small" color="tertiary" *ngIf="item?.ubicacion?.tipoUbicacion === 'aproximada'">📌 Aproximada</ion-chip>
+  </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-icon [name]="item.estado === 'adoptado' ? 'thumbs-up-outline' : 'hourglass-outline'" [color]="item.estado === 'adoptado' ? 'success' : 'warning'" slot="start"></ion-icon>
+          <ion-label>
+            <h3>{{ item.estado === 'adoptado' ? 'En su nuevo hogar' : 'Aún en búsqueda' }}</h3>
+            <p>{{ item.fechaRegistro?.toDate ? (item.fechaRegistro.toDate() | date:'dd/MM/yy HH:mm') : (item.fechaRegistro | date:'dd/MM/yy HH:mm') }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none" *ngIf="item?.ubicacion?.direccionTexto as dir">
+          <ion-icon name="location-outline" slot="start"></ion-icon>
+          <ion-label>
+            <p>{{ dir }}<span *ngIf="item?.ubicacion?.radioBusquedaKm"> · Radio {{ item.ubicacion.radioBusquedaKm }} km</span></p>
+          </ion-label>
+        </ion-item>
+        <app-mini-map *ngIf="item?.ubicacion?.coordenadas"
+          [coords]="{latitud: item.ubicacion.coordenadas.latitud, longitud: item.ubicacion.coordenadas.longitud}"
+          [radioKm]="item.ubicacion.radioBusquedaKm">
+        </app-mini-map>
+      </ion-card-content>
+    </ion-card>
 
-      <ion-card class="post-card">
-        <ion-card-header>
-          <ion-card-title>Luciana de los montes</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item lines="none">
-            <ion-icon name="hourglass-outline" color="warning" slot="start"></ion-icon>
-            <ion-label>
-              <h3>Aún en búsqueda</h3>
-              <p>28/05/25 13:30</p>
-            </ion-label>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
-
-
-      <ion-card class="post-card">
-        <ion-card-header>
-          <ion-card-title>Cholito</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item lines="none">
-            <ion-icon name="thumbs-up-outline" color="success" slot="start"></ion-icon>
-            <ion-label>
-              <h3>En su nuevo hogar</h3>
-              <p>27/05/25 10:30</p>
-            </ion-label>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
-
-    </ion-list>
-
+    <div class="empty-state" *ngIf="publicaciones.length === 0">
+      <ion-icon name="document-text-outline" class="empty-icon"></ion-icon>
+      <h3>No tienes posts aún</h3>
+      <p>Cuando publiques una mascota para adopción, aparecerá aquí.</p>
+    </div>
+  </ion-list>
 </ion-content>
-
-<!-- Contenido para Historial de Posts
-<ion-content class="ion-padding" *ngIf="currentTab === 'historial-posts'">
-  <div class="page-header">
-    <h2>Historial de Posts</h2>
-    <p>Tus publicaciones anteriores</p>
-  </div>
-
-  <ion-card *ngFor="let post of userPosts" class="post-card" [ngClass]="{'adopted': post.status === 'adopted'}">
-    <img src="assets/placeholder.png" [src]="post.petImage || 'assets/placeholder.png'" alt="Mascota" [alt]="post.petName || 'Mascota'" class="post-image" (error)="onImageError($event)">
-    <ion-card-content>
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.description }}</p>
-      <div class="post-footer">
-        <small>Publicado: {{ post.date }}</small>
-        <ion-chip [color]="post.status === 'adopted' ? 'success' : 'primary'" class="status-chip">
-          {{ post.status === 'adopted' ? '✓ Adoptado' : '🏠 Disponible' }}
-        </ion-chip>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <div class="empty-state" *ngIf="userPosts.length === 0">
-    <ion-icon name="document-text-outline" class="empty-icon"></ion-icon>
-    <h3>No tienes posts aún</h3>
-    <p>Cuando publiques una mascota para adopción, aparecerá aquí.</p>
-  </div>
-</ion-content>-->
