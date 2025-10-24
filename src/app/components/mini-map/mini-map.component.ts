@@ -31,7 +31,7 @@ export class MiniMapComponent implements AfterViewInit, OnDestroy {
       doubleClickZoom: false,
       boxZoom: false,
       keyboard: false,
-      tap: false
+      touchZoom: false
     });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,

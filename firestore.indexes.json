@@ -1,0 +1,51 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "mascotas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "especie",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ubicacion.geohash",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mascotas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "estado",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ubicacion.geohash",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "mascotas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "especie",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "estado",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ubicacion.geohash",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
