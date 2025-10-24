@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mapa de Mascotas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="centrarEnMiUbicacion()" (keyup.enter)="centrarEnMiUbicacion()" onKeyUp>
+        <ion-icon name="navigate" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="especieFiltro" (ionChange)="onFiltroChange()">
+      <ion-segment-button value="todos">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="perro">
+        <ion-label>🐕 Perros</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="gato">
+        <ion-label>🐱 Gatos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="estadoFiltro" (ionChange)="onFiltroChange()">
+      <ion-segment-button value="todos">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="disponible">
+        <ion-label>Disponibles</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="adoptado">
+        <ion-label>Adoptados</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="mapa-interactivo-container"></div>
+</ion-content>

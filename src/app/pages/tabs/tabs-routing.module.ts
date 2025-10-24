@@ -38,6 +38,10 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'mapa-interactivo',
+        loadComponent: () => import('../mapa-interactivo/mapa-interactivo.page').then(m => m.MapaInteractivoPage)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

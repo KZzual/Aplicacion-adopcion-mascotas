@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Subject, of, Observable } from 'rxjs';
 import { takeUntil, delay } from 'rxjs/operators';
 import { addIcons } from 'ionicons';
-import { filterOutline, searchOutline, closeOutline, checkmarkOutline, locationOutline, pawOutline, heartOutline, calendarOutline, maleFemaleOutline, checkmarkCircle, arrowForwardOutline } from 'ionicons/icons';
+import { filterOutline, searchOutline, closeOutline, checkmarkOutline, locationOutline, pawOutline, heartOutline, calendarOutline, maleFemaleOutline, checkmarkCircle, arrowForwardOutline, mapOutline } from 'ionicons/icons';
 
 // IMPORTACIÓN CLAVE PARA VIRTUAL SCROLL
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -128,7 +128,7 @@ export class HomePage implements OnDestroy {
   private readonly POSTS_PER_PAGE = 10;
 
   constructor(private readonly router: Router) {
-    addIcons({filterOutline,closeOutline,locationOutline,pawOutline,heartOutline,calendarOutline,maleFemaleOutline,checkmarkCircle,arrowForwardOutline,searchOutline,checkmarkOutline});
+    addIcons({filterOutline,mapOutline,closeOutline,locationOutline,pawOutline,heartOutline,calendarOutline,maleFemaleOutline,checkmarkCircle,arrowForwardOutline,searchOutline,checkmarkOutline});
     this.router.events.pipe(takeUntil(this.destroy$)).subscribe(ev => {
       if (ev instanceof NavigationEnd) { }
     });

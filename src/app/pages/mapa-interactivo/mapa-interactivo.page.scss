@@ -1,0 +1,58 @@
+ion-content {
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+#mapa-interactivo-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+// Estilos para los marcadores personalizados
+.custom-marker {
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+}
+
+// Estilos para los popups
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  padding: 0;
+
+  .leaflet-popup-content {
+    margin: 12px 14px;
+    line-height: 1.4;
+    font-size: 14px;
+
+    strong {
+      font-size: 16px;
+      color: var(--ion-color-primary);
+    }
+
+    p {
+      margin: 6px 0;
+    }
+  }
+}
+
+// Ajuste para clusters
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background-color: rgba(var(--ion-color-primary-rgb), 0.6) !important;
+
+  div {
+    background-color: rgba(var(--ion-color-primary-rgb), 0.8) !important;
+    color: white;
+    font-weight: bold;
+  }
+}
