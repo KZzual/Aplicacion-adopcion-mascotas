@@ -1,5 +1,7 @@
 # 🗺️ Mapa Interactivo - Implementación Completa
 
+**Última revisión:** 24 de octubre de 2025
+
 ## 📋 Resumen Ejecutivo
 
 Se ha implementado exitosamente un **sistema completo de mapas interactivos** para la aplicación de adopción de mascotas, inspirado en mapas modernos como el de Teyvat. La implementación incluye:

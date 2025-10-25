@@ -1,5 +1,7 @@
 # 🐾 Guía de Desarrollo - PetHub v0.3.1
 
+**Última revisión:** 24 de octubre de 2025
+
 ## 📋 **Análisis del Proyecto: Aplicación de Adopción de Mascotas**
 
 ### 🏗️ **Información General**

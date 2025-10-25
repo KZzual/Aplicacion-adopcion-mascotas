@@ -106,6 +106,24 @@
         <ion-button expand="block" shape="round" class="btn-login" (click)="onLogin()" (keydown.enter)="onLogin()" (keyup.space)="onLogin()">
           Iniciar Sesión
         </ion-button>
+
+        <!-- Separador -->
+        <div class="divider">
+          <span>O continuar con</span>
+        </div>
+
+        <!-- Botones de inicio de sesión social -->
+        <div class="social-buttons">
+          <ion-button expand="block" fill="outline" class="btn-social btn-google" (click)="signInWithGoogle()" (keydown.enter)="signInWithGoogle()" (keyup.space)="signInWithGoogle()" aria-label="Iniciar sesión con Google">
+            <ion-icon slot="start" name="logo-google"></ion-icon>
+            Google
+          </ion-button>
+
+          <ion-button expand="block" fill="outline" class="btn-social btn-microsoft" (click)="signInWithMicrosoft()" (keydown.enter)="signInWithMicrosoft()" (keyup.space)="signInWithMicrosoft()" aria-label="Iniciar sesión con Microsoft">
+            <ion-icon slot="start" name="logo-microsoft"></ion-icon>
+            Microsoft
+          </ion-button>
+        </div>
       </div>
 
       <!-- Formulario de Registro -->
@@ -199,6 +217,40 @@
         <ion-button expand="block" shape="round" class="btn-register" (click)="onRegister()" (keydown.enter)="onRegister()" (keyup.space)="onRegister()">
           Crear Cuenta
         </ion-button>
+
+        <!-- Botón para reenviar correo de verificación (solo visible después del registro) -->
+        <ion-button
+          *ngIf="verificationEmailSent"
+          expand="block"
+          fill="clear"
+          shape="round"
+          class="btn-resend"
+          [disabled]="!canResendVerification"
+          (click)="resendVerificationEmail()"
+          (keydown.enter)="resendVerificationEmail()"
+          (keyup.space)="resendVerificationEmail()"
+          aria-label="Reenviar correo de verificación">
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          {{ canResendVerification ? 'Reenviar correo de verificación' : 'Espera para reenviar...' }}
+        </ion-button>
+
+        <!-- Separador -->
+        <div class="divider">
+          <span>O registrarse con</span>
+        </div>
+
+        <!-- Botones de registro social -->
+        <div class="social-buttons">
+          <ion-button expand="block" fill="outline" class="btn-social btn-google" (click)="signInWithGoogle()" (keydown.enter)="signInWithGoogle()" (keyup.space)="signInWithGoogle()" aria-label="Registrarse con Google">
+            <ion-icon slot="start" name="logo-google"></ion-icon>
+            Google
+          </ion-button>
+
+          <ion-button expand="block" fill="outline" class="btn-social btn-microsoft" (click)="signInWithMicrosoft()" (keydown.enter)="signInWithMicrosoft()" (keyup.space)="signInWithMicrosoft()" aria-label="Registrarse con Microsoft">
+            <ion-icon slot="start" name="logo-microsoft"></ion-icon>
+            Microsoft
+          </ion-button>
+        </div>
       </div>
 
     </div>

@@ -1,5 +1,7 @@
 # 🏗️ Arquitectura del Sistema de Mapas
 
+**Última revisión:** 24 de octubre de 2025
+
 ## Diagrama de Componentes
 
 ```

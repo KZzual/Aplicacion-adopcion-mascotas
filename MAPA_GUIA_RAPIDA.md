@@ -1,5 +1,7 @@
 # 🚀 Guía Rápida: Mapa Interactivo
 
+**Última revisión:** 24 de octubre de 2025
+
 ## ⚡ Inicio Rápido (5 minutos)
 
 ### 1. Configurar Índices de Firestore

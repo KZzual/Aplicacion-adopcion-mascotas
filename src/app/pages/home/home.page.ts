@@ -23,7 +23,7 @@ import {
   IonAvatar, IonChip, IonPopover, IonList, IonItem, IonLabel,
   IonSelect, IonSelectOption, IonRange, IonCheckbox, IonText,
   IonRefresher, IonRefresherContent, IonInfiniteScrollContent,
-  IonSpinner, IonInfiniteScroll // IonInfiniteScroll estaba duplicado y ahora es solo uno
+  IonSpinner, IonInfiniteScroll, IonHeader
 } from '@ionic/angular/standalone';
 
 // ==========================================================
@@ -76,7 +76,8 @@ interface Filters {
   imports: [
     CommonModule,
     FormsModule,
-    ScrollingModule, // <-- AÑADIDO
+    ScrollingModule,
+    IonHeader,
     IonContent,
     IonSearchbar,
     IonButton,

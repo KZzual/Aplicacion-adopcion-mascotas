@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { UserProfileService, UserProfileData } from '../../services/user-profile.service';
 
 interface UserInfo {
-  name: string;
   fullName: string;
   profileImage: string;
-  birthDate: string;
-  location: string;
-  description: string;
+  birthDate?: string;
+  location?: string;
+  description?: string;
   email: string;
-  phone: string;
+  phone?: string;
 }
 
 interface Post {
@@ -43,15 +44,14 @@ interface Activity {
 export class ProfilePage implements OnInit {
   selectedFilter: string = 'todo';
 
+  @ViewChild('avatarInput') avatarInput?: ElementRef<HTMLInputElement>;
+
+  loading: boolean = true;
+  userId: string = '';
   userInfo: UserInfo = {
-    name: 'María González',
-    fullName: 'María Alejandra González Rodríguez',
-    profileImage: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-    birthDate: '15 de Marzo, 1995',
-    location: 'Santiago, Chile',
-    description: 'Amante de los animales 🐕🐱 Voluntaria en refugios locales. Busco dar amor y hogar a mascotas que lo necesiten.',
-    email: 'maria.gonzalez@email.com',
-    phone: '+56 9 1234 5678'
+    fullName: '-',
+    profileImage: 'assets/img/logoapp1.1.png',
+    email: '-'
   };
 
   posts: Post[] = [
@@ -102,26 +102,38 @@ export class ProfilePage implements OnInit {
     private readonly actionSheetController: ActionSheetController,
     private readonly alertController: AlertController,
     private readonly toastController: ToastController,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly auth: AuthService,
+    private readonly userProfile: UserProfileService
   ) { }
 
   ngOnInit() {
-    // Inicialización del componente - cargar datos del perfil si es necesario
-    console.log('ProfilePage initialized');
+    this.initProfile();
   }
 
   goBack() {
     this.router.navigate(['/home']);
   }
 
-  logout() {
-    this.router.navigate(['/login']);
+  async logout() {
+    try {
+      await this.auth.logout();
+    } finally {
+      this.router.navigate(['/login']);
+    }
   }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones',
       buttons: [
+        {
+          text: 'Cambiar foto',
+          icon: 'camera-outline',
+          handler: () => {
+            this.triggerAvatarFile();
+          }
+        },
         {
           text: 'Editar perfil',
           icon: 'create-outline',
@@ -131,7 +143,7 @@ export class ProfilePage implements OnInit {
         },
         {
           text: 'Configuración',
-          icon: 'ellipsis-horizontal',
+          icon: 'settings-outline',
           handler: () => {
             this.router.navigate(['/configuraciones']);
           }
@@ -163,16 +175,40 @@ export class ProfilePage implements OnInit {
       header: 'Editar Perfil',
       inputs: [
         {
-          name: 'name',
+          name: 'fullName',
           type: 'text',
-          placeholder: 'Nombre',
-          value: this.userInfo.name
+          placeholder: 'Nombre completo',
+          value: this.userInfo.fullName
+        },
+        {
+          name: 'birthDate',
+          type: 'date',
+          placeholder: 'Fecha de nacimiento',
+          value: this.userInfo.birthDate || ''
         },
         {
           name: 'description',
           type: 'textarea',
           placeholder: 'Descripción',
           value: this.userInfo.description
+        },
+        {
+          name: 'phone',
+          type: 'tel',
+          placeholder: 'Teléfono',
+          value: this.userInfo.phone || ''
+        },
+        {
+          name: 'location',
+          type: 'text',
+          placeholder: 'Ubicación',
+          value: this.userInfo.location || ''
+        },
+        {
+          name: 'avatarUrl',
+          type: 'url',
+          placeholder: 'URL de foto (opcional)',
+          value: this.userInfo.profileImage
         }
       ],
       buttons: [
@@ -183,11 +219,15 @@ export class ProfilePage implements OnInit {
         {
           text: 'Guardar',
           handler: (data) => {
-            if (data.name && data.description) {
-              this.userInfo.name = data.name;
-              this.userInfo.description = data.description;
-              this.showToast('Perfil actualizado correctamente');
-            }
+            const payload: UserProfileData = {
+              fullName: data.fullName?.trim(),
+              birthDate: data.birthDate || undefined,
+              description: data.description?.trim(),
+              phone: data.phone?.trim(),
+              location: data.location?.trim(),
+              avatarUrl: data.avatarUrl?.trim()
+            };
+            this.applyAndSaveProfile(payload);
           }
         }
       ]
@@ -252,5 +292,93 @@ export class ProfilePage implements OnInit {
   onImageError(event: Event): void {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = 'assets/img/logoapp1.1.png';
+  }
+
+  private async initProfile() {
+    this.loading = true;
+    const user = this.auth.getCurrentUser();
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    this.userId = user.uid;
+
+    // Prefill with auth data
+    this.userInfo = {
+      fullName: user.displayName || '-',
+      email: user.email || '-',
+      phone: user.phoneNumber || '',
+      profileImage: 'assets/img/logoapp1.1.png'
+    };
+
+    try {
+      const profile = await this.userProfile.getProfile(this.userId);
+      if (profile) {
+        this.userInfo = {
+          fullName: profile.fullName || this.userInfo.fullName,
+          email: profile.email || this.userInfo.email,
+          phone: profile.phone || this.userInfo.phone,
+          birthDate: profile.birthDate,
+          location: profile.location,
+          description: profile.description,
+          profileImage: profile.avatarUrl || this.userInfo.profileImage,
+        };
+      } else {
+        // Initialize minimal profile in Firestore
+        await this.userProfile.saveProfile(this.userId, {
+          fullName: this.userInfo.fullName,
+          email: this.userInfo.email,
+          phone: this.userInfo.phone
+        });
+      }
+    } catch (e) {
+      console.error('Error loading profile', e);
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  private async applyAndSaveProfile(payload: UserProfileData) {
+    try {
+      // Apply locally for immediate feedback
+      this.userInfo.fullName = payload.fullName || this.userInfo.fullName;
+      this.userInfo.description = payload.description ?? this.userInfo.description;
+      this.userInfo.phone = payload.phone ?? this.userInfo.phone;
+      this.userInfo.birthDate = payload.birthDate ?? this.userInfo.birthDate;
+      this.userInfo.location = payload.location ?? this.userInfo.location;
+      if (payload.avatarUrl) this.userInfo.profileImage = payload.avatarUrl;
+
+      // Persist
+      await this.userProfile.updateProfile(this.userId, {
+        fullName: this.userInfo.fullName,
+        description: this.userInfo.description,
+        phone: this.userInfo.phone,
+        birthDate: this.userInfo.birthDate,
+        location: this.userInfo.location,
+        avatarUrl: this.userInfo.profileImage
+      });
+      this.showToast('Perfil actualizado correctamente');
+    } catch (e) {
+      console.error(e);
+      this.showToast('❌ Error al actualizar el perfil');
+    }
+  }
+
+  triggerAvatarFile() {
+    this.avatarInput?.nativeElement.click();
+  }
+
+  async onAvatarSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const dataUrl = reader.result as string;
+      await this.applyAndSaveProfile({ avatarUrl: dataUrl });
+    };
+    reader.readAsDataURL(file);
+    // Reset input
+    input.value = '';
   }
 }

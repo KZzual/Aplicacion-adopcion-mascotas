@@ -14,9 +14,9 @@
     <ion-title class="profile-title">
       <div class="profile-header-info">
         <ion-avatar class="header-avatar">
-          <img [src]="userInfo.profileImage" [alt]="userInfo.name" (error)="onImageError($event)">
+          <img src="assets/img/logoapp1.1.png" alt="" [src]="userInfo.profileImage" [attr.title]="userInfo.fullName" [attr.alt]="userInfo.fullName" (error)="onImageError($event)">
         </ion-avatar>
-        <span class="header-name">{{ userInfo.name }}</span>
+        <span class="header-name">{{ userInfo.fullName }}</span>
       </div>
     </ion-title>
 
@@ -26,7 +26,7 @@
       (click)="presentActionSheet()"
       (keydown.enter)="presentActionSheet()"
       aria-label="Opciones">
-      <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+      <ion-icon slot="icon-only" name="list-circle-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -35,7 +35,7 @@
   <!-- Header colapsable para scroll -->
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ userInfo.name }}</ion-title>
+      <ion-title size="large">{{ userInfo.fullName }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -88,7 +88,7 @@
             <ion-icon name="calendar" class="info-icon"></ion-icon>
             <div class="info-details">
               <strong>Fecha de Nacimiento</strong>
-              <p>{{ userInfo.birthDate }}</p>
+              <p>{{ userInfo.birthDate || '-' }}</p>
             </div>
           </div>
 
@@ -126,7 +126,7 @@
               class="post-item"
               *ngFor="let post of posts"
               [ngClass]="{'adopted': post.status === 'adopted'}">
-              <img [src]="post.petImage" [alt]="post.petName" class="post-image" (error)="onImageError($event)">
+              <img src="assets/img/logoapp1.1.png" alt="" [src]="post.petImage" [attr.title]="post.petName" [attr.alt]="post.petName" class="post-image" (error)="onImageError($event)">
 
               <ion-card-content class="post-content">
                 <h3 class="pet-name">{{ post.petName }}</h3>
@@ -196,3 +196,5 @@
     </div>
   </div>
 </ion-content>
+<!-- Input de archivo oculto para cambio de avatar -->
+<input type="file" hidden accept="image/*" #avatarInput (change)="onAvatarSelected($event)">

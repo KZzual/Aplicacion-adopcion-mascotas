@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ActionSheetController, AlertController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { UserProfileService, UserProfileData } from '../../services/user-profile.service';
 
 interface UsuarioInfo {
-  name: string;
   fullName: string;
   profileImage: string;
-  birthDate: string;
-  location: string;
-  description: string;
+  birthDate?: string;
+  location?: string;
+  description?: string;
   email: string;
-  phone: string;
+  phone?: string;
 }
 
 interface UsuarioPost {
@@ -42,16 +43,13 @@ interface UsuarioActivity {
 })
 export class UsuariosPage implements OnInit {
   selectedFilter: string = 'todo';
+  loading = true;
+  userId: string = '';
 
   userInfo: UsuarioInfo = {
-    name: 'María González',
-    fullName: 'María Alejandra González Rodríguez',
-    profileImage: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-    birthDate: '15 de Marzo, 1995',
-    location: 'Santiago, Chile',
-    description: 'Amante de los animales 🐕🐱 Voluntaria en refugios locales. Busco dar amor y hogar a mascotas que lo necesiten.',
-    email: 'maria.gonzalez@email.com',
-    phone: '+56 9 1234 5678'
+    fullName: '-',
+    profileImage: 'assets/img/logoapp1.1.png',
+    email: '-'
   };
 
   posts: UsuarioPost[] = [
@@ -102,19 +100,26 @@ export class UsuariosPage implements OnInit {
     private readonly actionSheetController: ActionSheetController,
     private readonly alertController: AlertController,
     private readonly toastController: ToastController,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly auth: AuthService,
+    private readonly userProfile: UserProfileService
   ) { }
 
   ngOnInit() {
-    console.log('UsuariosPage initialized');
+    this.initUserProfile();
   }
 
   goBack() {
     this.router.navigate(['/home']);
   }
 
-  logout() {
-    this.router.navigate(['/login']);
+  async logout() {
+    try {
+      await this.auth.logout();
+    } finally {
+      this.router.navigate(['/login']);
+    }
   }
 
   async presentActionSheet() {
@@ -229,5 +234,52 @@ export class UsuariosPage implements OnInit {
   onImageError(event: Event): void {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = 'assets/img/logoapp1.1.png';
+  }
+
+  private async initUserProfile() {
+    this.loading = true;
+    try {
+      const uidFromParam = this.route.snapshot.paramMap.get('uid') || this.route.snapshot.queryParamMap.get('uid');
+      const current = this.auth.getCurrentUser();
+      const resolvedUid = uidFromParam || current?.uid || '';
+      if (!resolvedUid) {
+        await this.showToast('No se encontró el usuario a mostrar');
+        this.loading = false;
+        return;
+      }
+      this.userId = resolvedUid;
+
+      // Prefill con datos del auth si es el mismo usuario
+      if (current && current.uid === resolvedUid) {
+        this.userInfo = {
+          fullName: current.displayName || '-',
+          email: current.email || '-',
+          phone: current.phoneNumber || '',
+          profileImage: 'assets/img/logoapp1.1.png'
+        };
+      }
+
+      const profile = await this.userProfile.getProfile(this.userId);
+      if (profile) {
+        this.applyProfile(profile);
+      }
+    } catch (e) {
+      console.error('Error cargando perfil de usuario', e);
+      await this.showToast('Error al cargar el perfil');
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  private applyProfile(profile: UserProfileData) {
+    this.userInfo = {
+      fullName: profile.fullName || this.userInfo.fullName,
+      email: profile.email || this.userInfo.email,
+      phone: profile.phone || this.userInfo.phone,
+      birthDate: profile.birthDate,
+      location: profile.location,
+      description: profile.description,
+      profileImage: profile.avatarUrl || this.userInfo.profileImage,
+    };
   }
 }

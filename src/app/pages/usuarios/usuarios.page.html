@@ -8,9 +8,9 @@
     <ion-title class="profile-title">
       <div class="profile-header-info">
         <ion-avatar class="header-avatar">
-          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" [src]="userInfo.profileImage || 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="Avatar" [alt]="userInfo.name || 'Avatar'" (error)="onImageError($event)">
+          <img src="assets/img/logoapp1.1.png" [src]="userInfo.profileImage || 'assets/img/logoapp1.1.png'" alt="" [attr.alt]="userInfo.fullName || 'Avatar'" [attr.title]="userInfo.fullName || 'Avatar'" (error)="onImageError($event)">
         </ion-avatar>
-        <span class="header-name">{{ userInfo.name }}</span>
+        <span class="header-name">{{ userInfo.fullName }}</span>
       </div>
     </ion-title>
 
@@ -23,7 +23,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ userInfo.name }}</ion-title>
+      <ion-title size="large">{{ userInfo.fullName }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -84,7 +84,7 @@
         <ion-card-content>
           <div class="posts-grid">
             <ion-card class="post-item" *ngFor="let post of posts" [ngClass]="{'adopted': post.status === 'adopted'}">
-              <img src="assets/placeholder.png" [src]="post.petImage || 'assets/placeholder.png'" alt="Mascota" [alt]="post.petName || 'Mascota'" class="post-image" (error)="onImageError($event)">
+              <img src="assets/img/logoapp1.1.png" [src]="post.petImage || 'assets/img/logoapp1.1.png'" alt="" [attr.alt]="post.petName || 'Mascota'" [attr.title]="post.petName || 'Mascota'" class="post-image" (error)="onImageError($event)">
               <ion-card-content class="post-content">
                 <h3 class="pet-name">{{ post.petName }}</h3>
                 <p class="post-description">{{ post.description }}</p>

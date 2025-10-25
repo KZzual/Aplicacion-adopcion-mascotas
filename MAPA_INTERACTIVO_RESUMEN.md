@@ -1,5 +1,7 @@
 # 🗺️ Implementación Completa del Mapa Interactivo
 
+**Última revisión:** 24 de octubre de 2025
+
 ## ✅ Características Implementadas
 
 ### 1. **Página de Mapa Interactivo** (`mapa-interactivo.page.ts`)

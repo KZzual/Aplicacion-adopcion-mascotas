@@ -2,7 +2,8 @@
 
 **Versión:** 0.3.1  
 **Framework:** Ionic + Angular 19  
-**Backend:** Firebase (Auth, Firestore, Storage)
+**Backend:** Firebase (Auth, Firestore, Storage)  
+**Última revisión:** 24 de octubre de 2025
 
 ## 📋 Descripción
 

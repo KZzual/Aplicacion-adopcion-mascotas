@@ -1,5 +1,7 @@
 # 📚 Índice de Documentación - Mapa Interactivo
 
+**Última revisión:** 24 de octubre de 2025
+
 ## 🎯 Inicio Rápido
 
 ¿Primera vez usando el mapa interactivo? Comienza aquí:

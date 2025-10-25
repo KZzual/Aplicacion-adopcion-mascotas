@@ -78,9 +78,9 @@
 }
 
 .start-button {
-  --background: #8e44ad;
-  --background-hover: #9b59b6;
-  --background-activated: #7d3c98;
+  --background: #44ad96;
+  --background-hover: #83b659;
+  --background-activated: #44983c;
   --color: white;
   --border-radius: 25px;
   height: 50px;
@@ -282,5 +282,89 @@ ion-checkbox {
 
   &:hover {
     --background: rgba(142, 68, 173, 0.1);
+  }
+}
+
+.btn-resend {
+  --color: #3880ff;
+  font-size: 14px;
+  margin-top: 12px;
+  font-weight: 500;
+
+  &:disabled {
+    --color: #999;
+    opacity: 0.6;
+  }
+}
+
+/* Separador "O continuar con" */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  text-align: center;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+  }
+
+  span {
+    padding: 0 12px;
+    color: #666;
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+/* Botones de autenticación social */
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-social {
+  --border-radius: 12px;
+  --border-width: 1.5px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: none;
+  height: 48px;
+
+  ion-icon {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+}
+
+.btn-google {
+  --border-color: #db4437;
+  --color: #db4437;
+
+  &:hover {
+    --background: rgba(219, 68, 55, 0.08);
+  }
+
+  &:active {
+    --background: rgba(219, 68, 55, 0.15);
+  }
+}
+
+.btn-microsoft {
+  --border-color: #00a4ef;
+  --color: #00a4ef;
+
+  &:hover {
+    --background: rgba(0, 164, 239, 0.08);
+  }
+
+  &:active {
+    --background: rgba(0, 164, 239, 0.15);
   }
 }
