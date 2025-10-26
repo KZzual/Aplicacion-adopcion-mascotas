@@ -179,7 +179,7 @@
     <ion-card class="pet-card" *cdkVirtualFor="let pet of petsToDisplay; trackBy: trackByPetId">
 
       <div class="pet-card-header">
-        <div class="owner-info">
+  <a class="owner-info" href="javascript:void(0)" (click)="openUserProfile(pet.owner.id)" aria-label="Ver perfil de {{ pet.owner.name }}">
           <ion-avatar class="owner-avatar">
             <img
               [src]="pet.owner.avatar"
@@ -190,7 +190,7 @@
             <h4>{{ pet.owner.name }}</h4>
             <p class="publish-time">{{ getTimeAgo(pet.publishedDate) }}</p>
           </div>
-        </div>
+  </a>
         <ion-chip *ngIf="pet.distance" class="distance-chip" color="medium">
           <ion-icon name="location-outline"></ion-icon>
           <ion-label>{{ pet.distance }} km</ion-label>

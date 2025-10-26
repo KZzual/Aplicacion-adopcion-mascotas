@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subject, of, Observable } from 'rxjs';
@@ -100,7 +100,7 @@ interface Filters {
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     IonSpinner
-  ]
+  , RouterLink]
 })
 export class HomePage implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
@@ -251,6 +251,11 @@ export class HomePage implements OnDestroy {
   openDetails(pet: Pet): void {
     console.log('Ver detalles de:', pet.name);
   }
+
+  openUserProfile = (uid: string): void => {
+    if (!uid) return;
+    this.router.navigate([`/usuarios`, uid]);
+  };
 
   getTimeAgo(publishedDate: Date): string {
     const now = new Date();

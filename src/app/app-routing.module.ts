@@ -37,6 +37,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'usuarios/:uid',
+    loadComponent: () => import('./pages/usuarios/usuarios.page').then(m => m.UsuariosPage),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
     canActivate: [AuthGuard]

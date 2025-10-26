@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonBadge, IonIcon, IonCard, IonCardContent, IonAvatar, IonHeader, IonToolbar, IonTitle } from "@ionic/angular/standalone";
+import { IonContent, IonBadge, IonIcon, IonCard, IonCardContent, IonAvatar, IonHeader } from "@ionic/angular/standalone";
+import { Router } from '@angular/router';
 
 interface Conversation {
   id: number;
@@ -9,6 +10,7 @@ interface Conversation {
   lastMessage: string;
   time: string;
   unreadCount: number;
+  userId?: string;
 }
 
 @Component({
@@ -16,9 +18,9 @@ interface Conversation {
   templateUrl: './mensajes.page.html',
   styleUrls: ['./mensajes.page.scss'],
   standalone: true,
-  imports: [IonTitle, IonToolbar, CommonModule, IonContent, IonCard, IonCardContent, IonAvatar, IonBadge, IonIcon, IonHeader]
+  imports: [CommonModule, IonContent, IonCard, IonCardContent, IonAvatar, IonBadge, IonIcon, IonHeader]
 })
-export class MensajesPage implements OnInit {
+export class MensajesPage {
 
   conversations: Conversation[] = [
     {
@@ -27,7 +29,8 @@ export class MensajesPage implements OnInit {
       avatar: 'assets/avatar1.png',
       lastMessage: 'Hola, ¿Luna todavía está disponible para adopción?',
       time: '2:30 PM',
-      unreadCount: 2
+      unreadCount: 2,
+      userId: 'user1'
     },
     {
       id: 2,
@@ -35,7 +38,8 @@ export class MensajesPage implements OnInit {
       avatar: 'assets/avatar2.png',
       lastMessage: 'Gracias por la información sobre Max',
       time: '1:15 PM',
-      unreadCount: 0
+      unreadCount: 0,
+      userId: 'user2'
     },
     {
       id: 3,
@@ -43,19 +47,22 @@ export class MensajesPage implements OnInit {
       avatar: 'assets/avatar3.png',
       lastMessage: '¿Podríamos conocer a Bella este fin de semana?',
       time: '11:45 AM',
-      unreadCount: 1
+      unreadCount: 1,
+      userId: 'user3'
     }
   ];
 
-  constructor() { }
-
-  ngOnInit() {
-    // Inicialización si es necesaria
-  }
+  constructor(private readonly router: Router) { }
 
   openConversation(conversation: Conversation) {
     console.log('Abriendo conversación con:', conversation.name);
     // Aquí implementarías la navegación a la conversación individual
+  }
+
+  openUserProfile(conversation: Conversation) {
+    const uid = conversation.userId;
+    if (!uid) return;
+    this.router.navigate(['/usuarios', uid]);
   }
 
   /**

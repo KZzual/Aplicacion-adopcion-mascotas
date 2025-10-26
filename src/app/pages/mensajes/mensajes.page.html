@@ -7,16 +7,23 @@
 
     <!-- Lista de conversaciones -->
     <div class="conversations-list">
-      <ion-card class="conversation-card" *ngFor="let conversation of conversations" (click)="openConversation(conversation)">
+      <ion-card
+        class="conversation-card"
+        *ngFor="let conversation of conversations"
+      >
         <ion-card-content>
           <div class="conversation-header">
-            <ion-avatar>
-              <img [src]="conversation.avatar || 'assets/img/avatar3.png'" [alt]="conversation.name" (error)="onImageError($event)">
-            </ion-avatar>
-            <div class="conversation-info">
-              <h3>{{ conversation.name }}</h3>
-              <p class="last-message">{{ conversation.lastMessage }}</p>
-            </div>
+            <button type="button" class="avatar-button" (click)="$event.stopPropagation(); openUserProfile(conversation)" aria-label="Ver perfil de {{ conversation.name }}">
+              <ion-avatar>
+                <img src="assets/img/logoapp1.1.png" alt="" [src]="conversation.avatar || 'assets/img/avatar3.png'" [attr.alt]="conversation.name" [attr.title]="conversation.name" (error)="onImageError($event)">
+              </ion-avatar>
+            </button>
+            <button type="button" class="conversation-main" (click)="openConversation(conversation)" [attr.aria-label]="'Abrir conversación con ' + conversation.name">
+              <span class="conversation-info">
+                <span class="name-text">{{ conversation.name }}</span>
+                <span class="last-message">{{ conversation.lastMessage }}</span>
+              </span>
+            </button>
             <div class="conversation-meta">
               <span class="time">{{ conversation.time }}</span>
               <ion-badge color="primary" *ngIf="conversation.unreadCount > 0">
