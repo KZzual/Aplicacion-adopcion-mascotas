@@ -87,6 +87,16 @@ import { Router } from '@angular/router';
               <p>{{ mascota.descripcion }}</p>
             </ion-label>
           </ion-item>
+
+          <!-- Información del propietario/autor -->
+          <ion-item *ngIf="mascota.idUsuarioRegistra" button (click)="verPerfilAutor()" class="owner-item">
+            <ion-icon name="person" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h3>Publicado por</h3>
+              <p>{{ mascota.usuarioEmail || 'Usuario registrado' }}</p>
+            </ion-label>
+            <ion-icon name="chevron-forward" slot="end" color="medium"></ion-icon>
+          </ion-item>
         </ion-list>
 
         <!-- Botones de acción -->
@@ -157,6 +167,20 @@ import { Router } from '@angular/router';
           color: var(--ion-text-color);
         }
       }
+
+      .owner-item {
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+          transform: translateX(4px);
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
     }
 
     .action-buttons {
@@ -195,6 +219,13 @@ export class MascotaDetailSheetComponent {
       this.router.navigate(['/tabs/post-view'], {
         queryParams: { id: this.mascota.id }
       });
+    }
+  }
+
+  async verPerfilAutor(): Promise<void> {
+    if (this.mascota?.idUsuarioRegistra) {
+      await this.modalCtrl.dismiss();
+      this.router.navigate(['/usuarios', this.mascota.idUsuarioRegistra]);
     }
   }
 

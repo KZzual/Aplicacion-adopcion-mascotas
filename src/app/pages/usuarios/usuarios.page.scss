@@ -299,16 +299,30 @@ ion-card {
 	text-align: center;
 	padding: 40px 20px;
 	color: var(--ion-color-medium);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 
 	.empty-icon {
-		font-size: 48px;
+		font-size: 64px;
 		margin-bottom: 16px;
 		opacity: 0.5;
+		color: var(--ion-color-medium-tint);
+	}
+
+	h2 {
+		font-size: 18px;
+		font-weight: 600;
+		color: var(--ion-color-dark);
+		margin: 0 0 8px 0;
 	}
 
 	p {
-		font-size: 16px;
+		font-size: 14px;
 		margin: 0;
+		line-height: 1.5;
+		max-width: 280px;
 	}
 }
 
@@ -347,6 +361,29 @@ ion-card {
 	animation: fadeIn 0.3s ease-out;
 }
 
+/* Loader */
+.loading-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 60vh;
+	padding: 40px 20px;
+
+	ion-spinner {
+		width: 48px;
+		height: 48px;
+		margin-bottom: 16px;
+	}
+
+	.loading-text {
+		font-size: 16px;
+		color: var(--ion-color-medium);
+		margin: 0;
+		font-weight: 500;
+	}
+}
+
 /* Tema oscuro */
 @media (prefers-color-scheme: dark) {
 	.profile-separator {
@@ -364,6 +401,20 @@ ion-card {
 
 		ion-card-header {
 			background: linear-gradient(135deg, var(--ion-color-primary-shade), var(--ion-color-primary-tint));
+		}
+	}
+
+	.loading-text {
+		color: var(--ion-color-medium-tint);
+	}
+
+	.empty-state {
+		h2 {
+			color: var(--ion-color-light);
+		}
+
+		p {
+			color: var(--ion-color-medium-tint);
 		}
 	}
 }

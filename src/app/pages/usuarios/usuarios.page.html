@@ -27,7 +27,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="profile-content">
+  <!-- Loader mientras se carga el perfil del usuario -->
+  <div class="loading-container" *ngIf="loading">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p class="loading-text">Cargando perfil del usuario...</p>
+  </div>
+
+  <div class="profile-content" *ngIf="!loading">
     <hr class="profile-separator">
 
     <ion-segment [(ngModel)]="selectedFilter" (ionChange)="onFilterChange($event)" class="filter-segment">
@@ -100,7 +106,8 @@
           </div>
           <div *ngIf="posts.length === 0" class="empty-state">
             <ion-icon name="images-outline" class="empty-icon"></ion-icon>
-            <p>No hay publicaciones aún</p>
+            <h2>Sin publicaciones</h2>
+            <p>Este usuario aún no ha publicado mascotas</p>
           </div>
         </ion-card-content>
       </ion-card>
@@ -122,7 +129,8 @@
           </ion-list>
           <div *ngIf="activities.length === 0" class="empty-state">
             <ion-icon name="pulse-outline" class="empty-icon"></ion-icon>
-            <p>No hay actividad reciente</p>
+            <h2>Sin actividad</h2>
+            <p>La actividad reciente aparecerá aquí</p>
           </div>
         </ion-card-content>
       </ion-card>

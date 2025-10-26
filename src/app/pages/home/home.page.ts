@@ -7,28 +7,22 @@ import { takeUntil, delay } from 'rxjs/operators';
 import { addIcons } from 'ionicons';
 import { filterOutline, searchOutline, closeOutline, checkmarkOutline, locationOutline, pawOutline, heartOutline, calendarOutline, maleFemaleOutline, checkmarkCircle, arrowForwardOutline, mapOutline } from 'ionicons/icons';
 
-// IMPORTACIÓN CLAVE PARA VIRTUAL SCROLL
+
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
-// ==========================================================
-// <-- CORREGIDO: Imports separados correctamente
-// ==========================================================
-
-// TIPOS de @ionic/angular (no son componentes)
 import { RefresherCustomEvent, InfiniteScrollCustomEvent } from '@ionic/angular';
 
-// COMPONENTES de @ionic/angular/standalone
+
 import {
   IonContent, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent,
   IonAvatar, IonChip, IonPopover, IonList, IonItem, IonLabel,
   IonSelect, IonSelectOption, IonRange, IonCheckbox, IonText,
   IonRefresher, IonRefresherContent, IonInfiniteScrollContent,
-  IonSpinner, IonInfiniteScroll, IonHeader
+  IonSpinner, IonInfiniteScroll
 } from '@ionic/angular/standalone';
 
 // ==========================================================
 
-// --- INTERFACES (Sin cambios) ---
 interface Pet {
   id: number;
   name: string;
@@ -77,7 +71,6 @@ interface Filters {
     CommonModule,
     FormsModule,
     ScrollingModule,
-    IonHeader,
     IonContent,
     IonSearchbar,
     IonButton,
@@ -99,8 +92,9 @@ interface Filters {
     IonRefresherContent,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
-    IonSpinner
-  , RouterLink]
+    IonSpinner,
+    RouterLink
+  ]
 })
 export class HomePage implements OnDestroy {
   private readonly destroy$ = new Subject<void>();

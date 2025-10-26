@@ -26,7 +26,7 @@
         <ion-card-title>{{ item.nombre || 'Mascota' }}</ion-card-title>
         <ion-chip size="small" color="primary" *ngIf="item?.ubicacion?.tipoUbicacion === 'fija'">📍 Fija</ion-chip>
         <ion-chip size="small" color="tertiary" *ngIf="item?.ubicacion?.tipoUbicacion === 'aproximada'">📌 Aproximada</ion-chip>
-  </ion-card-header>
+      </ion-card-header>
       <ion-card-content>
         <ion-item lines="none">
           <ion-icon [name]="item.estado === 'adoptado' ? 'thumbs-up-outline' : 'hourglass-outline'" [color]="item.estado === 'adoptado' ? 'success' : 'warning'" slot="start"></ion-icon>
@@ -41,6 +41,7 @@
             <p>{{ dir }}<span *ngIf="item?.ubicacion?.radioBusquedaKm"> · Radio {{ item.ubicacion.radioBusquedaKm }} km</span></p>
           </ion-label>
         </ion-item>
+
         <app-mini-map *ngIf="item?.ubicacion?.coordenadas"
           [coords]="{latitud: item.ubicacion.coordenadas.latitud, longitud: item.ubicacion.coordenadas.longitud}"
           [radioKm]="item.ubicacion.radioBusquedaKm">

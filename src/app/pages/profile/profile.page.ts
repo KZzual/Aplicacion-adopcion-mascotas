@@ -331,8 +331,18 @@ export class ProfilePage implements OnInit {
           phone: this.userInfo.phone
         });
       }
+
+      // Pequeño delay para mostrar el loader
+      await new Promise(resolve => setTimeout(resolve, 300));
     } catch (e) {
       console.error('Error loading profile', e);
+      const toast = await this.toastController.create({
+        message: 'Error al cargar el perfil. Intenta de nuevo.',
+        duration: 3000,
+        color: 'danger',
+        position: 'bottom'
+      });
+      await toast.present();
     } finally {
       this.loading = false;
     }

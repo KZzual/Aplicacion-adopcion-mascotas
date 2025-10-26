@@ -179,7 +179,7 @@
     <ion-card class="pet-card" *cdkVirtualFor="let pet of petsToDisplay; trackBy: trackByPetId">
 
       <div class="pet-card-header">
-  <a class="owner-info" href="javascript:void(0)" (click)="openUserProfile(pet.owner.id)" aria-label="Ver perfil de {{ pet.owner.name }}">
+  <a class="owner-info" href="javascript:void(0)" (click)="openUserProfile(pet.owner.id)" [attr.aria-label]="'Ver perfil de ' + pet.owner.name">
           <ion-avatar class="owner-avatar">
             <img
               [src]="pet.owner.avatar"

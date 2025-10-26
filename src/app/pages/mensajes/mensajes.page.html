@@ -13,7 +13,7 @@
       >
         <ion-card-content>
           <div class="conversation-header">
-            <button type="button" class="avatar-button" (click)="$event.stopPropagation(); openUserProfile(conversation)" aria-label="Ver perfil de {{ conversation.name }}">
+            <button type="button" class="avatar-button" (click)="$event.stopPropagation(); openUserProfile(conversation)" [attr.aria-label]="'Ver perfil de ' + conversation.name">
               <ion-avatar>
                 <img src="assets/img/logoapp1.1.png" alt="" [src]="conversation.avatar || 'assets/img/avatar3.png'" [attr.alt]="conversation.name" [attr.title]="conversation.name" (error)="onImageError($event)">
               </ion-avatar>

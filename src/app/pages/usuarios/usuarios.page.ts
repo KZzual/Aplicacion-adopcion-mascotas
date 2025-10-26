@@ -263,6 +263,9 @@ export class UsuariosPage implements OnInit {
       if (profile) {
         this.applyProfile(profile);
       }
+
+      // Pequeño delay para mostrar el loader
+      await new Promise(resolve => setTimeout(resolve, 300));
     } catch (e) {
       console.error('Error cargando perfil de usuario', e);
       await this.showToast('Error al cargar el perfil');
