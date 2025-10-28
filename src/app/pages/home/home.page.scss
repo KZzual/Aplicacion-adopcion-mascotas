@@ -18,7 +18,7 @@ $bg-light: #f7fafc;
 // ============================================
 .home-content {
   --background: #{$bg-light};
-  --padding-top: 0;
+  --padding-top: 56px; // Altura del toolbar de tabs (ion-header)
   --padding-bottom: 20px;
 }
 
@@ -31,7 +31,10 @@ $bg-light: #f7fafc;
   text-align: center;
   color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 0; // Asegura que no haya margen superior extra
+  margin-top: 0;
+  position: sticky;
+  top: 56px; // Se posiciona justo debajo del toolbar de tabs
+  z-index: 10;
 
   h1 {
     margin: 0 0 8px 0;
@@ -58,6 +61,9 @@ $bg-light: #f7fafc;
   gap: 12px;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: calc(56px + 80px); // toolbar (56px) + home-header (~80px)
+  z-index: 9;
 
   ion-searchbar {
     flex: 1;

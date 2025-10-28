@@ -103,3 +103,15 @@ ion-tabs > * {
     pointer-events: auto;
 }
 
+/*
+ * FIX: Padding superior para todas las páginas dentro de tabs
+ * Esto evita que el contenido quede tapado por el toolbar superior (ion-header de app-tabs)
+ */
+app-tabs ion-content {
+    --padding-top: 56px;
+}
+
+/* Excepción: Home ya tiene su propio padding-top personalizado */
+app-home ion-content.home-content {
+    --padding-top: 56px; /* Ya está definido en home.page.scss */
+}
