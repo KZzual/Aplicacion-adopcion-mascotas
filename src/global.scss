@@ -78,3 +78,28 @@ ion-alert.overlay-hidden ion-backdrop {
     display: none !important;
     pointer-events: none !important;
 }
+
+/*
+ * FIX CRÍTICO: Los ion-router-outlet anidados (de tabs y split-pane) están bloqueando
+ * todos los clics porque tienen position:absolute y pointer-events:auto por defecto.
+ * Estos elementos son solo contenedores de navegación y NO deben interceptar eventos.
+ * Solo el contenido dentro de las páginas (ion-page) debe ser interactuable.
+ */
+ion-router-outlet {
+    pointer-events: none !important;
+}
+
+ion-router-outlet > * {
+    pointer-events: auto;
+}
+
+ion-split-pane,
+ion-tabs {
+    pointer-events: none !important;
+}
+
+ion-split-pane > *,
+ion-tabs > * {
+    pointer-events: auto;
+}
+
