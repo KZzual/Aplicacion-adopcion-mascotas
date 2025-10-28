@@ -56,3 +56,25 @@
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
 }
+
+/*
+ * Seguridad: evitar que overlays "ocultos" (overlay-hidden) intercepten clics.
+ * Hemos detectado casos donde el <ion-backdrop> queda visible con pointer-events activos
+ * cuando el overlay padre tiene la clase overlay-hidden. Estas reglas neutralizan
+ * cualquier backdrop o interacción cuando el overlay está oculto, sin afectar los overlays visibles.
+ */
+ion-loading.overlay-hidden,
+ion-popover.overlay-hidden,
+ion-modal.overlay-hidden,
+ion-alert.overlay-hidden {
+    pointer-events: none !important;
+    visibility: hidden; /* oculta visualmente sin afectar layout */
+}
+
+ion-loading.overlay-hidden ion-backdrop,
+ion-popover.overlay-hidden ion-backdrop,
+ion-modal.overlay-hidden ion-backdrop,
+ion-alert.overlay-hidden ion-backdrop {
+    display: none !important;
+    pointer-events: none !important;
+}

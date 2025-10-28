@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -66,7 +66,6 @@ interface Filters {
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     FormsModule,
